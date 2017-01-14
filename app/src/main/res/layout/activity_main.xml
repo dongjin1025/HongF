@@ -14,7 +14,8 @@
         android:id="@+id/vp_horizontal_ntb"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"/>
+        android:layout_weight="1"
+        android:background="@color/cardview_light_background" />
 
     <devlight.io.library.ntb.NavigationTabBar
         android:id="@+id/ntb_horizontal"
@@ -29,6 +30,7 @@
         app:ntb_title_mode="all"
         app:ntb_titled="true"
         app:ntb_swiped="true"
-        app:ntb_typeface="fonts/agency.ttf"/>
+        app:ntb_typeface="fonts/agency.ttf"
+        android:background="@color/cast_expanded_controller_seek_bar_progress_background_tint_color" />
 
 </LinearLayout>
