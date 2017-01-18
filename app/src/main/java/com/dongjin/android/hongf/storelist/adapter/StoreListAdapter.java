@@ -1,6 +1,7 @@
 package com.dongjin.android.hongf.storelist.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.networkmodel.Store;
+import com.dongjin.android.hongf.storelist.StoreDetail;
 import com.dongjin.android.hongf.storelist.adapter.model.StoreDataModel;
 import com.dongjin.android.hongf.storelist.adapter.view.StoreAdapterView;
 
@@ -43,7 +45,15 @@ implements StoreDataModel,StoreAdapterView{
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+
         holder.image.setImageResource(R.drawable.food02);
+        holder.cardItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context,StoreDetail.class);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

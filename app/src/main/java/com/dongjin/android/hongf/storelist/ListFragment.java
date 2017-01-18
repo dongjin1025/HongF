@@ -22,8 +22,8 @@ import com.melnykov.fab.FloatingActionButton;
 public class ListFragment extends android.support.v4.app.Fragment {
 
 
-    RecyclerView recyclerView;
-    FloatingActionButton fab;
+    private RecyclerView recyclerView;
+    private FloatingActionButton fab;
 
 
     public ListFragment() {
@@ -53,8 +53,8 @@ public class ListFragment extends android.support.v4.app.Fragment {
 
         final CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) view.findViewById(R.id.toolbar);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#009F90AF"));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#9f90af"));
+        collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#ff000000"));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#ff000000"));
 
 
 

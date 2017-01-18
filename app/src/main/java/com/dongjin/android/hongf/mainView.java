@@ -6,6 +6,5 @@ package com.dongjin.android.hongf;
 
 public interface mainView {
 
-    void setPager();
-    void setTab();
+
 }

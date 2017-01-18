@@ -5,6 +5,14 @@
         <item>#ffffff</item>
         <item>#fa0105</item>
 
+
+    </string-array>
+    <string-array name="white_array">
+        <item>#ffffff</item>
+        <item>#ffffff</item>
+        <item>#ffffff</item>
+
+
     </string-array>
 
     <string-array name="polluted_waves">

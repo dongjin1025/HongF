@@ -8,6 +8,28 @@
     xmlns:fab="http://schemas.android.com/apk/res-auto"
 
     >
+
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/recyclerview"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:background="@color/divider_color" />
+
+
+    <com.melnykov.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginRight="20dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:tint="#423752"
+        android:src="@drawable/ic_action_new_light"
+        />
+
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
@@ -19,9 +41,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fitsSystemWindows="true"
-            app:title="@string/app_name"
+            app:title="HONGSIK"
             app:expandedTitleTextAppearance="@null"
-            app:contentScrim="#605271"
+            app:contentScrim="#ffffff"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <android.support.v7.widget.Toolbar
@@ -38,36 +60,16 @@
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
                 android:textSize="30dp"
+                android:textColor="#ff000000"
                 android:text="연재형의 LOGO or SOMETHING"
-                android:background="@color/cast_expanded_controller_seek_bar_progress_background_tint_color"
+                android:background="@color/cardview_light_background"
                 android:src="@drawable/logo"
-                android:tint="#9f90af"
+                android:tint="@color/cardview_light_background"
                 android:padding="32dp"
                 app:layout_collapseMode="pin"/>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
-
-
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/recyclerview"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-
-
-    <com.melnykov.fab.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginRight="20dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:tint="#423752"
-        android:src="@drawable/ic_action_new_light"
-        />
 
 </android.support.design.widget.CoordinatorLayout>
 

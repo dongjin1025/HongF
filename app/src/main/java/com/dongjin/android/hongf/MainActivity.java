@@ -8,13 +8,15 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dongjin.android.hongf.Map.MapFragment;
+import com.dongjin.android.hongf.StoryList.StoryFragment;
 import com.dongjin.android.hongf.storelist.ListFragment;
 
 import java.util.ArrayList;
 
 import devlight.io.library.ntb.NavigationTabBar;
 
-public class MainActivity extends AppCompatActivity implements mainView {
+public class MainActivity extends AppCompatActivity{
 
 
     private FragmentManager fragmentManager;
@@ -23,24 +25,22 @@ public class MainActivity extends AppCompatActivity implements mainView {
     private ListFragment listFragment;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        fragmentManager=getSupportFragmentManager();
-        mapFragment=new MapFragment();
-        storyFragment=new StoryFragment();
-        listFragment=new ListFragment();
+        fragmentManager = getSupportFragmentManager();
+        mapFragment = new MapFragment();
+        storyFragment = new StoryFragment();
+        listFragment = new ListFragment();
 
-
+        initUi();
 
 
     }
 
-    @Override
-    public void setPager() {
+    private void initUi() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
 
 
@@ -52,13 +52,16 @@ public class MainActivity extends AppCompatActivity implements mainView {
 
             @Override
             public Fragment getItem(int position) {
-                Fragment fragment=null;
-                switch (position){
-                    case 0:fragment=mapFragment;
+                Fragment fragment = null;
+                switch (position) {
+                    case 0:
+                        fragment = mapFragment;
                         break;
-                    case 1:fragment=listFragment;
+                    case 1:
+                        fragment = listFragment;
                         break;
-                    case 2:fragment=storyFragment;
+                    case 2:
+                        fragment = storyFragment;
                         break;
                 }
 
@@ -66,11 +69,6 @@ public class MainActivity extends AppCompatActivity implements mainView {
                 return fragment;
             }
         });
-
-    }
-
-    @Override
-    public void setTab() {
 
         final String[] colors = getResources().getStringArray(R.array.france);
 
@@ -80,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements mainView {
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_fourth),
                         Color.parseColor(colors[0]))
-//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
                         .title("Map")
                         .build()
         );
@@ -96,19 +94,21 @@ public class MainActivity extends AppCompatActivity implements mainView {
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_second),
                         Color.parseColor(colors[2]))
-//                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
                         .title("Story")
                         .build()
+
+
         );
         viewPager.addOnPageChangeListener(navigationTabBar);
 
 
         navigationTabBar.setBehaviorEnabled(true);
-
         navigationTabBar.setModels(models);
         navigationTabBar.setViewPager(viewPager, 0);
-        navigationTabBar.setBackgroundColor(getResources().getColor(R.color.color_Bar));
+        navigationTabBar.setBackgroundColor(getResources().getColor(R.color.white));
         navigationTabBar.setIsBadged(false);
+
 
         navigationTabBar.postDelayed(new Runnable() {
             @Override
@@ -125,7 +125,9 @@ public class MainActivity extends AppCompatActivity implements mainView {
             }
         }, 500);
 
+
     }
+
 }
 
 
