@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.dongjin.android.hongf.storelist.AddReviewFragment">
+    tools:context="com.dongjin.android.hongf.view.AddReviewFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

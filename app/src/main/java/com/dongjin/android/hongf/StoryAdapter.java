@@ -1,12 +1,9 @@
-package com.dongjin.android.hongf.StoryList.StoryAdapter;
+package com.dongjin.android.hongf;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.storelist.adapter.StoreListAdapter;
 
 /**
  * Created by kimdongjin on 2017. 1. 16..

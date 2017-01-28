@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf.storelist.adapter;
+package com.dongjin.android.hongf;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,22 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.networkmodel.Store;
-import com.dongjin.android.hongf.storelist.StoreDetail;
-import com.dongjin.android.hongf.storelist.adapter.model.StoreDataModel;
-import com.dongjin.android.hongf.storelist.adapter.view.StoreAdapterView;
-
-import java.util.ArrayList;
+import com.dongjin.android.hongf.view.StoreDetail;
 
 /**
  * Created by user on 2016-12-27.
  */
 
 public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.ViewHolder>
-implements StoreDataModel,StoreAdapterView{
+{
 
-    ArrayList<Store> storeList;
     Context context;
 
     public StoreListAdapter(Context context){
@@ -62,30 +55,7 @@ implements StoreDataModel,StoreAdapterView{
         return 10;
     }
 
-    @Override
-    public void add(Store store) {
 
-    }
-
-    @Override
-    public Store removeStore(int position) {
-        return storeList.remove(position);
-    }
-
-    @Override
-    public Store getStore(int position) {
-        return storeList.get(position);
-    }
-
-    @Override
-    public int getSize() {
-        return storeList.size();
-    }
-
-    @Override
-    public void storeRefresh() {
-        notifyDataSetChanged();
-    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;

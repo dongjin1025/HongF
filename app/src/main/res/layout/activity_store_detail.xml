@@ -6,7 +6,7 @@
     android:id="@+id/activity_store_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dongjin.android.hongf.storelist.StoreDetail"
+    tools:context="com.dongjin.android.hongf.view.StoreDetail"
     android:background="@color/divider_color">
 '
 

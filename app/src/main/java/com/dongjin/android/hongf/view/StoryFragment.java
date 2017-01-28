@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf.StoryList;
+package com.dongjin.android.hongf.view;
 
 
 import android.os.Bundle;
@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.StoryList.StoryAdapter.StoryAdapter;
+import com.dongjin.android.hongf.StoryAdapter;
 
 
 /**

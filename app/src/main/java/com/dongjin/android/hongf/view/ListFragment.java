@@ -1,7 +1,8 @@
-package com.dongjin.android.hongf.storelist;
+package com.dongjin.android.hongf.view;
 
 
 import android.app.Fragment;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,14 +13,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.storelist.adapter.StoreListAdapter;
+import com.dongjin.android.hongf.StoreListAdapter;
+import com.dongjin.android.hongf.present.MapPresenter;
 import com.melnykov.fab.FloatingActionButton;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFragment extends android.support.v4.app.Fragment {
+public class ListFragment extends android.support.v4.app.Fragment{
 
 
     private RecyclerView recyclerView;
@@ -37,6 +39,7 @@ public class ListFragment extends android.support.v4.app.Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_list, container, false);
 
+
         recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview);
         StoreListAdapter adapter = new StoreListAdapter(getActivity());
         recyclerView.setAdapter(adapter);
@@ -51,6 +54,7 @@ public class ListFragment extends android.support.v4.app.Fragment {
         fab.setBackgroundColor(getResources().getColor(R.color.color_Bar));
         fab.attachToRecyclerView(recyclerView);
 
+
         final CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) view.findViewById(R.id.toolbar);
         collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#ff000000"));
@@ -61,7 +65,6 @@ public class ListFragment extends android.support.v4.app.Fragment {
 
         return view;
     }
-
 
 
 }

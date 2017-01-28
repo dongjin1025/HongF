@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf.Map;
+package com.dongjin.android.hongf.view;
 
 
 import android.app.Activity;
@@ -27,7 +27,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MapFragment extends Fragment implements OnMapReadyCallback,MapViewInterface {
+public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View {
 
     private GoogleMap googleMap;
     private static View v;

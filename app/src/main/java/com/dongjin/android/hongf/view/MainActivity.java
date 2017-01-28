@@ -1,5 +1,6 @@
-package com.dongjin.android.hongf;
+package com.dongjin.android.hongf.view;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,33 +8,49 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 
-import com.dongjin.android.hongf.Map.MapFragment;
-import com.dongjin.android.hongf.StoryList.StoryFragment;
-import com.dongjin.android.hongf.storelist.ListFragment;
+import com.dongjin.android.hongf.R;
+import com.dongjin.android.hongf.present.MapPresenter;
 
 import java.util.ArrayList;
 
 import devlight.io.library.ntb.NavigationTabBar;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements Map_View{
 
 
     private FragmentManager fragmentManager;
     private MapFragment mapFragment;
     private StoryFragment storyFragment;
     private ListFragment listFragment;
-
+    private MyPageFragment myPageFragment;
+    private ToDongFragment toDongFragment;
+    private MapPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        presenter=new MapPresenter();
+        presenter.attachView(this);
+
         fragmentManager = getSupportFragmentManager();
         mapFragment = new MapFragment();
         storyFragment = new StoryFragment();
         listFragment = new ListFragment();
+        myPageFragment= new MyPageFragment();
+        toDongFragment = new ToDongFragment();
+        Button button =(Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.loadPlace("닭밝먹은새우");
+            }
+        });
+
 
         initUi();
 
@@ -44,10 +61,11 @@ public class MainActivity extends AppCompatActivity{
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);
 
 
+
         viewPager.setAdapter(new FragmentPagerAdapter(fragmentManager) {
             @Override
             public int getCount() {
-                return 3;
+                return 5;
             }
 
             @Override
@@ -63,6 +81,11 @@ public class MainActivity extends AppCompatActivity{
                     case 2:
                         fragment = storyFragment;
                         break;
+                    case 3:
+                        fragment =myPageFragment;
+                        break;
+                    case 4:
+                        fragment = toDongFragment;
                 }
 
 
@@ -77,7 +100,7 @@ public class MainActivity extends AppCompatActivity{
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_fourth),
-                        Color.parseColor(colors[0]))
+                        Color.parseColor(colors[1]))
                         .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
                         .title("Map")
                         .build()
@@ -93,13 +116,32 @@ public class MainActivity extends AppCompatActivity{
         models.add(
                 new NavigationTabBar.Model.Builder(
                         getResources().getDrawable(R.drawable.ic_second),
-                        Color.parseColor(colors[2]))
+                        Color.parseColor(colors[1]))
                         .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
                         .title("Story")
                         .build()
 
 
         );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_second),
+                        Color.parseColor(colors[1]))
+                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .title("Story")
+                        .build()
+
+        );
+        models.add(
+                new NavigationTabBar.Model.Builder(
+                        getResources().getDrawable(R.drawable.ic_second),
+                        Color.parseColor(colors[1]))
+                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .title("Mon Page")
+                        .build()
+
+        );
+
         viewPager.addOnPageChangeListener(navigationTabBar);
 
 
@@ -128,6 +170,15 @@ public class MainActivity extends AppCompatActivity{
 
     }
 
+    @Override
+    public void displayStores() {
+
+    }
+
+    @Override
+    public Context getContext() {
+        return this;
+    }
 }
 
 

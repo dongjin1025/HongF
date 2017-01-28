@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf.storelist;
+package com.dongjin.android.hongf.view;
 
 
 import android.annotation.TargetApi;
