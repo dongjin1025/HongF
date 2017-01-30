@@ -1,6 +1,5 @@
 package com.dongjin.android.hongf.view;
 
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -8,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.Button;
 
 import com.dongjin.android.hongf.R;
@@ -18,13 +16,13 @@ import java.util.ArrayList;
 
 import devlight.io.library.ntb.NavigationTabBar;
 
-public class MainActivity extends AppCompatActivity implements Map_View{
+public class MainActivity extends AppCompatActivity{
 
 
     private FragmentManager fragmentManager;
     private MapFragment mapFragment;
     private StoryFragment storyFragment;
-    private ListFragment listFragment;
+    private StoreListFragment listFragment;
     private MyPageFragment myPageFragment;
     private ToDongFragment toDongFragment;
     private MapPresenter presenter;
@@ -34,22 +32,15 @@ public class MainActivity extends AppCompatActivity implements Map_View{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        presenter=new MapPresenter();
-        presenter.attachView(this);
 
         fragmentManager = getSupportFragmentManager();
         mapFragment = new MapFragment();
         storyFragment = new StoryFragment();
-        listFragment = new ListFragment();
+        listFragment = new StoreListFragment();
         myPageFragment= new MyPageFragment();
         toDongFragment = new ToDongFragment();
         Button button =(Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                presenter.loadPlace("닭밝먹은새우");
-            }
-        });
+
 
 
         initUi();
@@ -170,15 +161,6 @@ public class MainActivity extends AppCompatActivity implements Map_View{
 
     }
 
-    @Override
-    public void displayStores() {
-
-    }
-
-    @Override
-    public Context getContext() {
-        return this;
-    }
 }
 
 

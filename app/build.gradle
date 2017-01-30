@@ -18,11 +18,17 @@ android {
         }
     }
 }
+repositories {
+    maven {
+        url "https://jitpack.io"
+    }
+}
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     //support
     compile 'com.android.support:appcompat-v7:25.1.0'
     compile 'com.android.support:design:25.1.0'
@@ -45,6 +51,9 @@ dependencies {
     compile 'io.reactivex:rxandroid:1.1.0'
     //DaumMap
     compile files('libs/libDaumMapAndroid.jar')
+    //select multiple photos
+    compile 'com.github.darsh2:MultipleImageSelect:v0.0.4'
+
 
     testCompile 'junit:junit:4.12'
 }

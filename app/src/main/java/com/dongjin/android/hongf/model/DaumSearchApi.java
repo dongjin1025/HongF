@@ -1,8 +1,5 @@
 package com.dongjin.android.hongf.model;
 
-import java.util.List;
-
-
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -17,12 +14,11 @@ import rx.Observable;
 
 public interface DaumSearchApi {
 
-    @GET("local/v1/search/keyword.json/")
-    Observable<List<SearchItem>> daumSearch(@Header("x-appid")String appId,
+    @GET("/local/v1/search/keyword.json?location=37.551593, 126.924979&radius=20000")
+    Observable<RootData> daumSearch(@Header("x-appid")String appid,
                                             @Header("x-platform")String android,
-                                            @Query(value = "query",encoded = true) String query,
-                                            @Query(value = "location",encoded = true) String location,
-                                            @Query(value = "radious",encoded = true) Integer radious);
+                                            @Query("apikey") String apiKey,
+                                            @Query("query") String query);
 
 
 

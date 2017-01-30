@@ -2,7 +2,7 @@ package com.dongjin.android.hongf.view;
 
 
 import android.app.Fragment;
-import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -14,21 +14,20 @@ import android.view.ViewGroup;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.StoreListAdapter;
-import com.dongjin.android.hongf.present.MapPresenter;
 import com.melnykov.fab.FloatingActionButton;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListFragment extends android.support.v4.app.Fragment{
+public class StoreListFragment extends android.support.v4.app.Fragment{
 
 
     private RecyclerView recyclerView;
     private FloatingActionButton fab;
 
 
-    public ListFragment() {
+    public StoreListFragment() {
         // Required empty public constructor
     }
 
@@ -54,6 +53,13 @@ public class ListFragment extends android.support.v4.app.Fragment{
         fab.setBackgroundColor(getResources().getColor(R.color.color_Bar));
         fab.attachToRecyclerView(recyclerView);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navigationForTest();
+            }
+        });
+
 
         final CollapsingToolbarLayout collapsingToolbarLayout =
                 (CollapsingToolbarLayout) view.findViewById(R.id.toolbar);
@@ -65,6 +71,9 @@ public class ListFragment extends android.support.v4.app.Fragment{
 
         return view;
     }
-
+    public void navigationForTest(){
+        Intent intent =new Intent(getContext(),SearchActivity.class);
+        startActivity(intent);
+    }
 
 }
