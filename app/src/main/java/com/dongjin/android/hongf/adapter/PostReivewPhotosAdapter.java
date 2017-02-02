@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf;
+package com.dongjin.android.hongf.adapter;
 
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import com.dongjin.android.hongf.R;
 
 import java.util.ArrayList;
 

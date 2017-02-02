@@ -1,21 +1,23 @@
 package com.dongjin.android.hongf.model;
 
+import java.util.ArrayList;
+
 /**
  * Created by kimdongjin on 2017. 1. 30..
  */
 
 public class Channel
 {
-    private Item[] item;
+    private ArrayList<Item> item;
 
     private Info info;
 
-    public Item[] getItem ()
+    public ArrayList<Item> getItem ()
     {
         return item;
     }
 
-    public void setItem (Item[] item)
+    public void setItem (ArrayList<Item> item)
     {
         this.item = item;
     }

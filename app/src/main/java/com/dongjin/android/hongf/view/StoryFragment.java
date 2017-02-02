@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.StoryAdapter;
+import com.dongjin.android.hongf.adapter.StoryAdapter;
 
 
 /**

@@ -11,7 +11,7 @@ import android.widget.Button;
 
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
-import com.dongjin.android.hongf.PostReivewPhotosAdapter;
+import com.dongjin.android.hongf.adapter.PostReivewPhotosAdapter;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.present.PostReviewPresenter;
 

@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface Search_View extends MvpView {
 
     void showSearchedPlaces(ArrayList<Item> items);
+    void showErrorToGetData();
 }

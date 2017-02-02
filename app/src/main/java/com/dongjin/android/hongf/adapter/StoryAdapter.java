@@ -1,9 +1,11 @@
-package com.dongjin.android.hongf;
+package com.dongjin.android.hongf.adapter;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.dongjin.android.hongf.R;
 
 /**
  * Created by kimdongjin on 2017. 1. 16..

@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.StoreListAdapter;
+import com.dongjin.android.hongf.adapter.StoreListAdapter;
 import com.melnykov.fab.FloatingActionButton;
 
 

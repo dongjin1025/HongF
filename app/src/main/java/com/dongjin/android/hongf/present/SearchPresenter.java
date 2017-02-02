@@ -8,6 +8,8 @@ import com.dongjin.android.hongf.model.Item;
 import com.dongjin.android.hongf.model.RootData;
 import com.dongjin.android.hongf.view.Search_View;
 
+import java.util.ArrayList;
+
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -48,16 +50,16 @@ public class SearchPresenter implements Presenter<Search_View> {
                 .subscribe(new Subscriber<RootData>() {
                     @Override
                     public void onCompleted() {
-                        Item[] items;
+                        ArrayList<Item> items;
                         String address;
 
                         if (rootData!=null) {
 
                             items=rootData.getChannel().getItem();
-                            address=items[0].getAddress();
-                            Log.i(TAG, "Searchs loaded " + address);
+                            search_view.showSearchedPlaces(items);
 
                         } else {
+
 
                         }
                     }
@@ -65,6 +67,7 @@ public class SearchPresenter implements Presenter<Search_View> {
                     @Override
                     public void onError(Throwable error) {
                         Log.e(TAG, "Error loading GitHub repos ", error);
+                        search_view.showErrorToGetData();
 //                        if (isHttp404(error)) {
 //                            mainMvpView.showMessage(R.string.error_username_not_found);
 //                        } else {
