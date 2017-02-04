@@ -32,6 +32,7 @@
         app:ntb_titled="true"
         app:ntb_swiped="true"
         app:ntb_bg_color="@color/white"
-        android:background="@color/white" />
+        android:background="@color/white"
+        android:elevation="24dp" />
 
 </LinearLayout>

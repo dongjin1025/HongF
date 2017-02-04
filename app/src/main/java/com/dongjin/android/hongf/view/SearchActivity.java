@@ -1,11 +1,12 @@
 package com.dongjin.android.hongf.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -17,7 +18,7 @@ import com.dongjin.android.hongf.present.SearchPresenter;
 
 import java.util.ArrayList;
 
-public class SearchActivity extends AppCompatActivity implements Search_View {
+public class SearchActivity extends Activity implements Search_View {
 
     private SearchPresenter presenter;
     private RecyclerView searchRecyclerview;
@@ -29,6 +30,7 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_search);
         btnSearch=(Button)findViewById(R.id.btnSearch);
         tvNoResult=(TextView)findViewById(R.id.tvNoResult);

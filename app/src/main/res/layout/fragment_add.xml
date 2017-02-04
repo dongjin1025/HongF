@@ -1,0 +1,46 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.dongjin.android.hongf.view.AddFragment"
+    android:weightSum="1"
+    android:background="@color/white">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="391dp"
+        app:srcCompat="@drawable/mouton"
+        android:id="@+id/imageView11"
+        android:layout_weight="0.81" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:text="가게등록"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnRegisterStore"
+            android:background="@android:drawable/editbox_background_normal" />
+
+        <Button
+            android:text="리뷰등록"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnPostReview"
+            android:background="@android:drawable/editbox_background_normal" />
+
+        <Button
+            android:text="To developer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnToDevelop"
+            android:background="@android:drawable/editbox_background_normal" />
+    </LinearLayout>
+</LinearLayout>

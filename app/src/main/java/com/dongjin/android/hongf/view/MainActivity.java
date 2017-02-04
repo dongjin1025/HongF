@@ -7,10 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.Button;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.present.MapPresenter;
 
 import java.util.ArrayList;
 
@@ -24,8 +22,8 @@ public class MainActivity extends AppCompatActivity{
     private StoryFragment storyFragment;
     private StoreListFragment listFragment;
     private MyPageFragment myPageFragment;
-    private ToDongFragment toDongFragment;
-    private MapPresenter presenter;
+    private AddFragment addFragment;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +36,8 @@ public class MainActivity extends AppCompatActivity{
         storyFragment = new StoryFragment();
         listFragment = new StoreListFragment();
         myPageFragment= new MyPageFragment();
-        toDongFragment = new ToDongFragment();
-        Button button =(Button)findViewById(R.id.button);
+        addFragment = new AddFragment();
+
 
 
 
@@ -65,21 +63,23 @@ public class MainActivity extends AppCompatActivity{
                 switch (position) {
                     case 0:
                         fragment = mapFragment;
+
                         break;
                     case 1:
                         fragment = listFragment;
+
                         break;
                     case 2:
-                        fragment = storyFragment;
+                        fragment=addFragment;
                         break;
                     case 3:
                         fragment =myPageFragment;
+
                         break;
                     case 4:
-                        fragment = toDongFragment;
+                        fragment = storyFragment;
+
                 }
-
-
                 return fragment;
             }
         });
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity{
                         getResources().getDrawable(R.drawable.ic_second),
                         Color.parseColor(colors[1]))
                         .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
-                        .title("Story")
+                        .title("Add")
                         .build()
 
 
@@ -141,6 +141,7 @@ public class MainActivity extends AppCompatActivity{
         navigationTabBar.setViewPager(viewPager, 0);
         navigationTabBar.setBackgroundColor(getResources().getColor(R.color.white));
         navigationTabBar.setIsBadged(false);
+
 
 
         navigationTabBar.postDelayed(new Runnable() {

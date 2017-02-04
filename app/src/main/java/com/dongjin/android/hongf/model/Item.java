@@ -1,6 +1,9 @@
 package com.dongjin.android.hongf.model;
 
-public class Item
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class Item implements Parcelable
 {
 	private String id;
 
@@ -29,6 +32,10 @@ public class Item
 	private String latitude;
 
 	private String addressBCode;
+
+	public Item(Parcel in) {
+		readFromParcel(in);
+	}
 
 	public String getId ()
 	{
@@ -175,4 +182,57 @@ public class Item
 	{
 		return "ClassPojo [id = "+id+", category = "+category+", distance = "+distance+", title = "+title+", phone = "+phone+", newAddress = "+newAddress+", address = "+address+", imageUrl = "+imageUrl+", direction = "+direction+", zipcode = "+zipcode+", placeUrl = "+placeUrl+", longitude = "+longitude+", latitude = "+latitude+", addressBCode = "+addressBCode+"]";
 	}
+
+	@Override
+	public int describeContents() {
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeString(id);
+		dest.writeString(category);
+		dest.writeString(distance);
+		dest.writeString(title);
+		dest.writeString(phone);
+		dest.writeString(newAddress);
+		dest.writeString(address);
+		dest.writeString(imageUrl);
+		dest.writeString(direction);
+		dest.writeString(zipcode);
+		dest.writeString(placeUrl);
+		dest.writeString(longitude);
+		dest.writeString(latitude);
+		dest.writeString(addressBCode);
+
+	}
+	private void readFromParcel(Parcel in){
+
+		id=in.readString();
+		category=in.readString();
+		distance=in.readString();
+		title=in.readString();
+		phone=in.readString();
+		newAddress=in.readString();
+		address=in.readString();
+		imageUrl=in.readString();
+		direction=in.readString();
+		zipcode=in.readString();
+		placeUrl=in.readString();
+		longitude=in.readString();
+		latitude=in.readString();
+		addressBCode=in.readString();
+
+	}
+
+	public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+		public Item createFromParcel(Parcel in) {
+			return new Item(in);
+		}
+
+		public Item[] newArray(int size) {
+			return new Item[size];
+		}
+	};
+
 }

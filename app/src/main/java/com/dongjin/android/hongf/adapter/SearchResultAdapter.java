@@ -1,16 +1,19 @@
 package com.dongjin.android.hongf.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Item;
+import com.dongjin.android.hongf.view.RegisterStoreActivity;
 
 import java.util.ArrayList;
 
@@ -20,8 +23,11 @@ import java.util.ArrayList;
 
 public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapter.ViewHolder> {
 
-    ArrayList<Item> items;
-    Context context;
+
+    private ArrayList<Item> items;
+    private Item item;
+    private Context context;
+
     public SearchResultAdapter(Context context){
         this.context=context;
         items=new ArrayList<>();
@@ -39,10 +45,23 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+        item=items.get(position);
+        if(item.getImageUrl()!=null){
+            Glide.with(context).load(items.get(position).getImageUrl()).into(holder.resultIg);
+        }else{
+            holder.resultIg.setImageResource(android.R.drawable.ic_menu_camera);
+        }
 
-        Glide.with(context).load(items.get(position).getImageUrl()).into(holder.resultIg);
         holder.resultNmTv.setText(items.get(position).getTitle());
         holder.resultAdrsTv.setText(items.get(position).getAddress());
+        holder.container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent =new Intent(context, RegisterStoreActivity.class);
+                intent.putExtra("item",item);
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -54,11 +73,14 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         ImageView resultIg;
         TextView resultNmTv;
         TextView resultAdrsTv;
+        LinearLayout container;
+
         public ViewHolder(View itemView) {
             super(itemView);
-            resultIg=(ImageView)itemView.findViewById(R.id.igResult);
-            resultNmTv=(TextView)itemView.findViewById(R.id.vhStoreName);
-            resultAdrsTv=(TextView)itemView.findViewById(R.id.vhAddress);
+            resultIg = (ImageView) itemView.findViewById(R.id.igResult);
+            resultNmTv = (TextView) itemView.findViewById(R.id.vhStoreName);
+            resultAdrsTv = (TextView) itemView.findViewById(R.id.vhAddress);
+            container = (LinearLayout) itemView.findViewById(R.id.container);
         }
     }
 }

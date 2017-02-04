@@ -8,34 +8,33 @@
     android:orientation="vertical"
     tools:context="com.dongjin.android.hongf.view.SearchActivity">
 
-    <com.github.florent37.materialtextfield.MaterialTextField
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        app:mtf_image="@drawable/btn_location_restaurant_map"
-        app:mtf_animationDuration="700"
-        app:mtf_labelColor="@android:color/black"
-        app:mtf_openKeyboardOnFocus="true">
-        >
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Insert the store name"
-            android:textColor="#333"
-            android:textColorHint="#666"
-            android:textSize="15sp"
-            android:id="@+id/etSearch" />
+            android:inputType="text"
+            android:id="@+id/etSearch"
+            android:layout_weight="1"
+            android:layout_marginTop="7dp"
+            android:layout_marginRight="5dp"
+            android:hint="가게 이름이 무엇인가요?" />
 
-    </com.github.florent37.materialtextfield.MaterialTextField>
-
-    <Button
-        android:text="Button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnSearch" />
+        <Button
+            android:text="검색"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnSearch"
+            android:layout_weight="3"
+            android:background="@drawable/round_button"
+            android:layout_marginRight="3dp" />
+    </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/search_recyclerview" />
 

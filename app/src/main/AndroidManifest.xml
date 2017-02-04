@@ -43,7 +43,12 @@
                 <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.SearchActivity"></activity>
+        <activity android:name=".view.SearchActivity"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name=".view.RegisterStoreActivity"
+            android:theme="@android:style/Theme.Dialog"
+        />
     </application>
 
 </manifest>
