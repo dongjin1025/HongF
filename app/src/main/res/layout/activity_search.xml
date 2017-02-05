@@ -11,7 +11,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp">
 
         <EditText
             android:layout_width="match_parent"
@@ -35,8 +36,8 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/search_recyclerview" />
+        android:id="@+id/search_recyclerview"
+        android:layout_height="300dp" />
 
     <TextView
         android:text="Nothing to show"

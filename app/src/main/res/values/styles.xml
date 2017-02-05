@@ -22,5 +22,13 @@
     <style name="OverrideCustomToolbarTheme" parent="Base.ThemeOverlay.AppCompat.ActionBar">
     </style>
 
+    <style name="Dialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@color/white</item>     <!--Dialog background-->
+        <item name="android:textColorPrimary">@color/black</item>    <!--content text color-->
+        <item name="colorAccent">@color/black</item>     <!--Button text color-->
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
 
 </resources>

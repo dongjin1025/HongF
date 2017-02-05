@@ -37,6 +37,8 @@ public class SearchPresenter implements Presenter<Search_View> {
         if (subscription != null) subscription.unsubscribe();
     }
     public void loadPlace(String enteredPlace){
+        search_view.hideKeyBoard();
+
         String username = enteredPlace.trim();
         if (username.isEmpty()) return;
 
@@ -59,7 +61,7 @@ public class SearchPresenter implements Presenter<Search_View> {
                             search_view.showSearchedPlaces(items);
 
                         } else {
-
+                            search_view.showNoResult();
 
                         }
                     }
@@ -67,7 +69,7 @@ public class SearchPresenter implements Presenter<Search_View> {
                     @Override
                     public void onError(Throwable error) {
                         Log.e(TAG, "Error loading GitHub repos ", error);
-                        search_view.showErrorToGetData();
+
 //                        if (isHttp404(error)) {
 //                            mainMvpView.showMessage(R.string.error_username_not_found);
 //                        } else {

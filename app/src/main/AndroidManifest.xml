@@ -44,11 +44,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.SearchActivity"
-            android:theme="@android:style/Theme.Dialog"/>
+            android:theme="@style/Dialog"/>
         <activity
             android:name=".view.RegisterStoreActivity"
-            android:theme="@android:style/Theme.Dialog"
-        />
+            android:theme="@style/Dialog"/>
     </application>
 
 </manifest>
