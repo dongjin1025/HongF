@@ -1,6 +1,5 @@
 package com.dongjin.android.hongf.view;
 
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -8,7 +7,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.present.MapPresenter;
+import com.dongjin.android.hongf.presenter.MapPresenter;
 
 public class StoreDetail extends AppCompatActivity {
 

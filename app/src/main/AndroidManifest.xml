@@ -25,7 +25,6 @@
         </activity>
         <activity android:name=".view.StoreDetail" />
         <activity android:name=".view.PostReviewActivity">
-            android:windowSoftInputMode="adjustPan">
         </activity>
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"

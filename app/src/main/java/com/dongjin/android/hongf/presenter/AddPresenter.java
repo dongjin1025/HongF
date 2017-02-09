@@ -1,9 +1,10 @@
-package com.dongjin.android.hongf.present;
+package com.dongjin.android.hongf.presenter;
 
 import android.content.Context;
 import android.content.Intent;
 
 import com.dongjin.android.hongf.view.Add_View;
+import com.dongjin.android.hongf.view.PostReviewActivity;
 import com.dongjin.android.hongf.view.SearchActivity;
 
 /**
@@ -23,6 +24,10 @@ public class AddPresenter implements Presenter<Add_View> {
 
     }
     public void navigateToSearch(Context context, Class<SearchActivity> activity){
+        Intent intent = new Intent(context,activity);
+        context.startActivity(intent);
+    }
+    public void navigateToPostReview(Context context, Class<PostReviewActivity> activity){
         Intent intent = new Intent(context,activity);
         context.startActivity(intent);
     }

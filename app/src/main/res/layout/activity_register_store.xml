@@ -64,7 +64,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:srcCompat="@drawable/btn_comment_gray_a"
-                        android:id="@+id/imageView14"
+                        android:id="@+id/igKorean"
                         android:layout_weight="1" />
 
                     <TextView
@@ -197,6 +197,7 @@
 
         <RadioGroup
             android:orientation="vertical"
+            android:id="@+id/rg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/cardview_light_background"
@@ -229,19 +230,19 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <CheckBox
+                    <RadioButton
                         android:text="7천원 이하"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/checkBox3"
+                        android:id="@+id/priceRb0"
                         android:layout_weight="1"
                         android:textColor="@color/black" />
 
-                    <CheckBox
+                    <RadioButton
                         android:text="1.5~2.5만원"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/checkBox"
+                        android:id="@+id/priceRb2"
                         android:layout_weight="1"
                         android:textColor="@color/black" />
 
@@ -253,24 +254,31 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <CheckBox
+                    <RadioButton
                         android:text="7천원~1.5만원"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/checkBox2"
+                        android:id="@+id/priceRb1"
                         android:layout_weight="1"
                         android:textColor="@color/black" />
 
-                    <CheckBox
+                    <RadioButton
                         android:text="2.5만원 이상"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/checkBox4"
+                        android:id="@+id/priceRb3"
                         android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
 
         </RadioGroup>
+
+        <Button
+            android:text="등록"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnRegister"
+            android:background="@color/divider_color" />
     </LinearLayout>
 
 

@@ -8,9 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dongjin.android.hongf.R;
+import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.view.StoreDetail;
+
+import java.util.ArrayList;
 
 /**
  * Created by user on 2016-12-27.
@@ -20,10 +25,16 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
 {
 
     Context context;
+    ArrayList<Store> stores;
 
     public StoreListAdapter(Context context){
-
+        stores=new ArrayList<>();
         this.context=context;
+    }
+    public void setAdapterData(ArrayList<Store> stores){
+        this.stores=stores;
+        notifyDataSetChanged();
+
     }
 
 
@@ -40,7 +51,11 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
 
 
-        holder.image.setImageResource(R.drawable.food02);
+        if(stores.get(position).getImageUrl()!=null){
+            Glide.with(context).load(stores.get(position).getImageUrl()).into(holder.image);
+        }else{
+            holder.image.setImageResource(android.R.drawable.ic_menu_camera);
+        }
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,23 +63,25 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
                 context.startActivity(intent);
             }
         });
+        holder.storeName.setText(stores.get(position).getStorename());
 
     }
 
     @Override
     public int getItemCount() {
-        return 10;
+        return stores.size();
     }
 
 
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
+        TextView storeName;
         CardView cardItem;
 
         public ViewHolder(View itemView) {
             super(itemView);
-
+            storeName=(TextView)itemView.findViewById(R.id.tvStoreName);
             image=(ImageView)itemView.findViewById(R.id.image);
             cardItem=(CardView)itemView.findViewById(R.id.cardItem);
 

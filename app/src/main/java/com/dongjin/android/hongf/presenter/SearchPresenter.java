@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf.present;
+package com.dongjin.android.hongf.presenter;
 
 import android.util.Log;
 
@@ -53,7 +53,6 @@ public class SearchPresenter implements Presenter<Search_View> {
                     @Override
                     public void onCompleted() {
                         ArrayList<Item> items;
-                        String address;
 
                         if (rootData!=null) {
 

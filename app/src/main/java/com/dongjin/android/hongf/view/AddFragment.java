@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.present.AddPresenter;
+import com.dongjin.android.hongf.presenter.AddPresenter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,6 +43,12 @@ public class AddFragment extends Fragment implements Add_View {
             public void onClick(View v) {
                 presenter.navigateToSearch(getContext(),SearchActivity.class);
 
+            }
+        });
+        btnPostReview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                presenter.navigateToPostReview(getContext(),PostReviewActivity.class);
             }
         });
         return view;

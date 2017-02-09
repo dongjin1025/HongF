@@ -1,13 +1,19 @@
-package com.dongjin.android.hongf.present;
+package com.dongjin.android.hongf.presenter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.ExifInterface;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
+import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.view.PostReviewActivity;
 import com.dongjin.android.hongf.view.PostReview_View;
 
@@ -21,9 +27,11 @@ import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotate
 
 public class PostReviewPresenter implements Presenter<PostReview_View> {
 
+    PostReview_View postReview_view;
+
     @Override
     public void attachView(PostReview_View view) {
-
+        this.postReview_view=view;
     }
 
     @Override
@@ -87,5 +95,27 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         }
         return degree;
     }
+    public void makeCustomRating(Context context, LinearLayout linearLayout){
+        LayoutInflater.from(context).inflate(R.layout.item_rating,null);
+        
+    }
+
+
+    public void setSelectedIg(ImageView ig,ImageView selected,Context context){
+        ImageView selectedig =selected;
+        if(selectedig!=null){
+            // 다시 그린다음에
+            LayoutInflater.from(context).inflate(R.layout.item_rating,null);
+            ig.setColorFilter(ContextCompat.getColor(context, R.color.black));
+        }else{
+            selectedig=ig;
+            ig.setColorFilter(ContextCompat.getColor(context, R.color.black));
+        }
+
+
+
+
+    }
+
 
 }

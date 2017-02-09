@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.SearchResultAdapter;
 import com.dongjin.android.hongf.model.Item;
-import com.dongjin.android.hongf.present.SearchPresenter;
+import com.dongjin.android.hongf.presenter.SearchPresenter;
 
 import java.util.ArrayList;
 
@@ -30,11 +30,19 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
     private InputMethodManager inputMethodManager;
 
     @Override
+    public void onStart() {
+        super.onStart();
+
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_search);
         this.setFinishOnTouchOutside(false);
+
+
+
 
         inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
 
@@ -48,6 +56,7 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
         adapter=new SearchResultAdapter(this);
         searchRecyclerview.setAdapter(adapter);
 
+
         searchRecyclerview.setLayoutManager(new LinearLayoutManager(this));
 
 
@@ -55,6 +64,8 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
             @Override
             public void onClick(View v) {
                 String query =etSearch.getText().toString();
+
+
                 presenter.loadPlace(query);
             }
         });
