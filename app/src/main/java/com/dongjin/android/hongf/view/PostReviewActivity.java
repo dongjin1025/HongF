@@ -3,7 +3,6 @@ package com.dongjin.android.hongf.view;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -11,6 +10,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
@@ -28,6 +29,14 @@ public class PostReviewActivity extends AppCompatActivity {
     private ImageView igSoSo;
     private ImageView igFuck;
     private ImageView selectedIg;
+    private ArrayList<ImageView> ratingImages;
+    private TextView tvGood;
+    private TextView tvSoSo;
+    private TextView tvFuck;
+    private ArrayList<TextView> ratingTexts;
+    private LinearLayout linearGood;
+    private LinearLayout linearSoSo;
+    private LinearLayout linearFuck;
 
     private EditText etContent;
 
@@ -42,7 +51,9 @@ public class PostReviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_review);
 
-
+        selectedIg=null;
+        ratingImages=new ArrayList<>();
+        ratingTexts=new ArrayList<>();
         adapter=new PostReivewPhotosAdapter();
         presenter=new PostReviewPresenter();
         btnAddPhotos=(Button)findViewById(R.id.btnAddPhotos);
@@ -60,16 +71,41 @@ public class PostReviewActivity extends AppCompatActivity {
             }
         });
         igGood=(ImageView)findViewById(R.id.igGood);
-        igGood.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                igGood.setColorFilter(ContextCompat.getColor(PostReviewActivity.this,R.color.black));
-
-            }
-        });
         igSoSo=(ImageView)findViewById(R.id.igSoSo);
         igFuck=(ImageView)findViewById(R.id.igFuck);
-
+        tvGood=(TextView)findViewById(R.id.tvGood);
+        tvSoSo=(TextView)findViewById(R.id.tvSoSo);
+        tvFuck=(TextView)findViewById(R.id.tvFuck);
+        linearGood=(LinearLayout)findViewById(R.id.linearGood);
+        linearSoSo=(LinearLayout)findViewById(R.id.linearSoSo);
+        linearFuck=(LinearLayout)findViewById(R.id.linearFuck);
+        ratingImages.add(igGood);
+        ratingImages.add(igSoSo);
+        ratingImages.add(igFuck);
+        ratingTexts.add(tvGood);
+        ratingTexts.add(tvSoSo);
+        ratingTexts.add(tvFuck);
+        linearGood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedIg=presenter.setSelectedIg(igGood,ratingImages,selectedIg,tvGood
+                        ,ratingTexts,PostReviewActivity.this);
+            }
+        });
+        linearSoSo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedIg=presenter.setSelectedIg(igSoSo,ratingImages,selectedIg,tvSoSo
+                        ,ratingTexts,PostReviewActivity.this);
+            }
+        });
+        linearFuck.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                selectedIg=presenter.setSelectedIg(igFuck,ratingImages,selectedIg,tvFuck
+                        ,ratingTexts,PostReviewActivity.this);
+            }
+        });
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
         recyclerView.setAdapter(adapter);
 

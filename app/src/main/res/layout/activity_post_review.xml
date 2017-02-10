@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_post_review"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/divider_color"
+
+    android:fitsSystemWindows="true"
     tools:context="com.dongjin.android.hongf.view.PostReviewActivity"
     android:padding="30dp">
 
@@ -20,43 +22,51 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-            <TextView
-                android:text="리뷰쓰기"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView4"
-                android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
-                android:textSize="24sp" />
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="리뷰쓰기"
+            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
+            android:textSize="24sp" />
 
-            <LinearLayout
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/divider_color" />
+
+        <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/divider_color"
+                android:background="@color/white"
                 android:layout_marginTop="10dp"
                 android:weightSum="1">
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="53dp"
                     android:background="@color/white"
-                    android:padding="5dp">
+                    android:layout_height="80dp">
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/linearGood">
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             app:srcCompat="@drawable/ic_egmt_review_rating_3_normal"
                             android:id="@+id/igGood"
                             android:layout_weight="1"
-                            android:tintMode="src_over" />
+                            android:tint="@color/divider_color" />
 
                         <TextView
                             android:text="맛있어!"
@@ -64,7 +74,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tvGood"
                             android:layout_weight="1"
-                            android:gravity="center_horizontal" />
+                            android:gravity="center"
+                            android:textColor="@color/divider_color" />
 
                     </LinearLayout>
 
@@ -72,14 +83,16 @@
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/linearSoSo">
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="50dp"
                             app:srcCompat="@drawable/ic_egmt_review_rating_2_normal"
                             android:id="@+id/igSoSo"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:tint="@color/divider_color" />
 
                         <TextView
                             android:text="괜찮아!"
@@ -87,21 +100,24 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tvSoSo"
                             android:layout_weight="1"
-                            android:gravity="center_horizontal" />
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/divider_color" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/linearFuck">
 
                         <ImageView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            app:srcCompat="@drawable/ic_egmt_review_rating_1_normal"
+                            android:layout_height="50dp"
+                            app:srcCompat="@drawable/ic_egmt_review_rating_3_normal"
                             android:id="@+id/igFuck"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:tint="@color/divider_color" />
 
                         <TextView
                             android:text="우웩!"
@@ -109,11 +125,18 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/tvFuck"
                             android:layout_weight="1"
-                            android:gravity="center_horizontal" />
+                            android:gravity="center_horizontal"
+                            android:textColor="@color/divider_color" />
                     </LinearLayout>
 
                 </LinearLayout>
 
+                <View android:background="@color/divider_color"
+                    android:layout_width = "match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp" />
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -122,18 +145,19 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                     android:hint="얘기좀 들려줘요"
                     android:padding="10dp"
-                    android:layout_marginTop="2dp"
+                    android:layout_marginTop="8dp"
                     android:background="@color/white"
-                    android:minHeight="119dp"
                     android:gravity="start"
                     android:maxHeight="400dp"
                     android:layout_weight="140.57" />
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/recyclerview" />
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recyclerview"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="15dp" />
 
         <LinearLayout
             android:orientation="vertical"
@@ -160,4 +184,4 @@
 
     </LinearLayout>
 
-</RelativeLayout>
+</LinearLayout>

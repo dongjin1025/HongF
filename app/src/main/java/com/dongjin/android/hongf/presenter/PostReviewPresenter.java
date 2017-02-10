@@ -4,12 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.media.ExifInterface;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
@@ -18,6 +18,7 @@ import com.dongjin.android.hongf.view.PostReviewActivity;
 import com.dongjin.android.hongf.view.PostReview_View;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 
@@ -95,25 +96,33 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         }
         return degree;
     }
-    public void makeCustomRating(Context context, LinearLayout linearLayout){
-        LayoutInflater.from(context).inflate(R.layout.item_rating,null);
-        
-    }
 
-
-    public void setSelectedIg(ImageView ig,ImageView selected,Context context){
+    public ImageView setSelectedIg(ImageView ig, ArrayList<ImageView> images, ImageView selected,
+                                   TextView ratingText, ArrayList<TextView> textViews,Context context){
         ImageView selectedig =selected;
+        String colorDivider="#b5b5b5";
+        String colorBlack="#000000";
         if(selectedig!=null){
-            // 다시 그린다음에
-            LayoutInflater.from(context).inflate(R.layout.item_rating,null);
-            ig.setColorFilter(ContextCompat.getColor(context, R.color.black));
+
+            for(int i=0;i<images.size();i++){
+                images.get(i).setColorFilter(ContextCompat.getColor(context, R.color.divider_color));
+                textViews.get(i).setTextColor(Color.parseColor(colorDivider));
+            }
+            if(ig==selectedig){
+                selectedig=null;
+            }else{
+                ig.setColorFilter(ContextCompat.getColor(context, R.color.black));
+                ratingText.setTextColor(Color.parseColor(colorBlack));
+                selectedig=ig;
+            }
+
         }else{
             selectedig=ig;
             ig.setColorFilter(ContextCompat.getColor(context, R.color.black));
+            ratingText.setTextColor(Color.parseColor("#000000"));
         }
 
-
-
+        return selectedig;
 
     }
 
