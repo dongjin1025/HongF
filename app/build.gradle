@@ -24,6 +24,11 @@ repositories {
     }
     mavenCentral()
 }
+repositories {
+    jcenter()
+    maven { url 'http://devrepo.kakao.com:8088/nexus/content/groups/public/' }
+}
+
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
@@ -64,7 +69,8 @@ dependencies {
     compile 'com.google.firebase:firebase-database:10.0.1'
     compile 'com.google.firebase:firebase-storage:10.0.1'
     compile 'com.google.firebase:firebase-auth:10.0.1'
-
+    //kakao
+    compile group: 'com.kakao.sdk', name: 'usermgmt', version: '1.1.34'
 
     testCompile 'junit:junit:4.12'
 }

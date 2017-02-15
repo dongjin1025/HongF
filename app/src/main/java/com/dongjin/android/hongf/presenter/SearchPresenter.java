@@ -2,7 +2,7 @@ package com.dongjin.android.hongf.presenter;
 
 import android.util.Log;
 
-import com.dongjin.android.hongf.HongApplication;
+import com.dongjin.android.hongf.GlobalApplication;
 import com.dongjin.android.hongf.model.DaumSearchApi;
 import com.dongjin.android.hongf.model.Item;
 import com.dongjin.android.hongf.model.RootData;
@@ -44,7 +44,7 @@ public class SearchPresenter implements Presenter<Search_View> {
 
 
         if (subscription != null) subscription.unsubscribe();
-        HongApplication application = HongApplication.get(search_view.getContext());
+        GlobalApplication application = GlobalApplication.getGlobalApplicationContext().get(search_view.getContext());
         DaumSearchApi daumSearchApi = application.getDaumSearchApi();
         subscription = daumSearchApi.daumSearch(application.getPackageName(),"android","a40a441f065ed60aecb1b3a05805a68c",enteredPlace)
                 .observeOn(AndroidSchedulers.mainThread())
