@@ -24,8 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".view.StoreDetail" />
-        <activity android:name=".view.PostReviewActivity">
-        </activity>
+        <activity android:name=".view.PostReviewActivity"></activity>
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
             android:theme="@style/OverrideMultipleImageSelectTheme"
@@ -42,11 +41,13 @@
                 <category android:name="ANDROID.INTENT.CATEGORY.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.SearchActivity"
-            android:theme="@style/Dialog"/>
+        <activity
+            android:name=".view.SearchActivity"
+            android:theme="@style/Dialog" />
         <activity
             android:name=".view.RegisterStoreActivity"
-            android:theme="@style/Dialog"/>
+            android:theme="@style/Dialog" />
+        <activity android:name=".view.SearchForReviewActivity"></activity>
     </application>
 
 </manifest>

@@ -48,7 +48,7 @@ public class AddFragment extends Fragment implements Add_View {
         btnPostReview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                presenter.navigateToPostReview(getContext(),PostReviewActivity.class);
+                presenter.navigateToPostReview(getContext(),SearchForReviewActivity.class);
             }
         });
         return view;

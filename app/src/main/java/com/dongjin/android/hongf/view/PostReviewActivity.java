@@ -1,8 +1,10 @@
 package com.dongjin.android.hongf.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
@@ -39,17 +42,23 @@ public class PostReviewActivity extends AppCompatActivity {
     private LinearLayout linearFuck;
 
     private EditText etContent;
+    private float rate;
+
 
     private PostReviewPresenter presenter;
     public ArrayList<Bitmap> bitmaps;
     private PostReivewPhotosAdapter adapter;
     private RecyclerView recyclerView;
+    private String id;
+    ArrayList<Image> images;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_review);
+        Intent intent= getIntent();
+        id=intent.getStringExtra("storeId");
 
         selectedIg=null;
         ratingImages=new ArrayList<>();
@@ -67,9 +76,66 @@ public class PostReviewActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                final String content=etContent.getText().toString();
+                if(content==null){
+                    Toast.makeText(PostReviewActivity.this,"내용을 입력해주세요!",Toast.LENGTH_LONG).show();
+                }else if(selectedIg==null){
+                    Toast.makeText(PostReviewActivity.this,"표정으로 평가해주세요!",Toast.LENGTH_LONG).show();
+                }else{
+                    if(images.size()!=0){
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(PostReviewActivity.this);
+                        dialog.setTitle("등록");
+                        dialog.setMessage("리뷰를 등록 하시겠습니까?");
+                        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.postReview(id,content,rate);
+                                presenter.postReviewPhotos(images);
+
+                            }
+                        });
+                        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                            }
+                        });
+
+                        dialog.show();
+
+
+                    }else{
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(PostReviewActivity.this);
+                        dialog.setTitle("등록");
+                        dialog.setMessage("사진 없이 리뷰를 등록 하시겠습니까?");
+                        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                presenter.postReview(id,content,rate);
+
+                            }
+                        });
+                        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                            }
+                        });
+
+                        dialog.show();
+
+                    }
+
+
+                }
+
 
             }
         });
+        etContent=(EditText)findViewById(R.id.etContent);
+
         igGood=(ImageView)findViewById(R.id.igGood);
         igSoSo=(ImageView)findViewById(R.id.igSoSo);
         igFuck=(ImageView)findViewById(R.id.igFuck);
@@ -117,7 +183,7 @@ public class PostReviewActivity extends AppCompatActivity {
         if (requestCode == Constants.REQUEST_CODE && resultCode == RESULT_OK && data != null) {
             //The array list has the image paths of the selected images
             bitmaps=new ArrayList<>();
-            ArrayList<Image> images = data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
+            images= data.getParcelableArrayListExtra(Constants.INTENT_EXTRA_IMAGES);
 
             for(int i=0; i<images.size();i++){
                 Bitmap bitmap=presenter.getThumbnailImage(images.get(i).path);

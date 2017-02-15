@@ -160,7 +160,7 @@
             android:layout_marginRight="15dp" />
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentEnd="false"
@@ -172,14 +172,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnAddPhotos"
-                android:background="@android:drawable/editbox_background_normal" />
+                android:background="@android:drawable/editbox_background_normal"
+                android:layout_weight="1" />
 
             <Button
                 android:text="리뷰 등록"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnPost"
-                android:background="@android:drawable/editbox_background" />
+                android:background="@android:drawable/editbox_background"
+                android:layout_weight="1" />
         </LinearLayout>
 
     </LinearLayout>
