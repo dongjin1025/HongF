@@ -17,6 +17,7 @@ import com.darsh.multipleimageselect.activities.AlbumSelectActivity;
 import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 import com.dongjin.android.hongf.R;
+import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Review;
 import com.dongjin.android.hongf.view.PostReviewActivity;
 import com.dongjin.android.hongf.view.PostReview_View;
@@ -43,8 +44,14 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
     PostReview_View postReview_view;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://hongf-153308.appspot.com");
+    KaKaoInfo kaKaoInfo;
+
+    public PostReviewPresenter(){
+        kaKaoInfo=KaKaoInfo.getInstance();
+    }
 
     @Override
     public void attachView(PostReview_View view) {
@@ -61,17 +68,22 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
         postReviewActivity.startActivityForResult(intent, Constants.REQUEST_CODE);
     }
+    String reviewKey;
     public void postReview(String id,String content,float rate){
         Review review=new Review();
         review.setContent(content);
         review.setRate(rate);
-        myRef.child("Store").child(id).child("Review").child("id").setValue(review);
+        reviewKey=myRef.child("Store").child(id).child("Review").child(kaKaoInfo.read_id_kakao()).push().getKey().toString();
+        myRef.child("Store").child(id).child("Review").child(kaKaoInfo.read_id_kakao()).push().setValue(review);
+
+
         myRef.child("Review").child(id).setValue(review);
     }
-    public void postReviewPhotos(ArrayList<Image> images){
+    public void postReviewPhotos(ArrayList<Image> images,String id){
         for(int i=0; i<images.size();i++){
             Uri file = Uri.fromFile(new File(images.get(i).path));
-            UploadTask uploadTask = storageRef.child("photos").child(file.getLastPathSegment()).putFile(file);
+            UploadTask uploadTask = storageRef.child("Store").child(id).child(kaKaoInfo.read_id_kakao()).child(reviewKey)
+                    .child(file.getLastPathSegment()).putFile(file);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {

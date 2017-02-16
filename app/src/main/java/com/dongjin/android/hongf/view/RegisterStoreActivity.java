@@ -93,6 +93,8 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
                         store.setStoreprice(priceTag);
                         store.setId(item.getId());
                         store.setImageUrl(item.getImageUrl());
+                        store.setPhone(item.getPhone());
+                        store.setLatit(item.getLatitude());
                         presenter.writeNewStore(store);
 
                         Toast.makeText(RegisterStoreActivity.this,"등록 되었습니다",Toast.LENGTH_LONG).show();

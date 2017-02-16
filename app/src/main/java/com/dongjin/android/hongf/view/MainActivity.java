@@ -7,14 +7,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Toast;
 
 import com.dongjin.android.hongf.R;
-import com.kakao.network.ErrorResult;
-import com.kakao.usermgmt.UserManagement;
-import com.kakao.usermgmt.callback.MeResponseCallback;
-import com.kakao.usermgmt.response.model.UserProfile;
 
 import java.util.ArrayList;
 
@@ -46,45 +40,12 @@ public class MainActivity extends AppCompatActivity{
 
 
 
-
         initUi();
-        KakaorequestMe();
+
 
 
     }
-    protected void KakaorequestMe() {
-        UserManagement.requestMe(new MeResponseCallback() {
-            @Override
-            public void onFailure(ErrorResult errorResult) {
-                int ErrorCode = errorResult.getErrorCode();
-                int ClientErrorCode = -777;
 
-                if (ErrorCode == ClientErrorCode) {
-                    Toast.makeText(getApplicationContext(), "카카오톡 서버의 네트워크가 불안정합니다. 잠시 후 다시 시도해주세요.", Toast.LENGTH_SHORT).show();
-                } else {
-                    Log.d("TAG" , "오류로 카카오로그인 실패 ");
-                }
-            }
-
-            @Override
-            public void onSessionClosed(ErrorResult errorResult) {
-                Log.d("TAG" , "오류로 카카오로그인 실패 ");
-            }
-
-            @Override
-            public void onSuccess(UserProfile userProfile) {
-
-                String userName = userProfile.getNickname();
-                Log.e("USERNAME",userName);
-
-            }
-
-            @Override
-            public void onNotSignedUp() {
-                // 자동가입이 아닐경우 동의창
-            }
-        });
-    }
 
     private void initUi() {
         final ViewPager viewPager = (ViewPager) findViewById(R.id.vp_horizontal_ntb);

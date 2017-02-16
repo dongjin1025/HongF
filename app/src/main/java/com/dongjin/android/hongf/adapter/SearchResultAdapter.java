@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.dongjin.android.hongf.R;
@@ -79,7 +80,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         if(dataSnapshot.hasChild(item.getId())){
-                            Log.e("nonono","nono");
+                            Toast.makeText(context,"이미 등록 되어있는 가게 입니다",Toast.LENGTH_LONG).show();
                         }else{
                             Log.e("StoreCheck",item.getTitle());
                             Intent intent =new Intent(context, RegisterStoreActivity.class);

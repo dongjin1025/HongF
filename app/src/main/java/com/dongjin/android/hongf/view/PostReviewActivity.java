@@ -90,7 +90,7 @@ public class PostReviewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 presenter.postReview(id,content,rate);
-                                presenter.postReviewPhotos(images);
+                                presenter.postReviewPhotos(images,id);
 
                             }
                         });

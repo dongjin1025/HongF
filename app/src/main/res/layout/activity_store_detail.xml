@@ -6,7 +6,7 @@
     android:id="@+id/activity_store_detail"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dongjin.android.hongf.view.StoreDetail"
+    tools:context="com.dongjin.android.hongf.view.StoreDetailActivity"
     android:background="@color/divider_color">
 '
 
@@ -34,7 +34,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/toolbar2"
-                android:layout_alignParentStart="true" >
+                android:layout_alignParentStart="true"
+                android:id="@+id/detail_recycler">
 
             </android.support.v7.widget.RecyclerView>
 
@@ -52,14 +53,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
-                    android:id="@+id/textView3"
+                    android:id="@+id/detail_tv_storename"
                     android:paddingTop="10dp" />
 
                 <TextView
                     android:text="즐겨찾기10 평점5 리뷰5개"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center" />
+                    android:gravity="center"
+                    android:id="@+id/detail_tv_info" />
 
             </LinearLayout>
 
@@ -123,55 +125,104 @@
                         android:layout_weight="1"
                         android:layout_gravity="center_vertical"
                         android:layout_margin="10dp" />
+
                 </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="vertical"
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingTop="5dp"
-                android:layout_marginTop="1dp"
-                android:background="@color/cardview_light_background"
-                android:layout_weight="0.5">
+                android:layout_height="match_parent">
 
-                <TextView
-                    android:text="Price"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView9"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp" />
-
-                <TextView
-                    android:text="Address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView8"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp" />
-
-                <TextView
-                    android:text=" tell"
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp" />
+                    android:layout_height="match_parent"
+                    android:paddingTop="5dp"
+                    android:layout_marginTop="1dp"
+                    android:background="@color/cardview_light_background"
+                    android:layout_weight="0.5">
 
-                <TextView
-                    android:text="꿀 tip!"
+                    <TextView
+                        android:text="Address"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView8"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:text="Type"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView3"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:text="Price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView9"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:text=" tell"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView"
+                        android:layout_weight="1"
+                        android:layout_margin="5dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView2"
-                    android:layout_weight="1"
-                    android:layout_margin="5dp" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"
+                    android:background="@color/white"
+                    android:layout_marginTop="1dp"
+                    android:paddingTop="5dp">
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_tv_address"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_tv_type"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_tv_price"
+                        android:layout_margin="5dp" />
+
+                    <TextView
+                        android:text="TextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/detail_tv_tell"
+                        android:layout_margin="5dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/detail_review_recycler" />
 
         </LinearLayout>
     </ScrollView>

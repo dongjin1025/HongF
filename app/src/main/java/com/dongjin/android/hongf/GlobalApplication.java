@@ -5,7 +5,7 @@ import android.app.Application;
 import android.content.Context;
 import android.util.Log;
 
-import com.dongjin.android.hongf.kakaotest.KakaoSDKAdapter;
+import com.dongjin.android.hongf.adapter.KakaoSDKAdapter;
 import com.dongjin.android.hongf.model.DaumSearchApi;
 import com.kakao.auth.KakaoSDK;
 

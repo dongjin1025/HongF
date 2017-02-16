@@ -13,7 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Store;
-import com.dongjin.android.hongf.view.StoreDetail;
+import com.dongjin.android.hongf.view.StoreDetailActivity;
 
 import java.util.ArrayList;
 
@@ -48,7 +48,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
 
 
         if(stores.get(position).getImageUrl()!=null){
@@ -59,7 +59,8 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(context,StoreDetail.class);
+                Intent intent =new Intent(context,StoreDetailActivity.class);
+                intent.putExtra("Store",stores.get(position));
                 context.startActivity(intent);
             }
         });

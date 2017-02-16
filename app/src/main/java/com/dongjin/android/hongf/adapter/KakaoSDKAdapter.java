@@ -1,4 +1,4 @@
-package com.dongjin.android.hongf.kakaotest;
+package com.dongjin.android.hongf.adapter;
 
 import android.content.Context;
 

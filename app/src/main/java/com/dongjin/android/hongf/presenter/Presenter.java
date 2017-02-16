@@ -7,4 +7,5 @@ package com.dongjin.android.hongf.presenter;
 public interface Presenter<V> {
     void attachView(V view);
     void detachView();
+
 }
