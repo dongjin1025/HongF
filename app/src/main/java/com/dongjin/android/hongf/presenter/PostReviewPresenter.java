@@ -44,6 +44,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
     PostReview_View postReview_view;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
+    DatabaseReference storeRef;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://hongf-153308.appspot.com");
@@ -68,22 +69,33 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         intent.putExtra(Constants.INTENT_EXTRA_LIMIT, 10);
         postReviewActivity.startActivityForResult(intent, Constants.REQUEST_CODE);
     }
-    String reviewKey;
+
     public void postReview(String id,String content,float rate){
         Review review=new Review();
         review.setContent(content);
         review.setRate(rate);
-        reviewKey=myRef.child("Store").child(id).child("Review").child(kaKaoInfo.read_id_kakao()).push().getKey().toString();
-        myRef.child("Store").child(id).child("Review").child(kaKaoInfo.read_id_kakao()).push().setValue(review);
 
 
-        myRef.child("Review").child(id).setValue(review);
+        storeRef=myRef.child("Store").child(id);
+        myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).push().setValue(review);
     }
-    public void postReviewPhotos(ArrayList<Image> images,String id){
+
+    int c;
+
+    String pushKey;
+    public void postReviewAndPhotosAsWell(ArrayList<Image> images, final String id, String content, float rate){
+        final Review review=new Review();
+        c=0;
+        review.setContent(content);
+        review.setRate(rate);
+
+        storeRef=myRef.child("Store").child(id);
+        pushKey=myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).getKey();
+        myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).push().setValue(review);
+
         for(int i=0; i<images.size();i++){
             Uri file = Uri.fromFile(new File(images.get(i).path));
-            UploadTask uploadTask = storageRef.child("Store").child(id).child(kaKaoInfo.read_id_kakao()).child(reviewKey)
-                    .child(file.getLastPathSegment()).putFile(file);
+            UploadTask uploadTask = storageRef.child("Store").child(file.getLastPathSegment()).putFile(file);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
@@ -92,10 +104,18 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    ++c;
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                    storeRef.child("Urls").push().setValue(downloadUrl.toString());
+                    myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).child(pushKey)
+                    .child("review_urls").push().setValue(downloadUrl.toString());
+
+
                 }
             });
+
+
 
         }
 

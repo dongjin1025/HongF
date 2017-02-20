@@ -167,6 +167,20 @@ public class Store implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(storename);
+        dest.writeString(storeaddress);
+        dest.writeString(storefood);
+        dest.writeString(storeprice);
+        dest.writeString(imageUrl);
+        dest.writeString(reviewcount);
+        dest.writeString(discoveredBy);
+        dest.writeString(averagerating);
+        dest.writeString(bookmarkcount);
+        dest.writeString(phone);
+        dest.writeString(longni);
+        dest.writeString(latit);
+
 
     }
     private void readFromParcel(Parcel in){

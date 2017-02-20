@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,6 +62,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
             public void onClick(View v) {
                 Intent intent =new Intent(context,StoreDetailActivity.class);
                 intent.putExtra("Store",stores.get(position));
+                Log.e("STORE TAG",stores.get(position).getStorename());
                 context.startActivity(intent);
             }
         });

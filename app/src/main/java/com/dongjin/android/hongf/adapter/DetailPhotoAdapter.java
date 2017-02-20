@@ -1,11 +1,14 @@
 package com.dongjin.android.hongf.adapter;
 
+import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.dongjin.android.hongf.R;
 
 import java.util.ArrayList;
@@ -16,13 +19,14 @@ import java.util.ArrayList;
 
 public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.ViewHolder> {
 
-    ArrayList<Uri> Images;
-
-    public DetailPhotoAdapter(){
-        Images=new ArrayList<>();
+    ArrayList<Uri> images;
+    Context context;
+    public DetailPhotoAdapter(Context context){
+        this.context=context;
+        images=new ArrayList<>();
     }
     public void setImageDatas(ArrayList<Uri> images){
-        this.Images=images;
+        this.images=images;
         notifyDataSetChanged();
 
     }
@@ -30,7 +34,7 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_post_review_photos,parent,false);
+        View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_detail_adapter,parent,false);
 
         return new ViewHolder(itemView);
     }
@@ -38,16 +42,22 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
+
+        Glide.with(context).load(images.get(position)).into(holder.ig_detail);
+
     }
 
     @Override
     public int getItemCount() {
-        return Images.size();
+        return images.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView ig_detail;
         public ViewHolder(View itemView) {
             super(itemView);
+            ig_detail=(ImageView)itemView.findViewById(R.id.ig_detail);
         }
+
     }
 }

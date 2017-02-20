@@ -89,8 +89,8 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReview(id,content,rate);
-                                presenter.postReviewPhotos(images,id);
+                                presenter.postReviewAndPhotosAsWell(images,id,content,rate);
+                                finish();
 
                             }
                         });
@@ -113,6 +113,7 @@ public class PostReviewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 presenter.postReview(id,content,rate);
+                                finish();
 
                             }
                         });

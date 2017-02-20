@@ -1,5 +1,9 @@
 package com.dongjin.android.hongf.model;
 
+import android.net.Uri;
+
+import java.util.ArrayList;
+
 /**
  * Created by kimdongjin on 2017. 2. 9..
  */
@@ -7,6 +11,15 @@ package com.dongjin.android.hongf.model;
 public class Review {
     String username;
 
+    public ArrayList<Uri> getUrls() {
+        return urls;
+    }
+
+    public void setUrls(ArrayList<Uri> urls) {
+        this.urls = urls;
+    }
+
+    ArrayList<Uri> urls;
     public String getUsername() {
         return username;
     }

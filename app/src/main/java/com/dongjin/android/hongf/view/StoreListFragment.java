@@ -125,6 +125,7 @@ public class StoreListFragment extends android.support.v4.app.Fragment implement
     }
     public void navigationForTest(){
         Intent intent =new Intent(getContext(),SearchActivity.class);
+
         startActivity(intent);
     }
 

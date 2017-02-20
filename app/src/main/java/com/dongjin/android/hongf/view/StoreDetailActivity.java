@@ -15,9 +15,16 @@ import android.widget.TextView;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.DetailPhotoAdapter;
 import com.dongjin.android.hongf.model.Store;
+import com.dongjin.android.hongf.model.Urls;
 import com.dongjin.android.hongf.presenter.DetailPresenter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class StoreDetailActivity extends AppCompatActivity implements StoreDetail_View {
 
@@ -34,17 +41,67 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     private String detail_id;
     Store store;
     DetailPhotoAdapter photoAdapter;
+    FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    DatabaseReference myRef=firebaseDatabase.getReference();
+    ArrayList<Uri> uris;
+
+    private List<Urls> mModels;
+    private List<String> mKeys;
+
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        DatabaseReference storePhotosRef=myRef.child("Store").child(detail_id).child("Urls");
+
+        storePhotosRef.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String ur= (String) dataSnapshot.getValue();
+
+
+                uris.add(Uri.parse(ur));
+                presenter.getReviewImages(uris);
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_store_detail);
         presenter=new DetailPresenter();
         presenter.attachView(this);
-
+        uris=new ArrayList<>();
         Intent intent=getIntent();
-        store=intent.getParcelableExtra("Store");
+        Bundle bundle=intent.getExtras();
+        store=bundle.getParcelable("Store");
 
-        photoAdapter=new DetailPhotoAdapter();
+        photoAdapter=new DetailPhotoAdapter(this);
 
         detail_id=store.getId();
         recyclerView=(RecyclerView)findViewById(R.id.detail_recycler);
