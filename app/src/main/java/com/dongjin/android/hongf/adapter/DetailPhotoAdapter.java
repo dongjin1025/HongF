@@ -3,6 +3,7 @@ package com.dongjin.android.hongf.adapter;
 import android.content.Context;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
     public void setImageDatas(ArrayList<Uri> images){
         this.images=images;
         notifyDataSetChanged();
+        Log.e("IMAGES TAG",images.get(0).toString());
 
     }
 

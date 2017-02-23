@@ -70,58 +70,59 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         postReviewActivity.startActivityForResult(intent, Constants.REQUEST_CODE);
     }
 
-    public void postReview(String id,String content,float rate){
+    public void postReview(String username,String storename,String photo,String id,String content,float rate){
         Review review=new Review();
         review.setContent(content);
         review.setRate(rate);
+        review.setUserPicture(photo);
+        review.setCommentCount(0);
+        review.setLikeCount(0);
+        review.setUsername(username);
+        review.setStoreName(storename);
 
-
+        pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
-        myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).push().setValue(review);
+        myRef.child("Story").child(pushKey).setValue(review);
+        myRef.child("Story_Urls").child(pushKey).push().setValue("no");
     }
 
-    int c;
-
     String pushKey;
-    public void postReviewAndPhotosAsWell(ArrayList<Image> images, final String id, String content, float rate){
+    public void postReviewAndPhotosAsWell(ArrayList<Image> images,String username,String storename,String photo, final String id, String content, float rate){
         final Review review=new Review();
-        c=0;
         review.setContent(content);
         review.setRate(rate);
+        review.setUserPicture(photo);
+        review.setCommentCount(0);
+        review.setLikeCount(0);
+        review.setUsername(username);
+        review.setStoreName(storename);
+
 
         storeRef=myRef.child("Store").child(id);
-        pushKey=myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).getKey();
-        myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).push().setValue(review);
+        pushKey=myRef.child("Story").push().getKey();
+        myRef.child("Story").child(pushKey).setValue(review);
+
 
         for(int i=0; i<images.size();i++){
             Uri file = Uri.fromFile(new File(images.get(i).path));
-            UploadTask uploadTask = storageRef.child("Store").child(file.getLastPathSegment()).putFile(file);
+            UploadTask uploadTask = storageRef.child(file.getLastPathSegment()).putFile(file);
             uploadTask.addOnFailureListener(new OnFailureListener() {
                 @Override
                 public void onFailure(@NonNull Exception exception) {
                     // Handle unsuccessful uploads
+                    Log.e("FAIL TO UPLOAD",exception.toString());
                 }
             }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                    ++c;
                     // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                     Uri downloadUrl = taskSnapshot.getDownloadUrl();
                     storeRef.child("Urls").push().setValue(downloadUrl.toString());
-                    myRef.child("Review").child(id).child(kaKaoInfo.read_id_kakao()).child(pushKey)
-                    .child("review_urls").push().setValue(downloadUrl.toString());
-
-
+                    //myRef.child("Story").child(pushKey).child("Story_Urls").push().setValue(downloadUrl.toString());
+                    myRef.child("Story_Urls").child(pushKey).push().setValue(downloadUrl.toString());
                 }
             });
-
-
-
         }
-
-
-
-
     }
 
     public Bitmap getThumbnailImage(String imgPath) {

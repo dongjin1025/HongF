@@ -20,6 +20,8 @@ import com.darsh.multipleimageselect.helpers.Constants;
 import com.darsh.multipleimageselect.models.Image;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.PostReivewPhotosAdapter;
+import com.dongjin.android.hongf.model.KaKaoInfo;
+import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.PostReviewPresenter;
 
 import java.util.ArrayList;
@@ -50,17 +52,36 @@ public class PostReviewActivity extends AppCompatActivity {
     private PostReivewPhotosAdapter adapter;
     private RecyclerView recyclerView;
     private String id;
-    ArrayList<Image> images;
 
+    private String kakoProfile;
+    private int likeCountl;
+    private int commentCount;
+    private String username;
+    private String storename;
+    ArrayList<Image> images;
+    KaKaoInfo kaKaoInfo;
+    Store store;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_review);
         Intent intent= getIntent();
-        id=intent.getStringExtra("storeId");
+        Bundle bundle=intent.getExtras();
+        store=bundle.getParcelable("store");
+        id=store.getId();
+
+
+        kaKaoInfo=KaKaoInfo.getInstance();
+        if(kaKaoInfo.read_picture_kakao()!=null){
+            kakoProfile=kaKaoInfo.read_picture_kakao();
+        }
+        username=kaKaoInfo.read_name_kakao();
+        storename=store.getStorename();
+
 
         selectedIg=null;
+        images=new ArrayList<>();
         ratingImages=new ArrayList<>();
         ratingTexts=new ArrayList<>();
         adapter=new PostReivewPhotosAdapter();
@@ -89,7 +110,7 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReviewAndPhotosAsWell(images,id,content,rate);
+                                presenter.postReviewAndPhotosAsWell(images,username,storename,kakoProfile,id,content,rate);
                                 finish();
 
                             }
@@ -112,7 +133,7 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReview(id,content,rate);
+                                presenter.postReview(username,storename,kakoProfile,id,content,rate);
                                 finish();
 
                             }
@@ -193,6 +214,7 @@ public class PostReviewActivity extends AppCompatActivity {
             adapter.setReviewPhotos(bitmaps);
 
         }
+
 
     }
 

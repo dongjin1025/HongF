@@ -61,11 +61,8 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String ur= (String) dataSnapshot.getValue();
 
-
                 uris.add(Uri.parse(ur));
                 presenter.getReviewImages(uris);
-
-
 
             }
 

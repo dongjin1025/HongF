@@ -53,7 +53,7 @@ public class KaKaoInfo {
     }
 
     public String read_picture_kakao() {
-        String text = pref.getString("kakaoPictur", "");
+        String text = pref.getString("kakaoPicture", "");
         return text;
     }
 

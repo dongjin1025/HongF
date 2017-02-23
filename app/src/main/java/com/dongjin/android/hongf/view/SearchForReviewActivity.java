@@ -6,13 +6,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Store;
@@ -103,11 +101,9 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView tvId=(TextView)view.findViewById(R.id.tvId_search_for_review);
 
                 Intent intent =new Intent(SearchForReviewActivity.this,PostReviewActivity.class);
-                intent.putExtra("storeId",tvId.getText().toString());
-                Log.e("Id for Review",tvId.getText().toString());
+                intent.putExtra("store",stores.get(position));
                 startActivity(intent);
             }
         });

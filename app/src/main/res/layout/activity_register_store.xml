@@ -61,11 +61,10 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/btn_comment_gray_a"
+                        android:layout_width="wrap_content"
+                        app:srcCompat="@drawable/temp_korean"
                         android:id="@+id/igKorean"
-                        android:layout_weight="1" />
+                        android:layout_height="110dp" />
 
                     <TextView
                         android:text="한식"
@@ -84,13 +83,12 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/btn_comment_gray_a"
+                        app:srcCompat="@drawable/koreansnack"
                         android:id="@+id/imageView13"
-                        android:layout_weight="1" />
+                        android:layout_height="110dp" />
 
                     <TextView
-                        android:text="일식"
+                        android:text="분식"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:id="@+id/textView18"
@@ -106,10 +104,9 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/btn_comment_gray_a"
-                        android:id="@+id/imageView12"
-                        android:layout_weight="1" />
+                        android:layout_height="110dp"
+                        app:srcCompat="@drawable/chinease"
+                        android:id="@+id/imageView12" />
 
                     <TextView
                         android:text="중식"

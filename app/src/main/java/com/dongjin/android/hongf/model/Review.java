@@ -1,25 +1,53 @@
 package com.dongjin.android.hongf.model;
 
-import android.net.Uri;
-
-import java.util.ArrayList;
-
 /**
  * Created by kimdongjin on 2017. 2. 9..
  */
 
 public class Review {
     String username;
+    String storeName;
+    String content;
+    float rate;
+    String userPicture;
+    String key;
 
-    public ArrayList<Uri> getUrls() {
-        return urls;
+    public String getKey() {
+        return key;
     }
 
-    public void setUrls(ArrayList<Uri> urls) {
-        this.urls = urls;
+    public void setKey(String key) {
+        this.key = key;
     }
 
-    ArrayList<Uri> urls;
+    public String getUserPicture() {
+        return userPicture;
+    }
+
+    public void setUserPicture(String userPicture) {
+        this.userPicture = userPicture;
+    }
+
+    public int getLikeCount() {
+        return likeCount;
+    }
+
+    public void setLikeCount(int likeCount) {
+        this.likeCount = likeCount;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    int likeCount;
+    int commentCount;
+
+
     public String getUsername() {
         return username;
     }
@@ -44,8 +72,7 @@ public class Review {
         this.content = content;
     }
 
-    String storeName;
-    String content;
+
 
     public float getRate() {
         return rate;
@@ -55,6 +82,6 @@ public class Review {
         this.rate = rate;
     }
 
-    float rate;
+
 
 }
