@@ -8,62 +8,102 @@
     android:layout_marginTop="10dp"
     android:background="@color/divider_color">
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cardview_light_background"
-        >
-
-        <ImageView
-            android:layout_width="50dp"
-            app:srcCompat="@drawable/ic_sixth"
-            android:id="@+id/story_ig_profile"
-            android:layout_marginLeft="10dp"
-            android:layout_height="50dp" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:background="@color/cardview_light_background"
+            >
 
-            <TextView
-                android:text="userName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/story_tv_username"
-                android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-                android:layout_marginEnd="5dp"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginStart="5dp"
-                android:textSize="18sp" />
+            <ImageView
+                android:layout_width="50dp"
+                app:srcCompat="@drawable/ic_sixth"
+                android:id="@+id/story_ig_profile"
+                android:layout_marginLeft="10dp"
+                android:layout_height="50dp"
+                android:layout_margin="5dp" />
 
-            <TextView
-                android:text="StoreName"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/story_tv_storename"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:layout_marginStart="5dp"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="5dp"
-                android:textSize="14sp" />
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp">
+
+                <TextView
+                    android:text="userName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/story_tv_username"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="5dp"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:text="StoreName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/story_tv_storename"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
+
+        <ImageView
+            android:layout_height="50dp"
+            app:srcCompat="@drawable/ic_egmt_review_rating_1_normal"
+            android:id="@+id/story_ig_rate"
+            android:cropToPadding="false"
+            android:adjustViewBounds="false"
+            android:baselineAlignBottom="false"
+            android:layout_width="50dp"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="3dp" />
+
+    </RelativeLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/story_photos_recy" />
 
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/Story_tv_date"
+        android:background="@color/cardview_light_background"
+        android:textColor="@color/divider_color" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/story_tv_content"
+        android:textSize="16sp"
+        android:background="@color/cardview_light_background"
+        android:paddingLeft="5dp" />
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/cardview_light_background">
+        android:background="@color/cardview_light_background"
+        android:layout_marginTop="0.5dp">
 
         <ImageView
             android:layout_width="60dp"
@@ -99,15 +139,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cardview_light_background">
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/story_tv_content"
-            android:textSize="16sp"
-            android:background="@color/cardview_light_background"
-            android:paddingLeft="5dp" />
 
         <TextView
             android:text="12 Comments"

@@ -58,6 +58,7 @@ public class PostReviewActivity extends AppCompatActivity {
     private int commentCount;
     private String username;
     private String storename;
+    private String content;
     ArrayList<Image> images;
     KaKaoInfo kaKaoInfo;
     Store store;
@@ -68,8 +69,8 @@ public class PostReviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_post_review);
         Intent intent= getIntent();
         Bundle bundle=intent.getExtras();
-        store=bundle.getParcelable("store");
-        id=store.getId();
+        storename=bundle.getString("title");
+        id=bundle.getString("id");
 
 
         kaKaoInfo=KaKaoInfo.getInstance();
@@ -77,8 +78,6 @@ public class PostReviewActivity extends AppCompatActivity {
             kakoProfile=kaKaoInfo.read_picture_kakao();
         }
         username=kaKaoInfo.read_name_kakao();
-        storename=store.getStorename();
-
 
         selectedIg=null;
         images=new ArrayList<>();
@@ -97,8 +96,16 @@ public class PostReviewActivity extends AppCompatActivity {
         btnPost.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String content=etContent.getText().toString();
-                if(content==null){
+                content=etContent.getText().toString();
+                if(selectedIg==igGood){
+                    rate=5;
+                }else if(selectedIg==igSoSo){
+                    rate=(float) 2.5;
+                }else if(selectedIg==igFuck){
+                    rate=0;
+                }
+
+                if(content==""){
                     Toast.makeText(PostReviewActivity.this,"내용을 입력해주세요!",Toast.LENGTH_LONG).show();
                 }else if(selectedIg==null){
                     Toast.makeText(PostReviewActivity.this,"표정으로 평가해주세요!",Toast.LENGTH_LONG).show();
@@ -111,6 +118,7 @@ public class PostReviewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 presenter.postReviewAndPhotosAsWell(images,username,storename,kakoProfile,id,content,rate);
+                                store=null;
                                 finish();
 
                             }
@@ -134,6 +142,7 @@ public class PostReviewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 presenter.postReview(username,storename,kakoProfile,id,content,rate);
+                                store=null;
                                 finish();
 
                             }
@@ -215,7 +224,7 @@ public class PostReviewActivity extends AppCompatActivity {
 
         }
 
-
     }
+
 
 }

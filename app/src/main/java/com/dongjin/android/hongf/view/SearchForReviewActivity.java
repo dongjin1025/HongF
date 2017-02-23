@@ -103,7 +103,8 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
 
 
                 Intent intent =new Intent(SearchForReviewActivity.this,PostReviewActivity.class);
-                intent.putExtra("store",stores.get(position));
+                intent.putExtra("title",itemLists.get(position).get("title"));
+                intent.putExtra("id",itemLists.get(position).get("id"));
                 startActivity(intent);
             }
         });
@@ -165,6 +166,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
     public void onStop() {
         super.onStop();
         storeListRefer.removeEventListener(childEventListener);
+        finish();
     }
 
     @Override

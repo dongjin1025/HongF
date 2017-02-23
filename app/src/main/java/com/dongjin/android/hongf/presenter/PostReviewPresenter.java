@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.ExifInterface;
 import android.net.Uri;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -31,7 +32,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 
@@ -50,8 +53,30 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
     StorageReference storageRef = storage.getReferenceFromUrl("gs://hongf-153308.appspot.com");
     KaKaoInfo kaKaoInfo;
 
+    String stringdate;
+    Handler handler;
+    Runnable runnable;
     public PostReviewPresenter(){
         kaKaoInfo=KaKaoInfo.getInstance();
+        handler=new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                try {
+                    Date date = new Date();
+                    Date newDate = new Date(date.getTime());
+                    SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+                    stringdate= dt.format(newDate);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 1 * 1000);
+
     }
 
     @Override
@@ -72,6 +97,8 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
 
     public void postReview(String username,String storename,String photo,String id,String content,float rate){
         Review review=new Review();
+
+
         review.setContent(content);
         review.setRate(rate);
         review.setUserPicture(photo);
@@ -79,11 +106,13 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setLikeCount(0);
         review.setUsername(username);
         review.setStoreName(storename);
+        review.setDate(stringdate);
+        review.setLiked(false);
 
         pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
         myRef.child("Story").child(pushKey).setValue(review);
-        myRef.child("Story_Urls").child(pushKey).push().setValue("no");
+
     }
 
     String pushKey;
@@ -96,6 +125,8 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setLikeCount(0);
         review.setUsername(username);
         review.setStoreName(storename);
+        review.setDate(stringdate);
+        review.setLiked(false);
 
 
         storeRef=myRef.child("Store").child(id);

@@ -11,6 +11,25 @@ public class Review {
     float rate;
     String userPicture;
     String key;
+    boolean isLiked;
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    String date;
 
     public String getKey() {
         return key;

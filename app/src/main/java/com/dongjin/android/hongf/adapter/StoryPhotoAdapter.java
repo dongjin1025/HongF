@@ -38,13 +38,14 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ur= dataSnapshot.getValue(String.class);
                 Log.e("ur TAG1",ur);
-                if(ur!="no") {
+
+                if(ur!=null){
                     images.add(Uri.parse(ur));
+                    notifyDataSetChanged();
                 }
-                else{
-                    images=new ArrayList<Uri>();
-                }
-                notifyDataSetChanged();
+
+
+
 
             }
 
@@ -87,7 +88,7 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
     public void onBindViewHolder(ViewHolder holder, int position) {
 
 
-        Log.e("images size Tag",images.size()+"");
+        Log.e("images size Tag",images.get(position).toString());
         if(images.get(0)!=null){
             Glide.with(context).load(images.get(position)).into(holder.ig_detail);
         }
@@ -98,8 +99,12 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
     @Override
     public int getItemCount() {
 
-            return images.size();
+
+        return images.size();
+
+
     }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ig_detail;
