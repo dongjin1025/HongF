@@ -1,6 +1,7 @@
 package com.dongjin.android.hongf.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,11 +18,14 @@ import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.InterestedUser;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Review;
+import com.dongjin.android.hongf.view.CommentActivity;
+import com.dongjin.android.hongf.view.LikeDetailActivity;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -36,24 +40,20 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
     Context context;
     DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
-    DatabaseReference likeRef;
     ArrayList<Review> reviews;
     ArrayList<String> keyArray;
-    ArrayList<String> userLikeKey;
-    InterestedUser user;
-    boolean isLiked;
+    boolean isLiking=false;
     KaKaoInfo kaKaoInfo;
-    String key;
-    int keyIndex;
+
+    DatabaseReference likeRef;
 
     public StoryAdapter(Context context){
         this.context=context;
-        isLiked=false;
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
-        user=new InterestedUser();
-        userLikeKey=new ArrayList<>();
         kaKaoInfo=KaKaoInfo.getInstance();
+
+
         storyRef.child("Story").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -63,42 +63,12 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 Log.e("keyArrayTag",""+keyArray.size());
                 reviews.add(review);
                 notifyDataSetChanged();
-
-
-                storyRef.child(kaKaoInfo.read_id_kakao()).child("likeReview").addChildEventListener(new ChildEventListener() {
-                    @Override
-                    public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-
-                    }
-
-                    @Override
-                    public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                    }
-
-                    @Override
-                    public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-
-
-
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+
 
             }
 
@@ -118,7 +88,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             }
 
         });
-
+        storyRef.child("Story").keepSynced(true);
 
         Log.e("keyArrayTag2",""+keyArray.size());
 
@@ -138,16 +108,15 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
 
-        Review review=reviews.get(position);
-        key=keyArray.get(position);
+        final Review review=reviews.get(position);
 
-
-
-
+        holder.setLikeBtn(keyArray.get(position));
+        final InterestedUser user=new InterestedUser();
+        user.setUserId(kaKaoInfo.read_id_kakao());
         user.setUsername(kaKaoInfo.read_name_kakao());
         user.setProfilepath(kaKaoInfo.read_picture_kakao());
-        user.setUserId(kaKaoInfo.read_id_kakao());
-        user.setComment("");
+
+
         float rate=review.getRate();
 
         if(keyArray.size()!=0){
@@ -160,6 +129,31 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         holder.username.setText(review.getUsername());
         holder.storename.setText(review.getStoreName());
         holder.content.setText(review.getContent());
+        holder.commentCount.setText("뎃글 "+ review.getCommentCount()+"개");
+
+        holder.commentCount.setTag(position);
+        holder.commentCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tag= (int) holder.commentCount.getTag();
+                Intent intent =new Intent(context, CommentActivity.class);
+                intent.putExtra("key",keyArray.get(tag));
+                context.startActivity(intent);
+
+
+            }
+        });
+        holder.btnComment.setTag(position);
+        holder.btnComment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tag= (int) holder.btnComment.getTag();
+                Intent intent =new Intent(context, CommentActivity.class);
+                intent.putExtra("key",keyArray.get(tag));
+                context.startActivity(intent);
+
+            }
+        });
 
         if(review.getUserPicture()!=""){
             Uri uri= Uri.parse(review.getUserPicture());
@@ -180,27 +174,70 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             holder.rate.setColorFilter(ContextCompat.getColor(context, R.color.black));
         }
         holder.date.setText(review.getDate());
+        holder.likeCount.setText(review.getLikeCount()+"명이 이 게시물을 좋아합니다");
 
-        if(!isLiked){
-            holder.btnLike.setImageResource(R.drawable.btn_unpress_like);
-        }else if(isLiked){
-            holder.btnLike.setImageResource(R.drawable.btn_common_card_like_pressed);
-        }
+        holder.likeCount.setTag(position);
+        holder.likeCount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int tag= (int) holder.likeCount.getTag();
+                Intent intent =new Intent(context, LikeDetailActivity.class);
+                intent.putExtra("key",keyArray.get(tag));
+                context.startActivity(intent);
+            }
+        });
+
+        holder.btnLike.setTag(position);
         holder.btnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                if(!isLiked){
-                    holder.btnLike.setImageResource(R.drawable.btn_common_card_like_pressed);
-                    HashMap<String,Object> hashMap=new HashMap();
-                    hashMap.put(key,key);
-                    storyRef.child(kaKaoInfo.read_id_kakao()).child("likeReview").updateChildren(hashMap);
-                    isLiked=true;
-                }else{
-                    holder.btnLike.setImageResource(R.drawable.btn_unpress_like);
-                    storyRef.child(kaKaoInfo.read_id_kakao()).child("likeReview").child(key).removeValue();
-                    isLiked=false;
-                }
+                isLiking=true;
+                int posi= (int) holder.btnLike.getTag();
+
+                storyRef.child("likeReview").child(keyArray.get(posi)).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        String key=dataSnapshot.getKey().toString();
+                        if (isLiking) {
+
+                            if (!dataSnapshot.hasChild(kaKaoInfo.read_id_kakao())) {
+
+                                storyRef.child("likeReview").child(key).child(kaKaoInfo.read_id_kakao()).setValue(user);
+                                holder.btnLike.setImageResource(R.drawable.btn_common_card_like_pressed);
+
+                                HashMap<String, Object> hashMap= new HashMap<>();
+                                hashMap.put("likeCount", (int) dataSnapshot.getChildrenCount()+1);
+                                review.setLikeCount((int) dataSnapshot.getChildrenCount()+1);
+                                storyRef.child("Story").child(key).updateChildren(hashMap);
+
+                                isLiking = false;
+
+                            } else {
+                                storyRef.child("likeReview").child(key).child(kaKaoInfo.read_id_kakao()).removeValue();
+                                holder.btnLike.setImageResource(R.drawable.btn_unpress_like);
+
+                                HashMap<String, Object> hashMap= new HashMap<>();
+                                hashMap.put("likeCount", (int) dataSnapshot.getChildrenCount()-1);
+                                review.setLikeCount((int) dataSnapshot.getChildrenCount()-1);
+                                storyRef.child("Story").child(key).updateChildren(hashMap);
+
+
+                                isLiking = false;
+                            }
+                            notifyDataSetChanged();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
 
 
 
@@ -221,6 +258,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
+        DatabaseReference likeRef;
+
+
+
         ImageView profile;
         TextView username;
         TextView storename;
@@ -234,6 +275,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         TextView date;
         public ViewHolder(View itemView) {
             super(itemView);
+            likeRef=FirebaseDatabase.getInstance()
+                    .getReference().child("likeReview");
+            likeRef.keepSynced(true);
+
             date=(TextView)itemView.findViewById(R.id.Story_tv_date);
             rate=(ImageView)itemView.findViewById(R.id.story_ig_rate);
             profile=(ImageView) itemView.findViewById(R.id.story_ig_profile);
@@ -246,5 +291,27 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             content=(TextView)itemView.findViewById(R.id.story_tv_content);
             commentCount=(TextView)itemView.findViewById(R.id.story_tv_commentCount);
         }
+        public void setLikeBtn(final String key){
+            likeRef.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.child(key).hasChild(kaKaoInfo.read_id_kakao())){
+                        btnLike.setImageResource(R.drawable.btn_common_card_like_pressed);
+                    }else{
+                        btnLike.setImageResource(R.drawable.btn_unpress_like);
+                    }
+
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            });
+
+        }
     }
+
+
 }

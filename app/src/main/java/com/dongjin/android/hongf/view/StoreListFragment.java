@@ -2,7 +2,6 @@ package com.dongjin.android.hongf.view;
 
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -101,16 +100,6 @@ public class StoreListFragment extends android.support.v4.app.Fragment implement
         recyclerView.setLayoutManager(manager);
 
 
-        fab = (FloatingActionButton)view.findViewById(R.id.fab);
-        fab.setBackgroundColor(getResources().getColor(R.color.color_Bar));
-        fab.attachToRecyclerView(recyclerView);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                navigationForTest();
-            }
-        });
 
 
         final CollapsingToolbarLayout collapsingToolbarLayout =
@@ -122,11 +111,6 @@ public class StoreListFragment extends android.support.v4.app.Fragment implement
 
 
         return view;
-    }
-    public void navigationForTest(){
-        Intent intent =new Intent(getContext(),SearchActivity.class);
-
-        startActivity(intent);
     }
 
     @Override

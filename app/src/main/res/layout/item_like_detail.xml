@@ -15,7 +15,7 @@
 
             <ImageView
                 app:srcCompat="@drawable/btn_comment_gray_a"
-                android:id="@+id/comment_ig_profile"
+                android:id="@+id/likedetail_ig_profile"
                 android:layout_weight="0.12"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
@@ -27,7 +27,7 @@
                 android:text="TextView"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:id="@+id/comment_tv_username"
+                android:id="@+id/likedetail_tv_username"
                 android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"

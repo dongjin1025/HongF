@@ -1,11 +1,11 @@
 package com.dongjin.android.hongf.presenter;
 
+import com.dongjin.android.hongf.model.MarkerItem;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.view.Register_View;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 /**
  * Created by kimdongjin on 2017. 2. 6..
@@ -16,11 +16,19 @@ public class RegisterPresenter implements Presenter<Register_View> {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     FirebaseStorage storage = FirebaseStorage.getInstance();
-    StorageReference storageRef = storage.getReferenceFromUrl("gs://hongf-153308.appspot.com");
+
 
     public void writeNewStore(Store store) {
+        MarkerItem item=new MarkerItem();
+        double lati= Double.parseDouble(store.getLatit());
+        double longi= Double.parseDouble(store.getLongni());
+        item.setLat(lati);
+        item.setLon(longi);
+        item.setId(store.getId());
+
         myRef.child("Store").child(store.getId()).setValue(store);
         myRef.child("Store2").child(store.getStorefood()).child(store.getId()).setValue(store);
+        myRef.child("storeMarker").child(store.getId()).setValue(item);
     }
 
     @Override

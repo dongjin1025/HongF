@@ -1,6 +1,7 @@
 package com.dongjin.android.hongf.view;
 
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,9 +31,12 @@ public class StoryFragment extends Fragment implements Story_View {
     ArrayList<ArrayList<Uri>> uris;
     ArrayList<Uri> smallUris;
     StoryPresenter presenter;
+
+    Context context;
     @Override
     public void onStart() {
         super.onStart();
+
 
     }
     public StoryFragment() {
@@ -48,7 +52,7 @@ public class StoryFragment extends Fragment implements Story_View {
         storyAdapter =new StoryAdapter(getContext() );
         presenter=new StoryPresenter();
         presenter.attachView(this);
-
+        context=getContext();
         uris=new ArrayList<>();
         reviews=new ArrayList<>();
 

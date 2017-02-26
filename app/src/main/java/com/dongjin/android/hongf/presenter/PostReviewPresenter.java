@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
 
@@ -107,7 +108,6 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setUsername(username);
         review.setStoreName(storename);
         review.setDate(stringdate);
-        review.setLiked(false);
 
         pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
@@ -126,7 +126,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setUsername(username);
         review.setStoreName(storename);
         review.setDate(stringdate);
-        review.setLiked(false);
+
 
 
         storeRef=myRef.child("Store").child(id);
@@ -151,6 +151,9 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
                     storeRef.child("Urls").push().setValue(downloadUrl.toString());
                     //myRef.child("Story").child(pushKey).child("Story_Urls").push().setValue(downloadUrl.toString());
                     myRef.child("Story_Urls").child(pushKey).push().setValue(downloadUrl.toString());
+                    HashMap<String,Object> hashMap=new HashMap<String, Object>();
+                    hashMap.put("imageUrl",downloadUrl.toString());
+                    storeRef.updateChildren(hashMap);
                 }
             });
         }

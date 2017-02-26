@@ -6,6 +6,15 @@ package com.dongjin.android.hongf.model;
 
 public class InterestedUser {
     String userId;
+    String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public String getUserId() {
         return userId;
