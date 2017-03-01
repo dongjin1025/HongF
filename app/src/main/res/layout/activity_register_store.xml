@@ -36,6 +36,7 @@
             android:background="@color/cardview_light_background"
             android:padding="10dp">
 
+
             <TextView
                 android:text="음식 종류"
                 android:layout_width="match_parent"
@@ -61,20 +62,19 @@
                     android:layout_weight="1">
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        app:srcCompat="@drawable/temp_korean"
-                        android:id="@+id/igKorean"
-                        android:layout_height="110dp" />
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/korean"
+                        android:id="@+id/register_ig_korean"
+                        android:layout_height="70dp"
+                        android:background="@color/cardview_light_background" />
 
                     <TextView
                         android:text="한식"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView17"
                         android:layout_weight="1"
                         android:gravity="center_horizontal" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:orientation="vertical"
                     android:layout_width="match_parent"
@@ -83,142 +83,85 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/koreansnack"
-                        android:id="@+id/imageView13"
-                        android:layout_height="110dp" />
-
-                    <TextView
-                        android:text="분식"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView18"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="110dp"
                         app:srcCompat="@drawable/chinease"
-                        android:id="@+id/imageView12" />
+                        android:id="@+id/register_ig_chinease"
+                        android:layout_height="70dp" />
 
                     <TextView
                         android:text="중식"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView19"
                         android:layout_weight="1"
                         android:gravity="center_horizontal" />
                 </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/japan"
+                        android:id="@+id/register_ig_japanease"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="일식"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/wastern"
+                        android:id="@+id/register_ig_wastern"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="양식"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/world"
+                        android:id="@+id/register_ig_world"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="기타세계음식"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+
 
             </LinearLayout>
-
-            <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/btn_comment_gray_a"
-                        android:id="@+id/imageView17"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView20"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/btn_comment_gray_a"
-                        android:id="@+id/imageView16"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView21"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/btn_comment_gray_a"
-                        android:id="@+id/imageView15"
-                        android:layout_weight="1" />
-
-                    <TextView
-                        android:text="TextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView22"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal" />
-                </LinearLayout>
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <RadioGroup
-            android:orientation="vertical"
-            android:id="@+id/rg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/cardview_light_background"
-            android:layout_marginTop="3dp"
-            android:padding="10dp">
-
-            <TextView
-                android:text="가격 정보/1인 기준"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView15"
-                android:layout_weight="1"
-                android:gravity="center_horizontal"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-                android:textColor="@color/black"
-                android:paddingTop="15dp"
-                android:textSize="12sp"
-                android:textStyle="bold" />
 
             <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:layout_marginTop="5dp">
 
                 <LinearLayout
@@ -227,20 +170,137 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <RadioButton
-                        android:text="7천원 이하"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/priceRb0"
-                        android:layout_weight="1"
-                        android:textColor="@color/black" />
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/cafe"
+                        android:id="@+id/register_ig_cafe"
+                        android:layout_height="70dp" />
 
-                    <RadioButton
-                        android:text="1.5~2.5만원"
+                    <TextView
+                        android:text="까페"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/priceRb2"
                         android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/bar"
+                        android:id="@+id/register_ig_bar"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="Bar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/hope"
+                        android:id="@+id/register_ig_hope"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="술집"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/fastfood"
+                        android:id="@+id/register_ig_fastfood"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="패스트푸드"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/korean_snack"
+                        android:id="@+id/register_ig_koreansnack"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="분식"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/cardview_light_background"
+            android:layout_marginTop="3dp"
+            android:padding="10dp">
+
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/priceRb0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="7천원 이하"
+                        android:textColor="@color/black" />
+
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/priceRb2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1만원~1.5만원"
                         android:textColor="@color/black" />
 
                 </LinearLayout>
@@ -251,24 +311,39 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                    <RadioButton
-                        android:text="7천원~1.5만원"
+                    <android.support.v7.widget.AppCompatCheckBox
+                        android:id="@+id/priceRb1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/priceRb1"
                         android:layout_weight="1"
+                        android:text="7천원~1만원"
                         android:textColor="@color/black" />
 
-                    <RadioButton
-                        android:text="2.5만원 이상"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                    <android.support.v7.widget.AppCompatCheckBox
                         android:id="@+id/priceRb3"
-                        android:layout_weight="1" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="1.5만원 이상" />
                 </LinearLayout>
+
             </LinearLayout>
 
-        </RadioGroup>
+            <TextView
+                android:id="@+id/textView15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:paddingTop="15dp"
+                android:text="가격 정보/1인 기준"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
 
         <Button
             android:text="등록"

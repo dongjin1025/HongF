@@ -25,10 +25,12 @@ public class RegisterPresenter implements Presenter<Register_View> {
         item.setLat(lati);
         item.setLon(longi);
         item.setId(store.getId());
+        item.setFoodTag((store.getStorefood()));
 
         myRef.child("Store").child(store.getId()).setValue(store);
         myRef.child("Store2").child(store.getStorefood()).child(store.getId()).setValue(store);
         myRef.child("storeMarker").child(store.getId()).setValue(item);
+        myRef.child("storeMarker2").child(store.getStorefood()).push().setValue(item);
     }
 
     @Override

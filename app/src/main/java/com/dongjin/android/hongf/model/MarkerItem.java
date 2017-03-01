@@ -8,6 +8,16 @@ public class MarkerItem {
     double lat;
     double lon;
 
+    public String getFoodTag() {
+        return foodTag;
+    }
+
+    public void setFoodTag(String foodTag) {
+        this.foodTag = foodTag;
+    }
+
+    String foodTag;
+
     public String getId() {
         return id;
     }

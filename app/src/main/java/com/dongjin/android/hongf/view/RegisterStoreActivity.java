@@ -3,13 +3,15 @@ package com.dongjin.android.hongf.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Toast;
 
 import com.dongjin.android.hongf.R;
@@ -17,15 +19,25 @@ import com.dongjin.android.hongf.model.Item;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.RegisterPresenter;
 
-public class RegisterStoreActivity extends AppCompatActivity implements Register_View{
+public class RegisterStoreActivity extends AppCompatActivity implements Register_View,View.OnClickListener {
 
-    private RadioButton priceRb0;
-    private RadioButton priceRb1;
-    private RadioButton priceRb2;
-    private RadioButton priceRb3;
-    private RadioGroup radioGroup;
+    private CheckBox priceRb0;
+    private CheckBox priceRb1;
+    private CheckBox priceRb2;
+    private CheckBox priceRb3;
+    private CheckBox clickedCh;
     private RegisterPresenter presenter;
     private ImageView igKoreanF;
+    private ImageView chinease;
+    private ImageView japanease;
+    private ImageView wastern;
+    private ImageView bar;
+    private ImageView koreansnack;
+    private ImageView hope;
+    private ImageView world;
+    private ImageView cafe;
+    private ImageView fastfood;
+    private ImageView clickedIg;
     private Button btnRegister;
     String priceTag;
     String foodTag;
@@ -47,41 +59,52 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
         Bundle bundle=intent.getExtras();
         item=bundle.getParcelable("item");
 
-        radioGroup=(RadioGroup)findViewById(R.id.rg);
-        igKoreanF=(ImageView) findViewById(R.id.igKorean);
+
+        priceRb0=(CheckBox)findViewById(R.id.priceRb0);
+        priceRb0.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                priceTag=priceRb0.getText().toString();
+                Log.e("PRICE TAG",priceTag);
+                clickCheckbox(priceRb0);
+            }
+        });
+        priceRb1=(CheckBox)findViewById(R.id.priceRb1);
+        priceRb1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                priceTag=priceRb1.getText().toString();
+                Log.e("PRICE TAG",priceTag);
+                clickCheckbox(priceRb1);
+            }
+        });
+
+        priceRb2=(CheckBox)findViewById(R.id.priceRb2);
+        priceRb2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                priceTag=priceRb2.getText().toString();
+                Log.e("PRICE TAG",priceTag);
+                clickCheckbox(priceRb2);
+            }
+        });
+        priceRb3=(CheckBox)findViewById(R.id.priceRb3);
+        priceRb3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                priceTag=priceRb3.getText().toString();
+                Log.e("PRICE TAG",priceTag);
+                clickCheckbox(priceRb3);
+            }
+        });
+
+
+        setImages();
+
         btnRegister=(Button) findViewById(R.id.btnRegister);
 
-        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener(){
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                switch (checkedId){
-                    case R.id.priceRb0:
-                        priceTag="0";
-                        checkChecked =true;
-                        break;
-                    case R.id.priceRb1:
-                        priceTag="1";
-                        checkChecked =true;
-                        break;
-                    case R.id.priceRb2:
-                        priceTag="2";
-                        checkChecked =true;
-                        break;
-                    case R.id.priceRb3:
-                        priceTag="3";
-                        checkChecked =true;
-                        break;
-                }
-            }
-        });
 
-        igKoreanF.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                foodTag="korean";
-            }
-        });
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,4 +145,110 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
         super.onStop();
         item=null;
     }
+
+    public void setImages(){
+        igKoreanF=(ImageView) findViewById(R.id.register_ig_korean);
+        igKoreanF.setOnClickListener(this);
+        japanease=(ImageView) findViewById(R.id.register_ig_japanease);
+        japanease.setOnClickListener(this);
+        chinease=(ImageView) findViewById(R.id.register_ig_chinease);
+        chinease.setOnClickListener(this);
+        wastern=(ImageView) findViewById(R.id.register_ig_wastern);
+        wastern.setOnClickListener(this);
+        world=(ImageView) findViewById(R.id.register_ig_world);
+        world.setOnClickListener(this);
+        bar=(ImageView) findViewById(R.id.register_ig_bar);
+        bar.setOnClickListener(this);
+        hope=(ImageView) findViewById(R.id.register_ig_hope);
+        hope.setOnClickListener(this);
+        koreansnack=(ImageView) findViewById(R.id.register_ig_koreansnack);
+        koreansnack.setOnClickListener(this);
+        fastfood=(ImageView) findViewById(R.id.register_ig_fastfood);
+        fastfood.setOnClickListener(this);
+        cafe=(ImageView) findViewById(R.id.register_ig_cafe);
+        cafe.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.register_ig_korean:
+                foodTag="korean";
+                clickImageView(igKoreanF);
+                break;
+            case R.id.register_ig_japanease:
+                foodTag="japanease";
+                clickImageView(japanease);
+                break;
+            case R.id.register_ig_chinease:
+                foodTag="chinease";
+                clickImageView(chinease);
+                break;
+            case R.id.register_ig_wastern:
+                foodTag="wastern";
+                clickImageView(wastern);
+                break;
+            case R.id.register_ig_world:
+                foodTag="world";
+                clickImageView(world);
+                break;
+            case R.id.register_ig_cafe:
+                foodTag="cafe";
+                clickImageView(cafe);
+                break;
+            case R.id.register_ig_bar:
+                foodTag="bar";
+                clickImageView(bar);
+                break;
+            case R.id.register_ig_hope:
+                foodTag="hope";
+                clickImageView(hope);
+                break;
+            case R.id.register_ig_fastfood:
+                foodTag="fastfood";
+                clickImageView(fastfood);
+                break;
+            case R.id.register_ig_koreansnack:
+                foodTag="koreansnack";
+                clickImageView(koreansnack);
+                break;
+
+
+        }
+    }
+
+    public void clickImageView (ImageView imageView){
+        if(clickedIg==null){
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            clickedIg=imageView;
+        }else if(clickedIg==imageView){
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            clickedIg=null;
+            foodTag=null;
+        }else if(clickedIg!=null && clickedIg!=imageView){
+            clickedIg.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            clickedIg=imageView;
+        }
+    }
+
+    public void clickCheckbox(CheckBox v){
+
+        if(clickedCh==null){
+            clickedCh=v;
+            v.setChecked(true);
+        }else if(clickedCh==v){
+            v.setChecked(false);
+            clickedCh=null;
+            priceTag=null;
+        }else if(clickedCh!=null&& clickedCh!=v){
+            clickedCh.setChecked(false);
+            v.setChecked(true);
+            clickedCh=v;
+        }
+
+
+    }
+
 }

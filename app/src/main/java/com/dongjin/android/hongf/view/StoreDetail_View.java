@@ -11,4 +11,5 @@ import java.util.ArrayList;
 public interface StoreDetail_View extends MvpView {
 
     void showStorePhotos(ArrayList<Uri> uris);
+    void setClickedBookmark();
 }

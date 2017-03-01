@@ -22,7 +22,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapPresenter implements Presenter<Map_View> {
     Map_View map_view;
+    Context context;
+
     public MapPresenter (){
+
+        context=map_view.getContext();
 
     }
     @Override
@@ -76,6 +80,7 @@ public class MapPresenter implements Presenter<Map_View> {
         return bitmap;
 
     }
+
 
 
 }
