@@ -11,20 +11,20 @@
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="286dp"
-        android:gravity="center">
+        android:gravity="center"
+        android:layout_height="250dp">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             app:srcCompat="@drawable/ic_account_24dp"
-            android:id="@+id/imageView6" />
+            android:id="@+id/mypage_ig_profile" />
 
         <TextView
             android:text="Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/tvName"
+            android:id="@+id/mypage_tv_name"
             android:gravity="center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
     </LinearLayout>
@@ -33,26 +33,59 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <devlight.io.library.ntb.NavigationTabBar
-            android:id="@+id/ntb_horizontal"
-            android:layout_width="match_parent"
-            android:layout_gravity="bottom"
-            android:layout_height="40dp"
-            app:ntb_badge_gravity="top"
-            app:ntb_badge_position="right"
-            app:ntb_inactive_color="@color/divider_color"
-            app:ntb_active_color="@color/black"
 
-            app:ntb_badged="false"
-            app:ntb_scaled="true"
-            app:ntb_title_mode="all"
-            app:ntb_titled="true"
-            app:ntb_swiped="true"
-            app:ntb_bg_color="@color/white"
-            android:background="@color/white" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/btn_unpress_like"
+                android:id="@+id/mypage_ig_bookmark"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                app:srcCompat="@android:drawable/ic_menu_myplaces"
+                android:id="@+id/mypage_ig_ifound"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="40dp">
+
+            <TextView
+                android:text="내가 가고 싶은 곳"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mypage_tv_bookmark"
+                android:layout_weight="1"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:gravity="center_horizontal"
+                android:visibility="invisible"
+                android:layout_marginTop="5dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mypage_tv_ifound"
+                android:gravity="center_horizontal"
+                android:layout_weight="1"
+                android:text="내가 발견한 곳"
+                android:visibility="invisible"
+                android:layout_marginTop="5dp" />
+        </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content"
+            android:id="@+id/mypage_recy_myinfo" />
     </LinearLayout>
+
 </LinearLayout>

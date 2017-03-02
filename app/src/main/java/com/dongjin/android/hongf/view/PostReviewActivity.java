@@ -23,8 +23,15 @@ import com.dongjin.android.hongf.adapter.PostReivewPhotosAdapter;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.PostReviewPresenter;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class PostReviewActivity extends AppCompatActivity {
 
@@ -52,6 +59,7 @@ public class PostReviewActivity extends AppCompatActivity {
     private PostReivewPhotosAdapter adapter;
     private RecyclerView recyclerView;
     private String id;
+    DatabaseReference storyRef;
 
     private String kakoProfile;
     private int likeCountl;
@@ -62,6 +70,7 @@ public class PostReviewActivity extends AppCompatActivity {
     ArrayList<Image> images;
     KaKaoInfo kaKaoInfo;
     Store store;
+    DatabaseReference storeRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +80,10 @@ public class PostReviewActivity extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
         storename=bundle.getString("title");
         id=bundle.getString("id");
+        storyRef= FirebaseDatabase.getInstance().getReference().child("story2").child(id);
+        storeRef=FirebaseDatabase.getInstance().getReference().child("Store").child(id);
+        storeRef.keepSynced(true);
+        storyRef.keepSynced(true);
 
 
         kaKaoInfo=KaKaoInfo.getInstance();
@@ -159,6 +172,53 @@ public class PostReviewActivity extends AppCompatActivity {
 
                     }
 
+
+                    storyRef.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            final int count = (int) dataSnapshot.getChildrenCount();
+
+                            HashMap<String,Object> hashMap =new HashMap<String, Object>();
+                            hashMap.put("reviewcount",count);
+                            storeRef.updateChildren(hashMap);
+
+
+                            storeRef.addChildEventListener(new ChildEventListener() {
+                                @Override
+                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                                    Store store=dataSnapshot.getValue(Store.class);
+
+
+                                }
+
+                                @Override
+                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+                                }
+
+                                @Override
+                                public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+                                }
+
+                                @Override
+                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
 
                 }
 

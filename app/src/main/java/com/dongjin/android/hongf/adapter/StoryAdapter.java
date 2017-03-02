@@ -95,6 +95,54 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
 
     }
+    public StoryAdapter(Context context,String id){
+        this.context=context;
+        reviews=new ArrayList<>();
+        keyArray=new ArrayList<>();
+        kaKaoInfo=KaKaoInfo.getInstance();
+
+
+        storyRef.child("story2").child(id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Review review=dataSnapshot.getValue(Review.class);
+                String key=dataSnapshot.getKey();
+                keyArray.add(key);
+                Log.e("keyArrayTag",""+keyArray.size());
+                reviews.add(review);
+                notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        storyRef.child("Story").keepSynced(true);
+
+        Log.e("keyArrayTag2",""+keyArray.size());
+
+
+
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {

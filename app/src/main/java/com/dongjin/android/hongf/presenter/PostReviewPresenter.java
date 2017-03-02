@@ -112,6 +112,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
         myRef.child("Story").child(pushKey).setValue(review);
+        myRef.child("story2").child(id).child(pushKey).setValue(review);
 
     }
 
@@ -132,6 +133,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         storeRef=myRef.child("Store").child(id);
         pushKey=myRef.child("Story").push().getKey();
         myRef.child("Story").child(pushKey).setValue(review);
+        myRef.child("story2").child(id).child(pushKey).setValue(review);
 
 
         for(int i=0; i<images.size();i++){

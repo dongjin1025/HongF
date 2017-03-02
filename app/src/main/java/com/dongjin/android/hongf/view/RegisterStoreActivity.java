@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Item;
+import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.RegisterPresenter;
 
@@ -39,6 +40,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
     private ImageView fastfood;
     private ImageView clickedIg;
     private Button btnRegister;
+    KaKaoInfo kaKaoInfo;
     String priceTag;
     String foodTag;
     Item item;
@@ -54,7 +56,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
         store = new Store();
         presenter=new RegisterPresenter();
         presenter.attachView(this);
-
+        kaKaoInfo=KaKaoInfo.getInstance();
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         item=bundle.getParcelable("item");
@@ -119,6 +121,12 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
                         store.setPhone(item.getPhone());
                         store.setLatit(item.getLatitude());
                         store.setLongni(item.getLongitude());
+                        store.setFinder(kaKaoInfo.read_name_kakao());
+                        store.setFinderId(kaKaoInfo.read_id_kakao());
+                        store.setAveragerating(0);
+                        store.setReviewcount(0);
+                        store.setBookmarkcount(0);
+
                         presenter.writeNewStore(store);
 
                         Toast.makeText(RegisterStoreActivity.this,"등록 되었습니다",Toast.LENGTH_LONG).show();

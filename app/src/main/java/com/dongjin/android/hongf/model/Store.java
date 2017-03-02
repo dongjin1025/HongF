@@ -69,43 +69,57 @@ public class Store implements Parcelable {
 
     public String storefood;
     public String storeprice;
-    public String bookmarkcount;
+    public int bookmarkcount;
 
-    public String getBookmarkcount() {
+    public String getFinder() {
+        return finder;
+    }
+
+    String finderId;
+
+    public String getFinderId() {
+        return finderId;
+    }
+
+    public void setFinderId(String finderId) {
+        this.finderId = finderId;
+    }
+
+    public void setFinder(String finder) {
+        this.finder = finder;
+    }
+
+    public String finder;
+
+    public int getBookmarkcount() {
         return bookmarkcount;
     }
 
-    public void setBookmarkcount(String bookmarkcount) {
+    public void setBookmarkcount(int bookmarkcount) {
         this.bookmarkcount = bookmarkcount;
     }
 
-    public String getReviewcount() {
+    public int getReviewcount() {
         return reviewcount;
     }
 
-    public void setReviewcount(String reviewcount) {
+    public void setReviewcount(int reviewcount) {
         this.reviewcount = reviewcount;
     }
 
-    public String getDiscoveredBy() {
-        return discoveredBy;
-    }
 
-    public void setDiscoveredBy(String discoveredBy) {
-        this.discoveredBy = discoveredBy;
-    }
 
-    public String getAveragerating() {
+    public float getAveragerating() {
         return averagerating;
     }
 
-    public void setAveragerating(String averagerating) {
+    public void setAveragerating(float averagerating) {
         this.averagerating = averagerating;
     }
 
-    public String reviewcount;
-    public String discoveredBy;
-    public String averagerating;
+    public int reviewcount;
+
+    public float averagerating;
 
     public String getPhone() {
         return phone;
@@ -143,7 +157,7 @@ public class Store implements Parcelable {
     }
 
     public Store(String storename, String storeaddress, String storefood, String storeprice, String id, String imageUrl,
-                 String reviewcount, String discoveredBy, String averagerating, String bookmarkcount, String phone
+                 int reviewcount, String finder, float averagerating, int bookmarkcount, String phone
     , String latit, String longni) {
         this.storename = storename;
         this.storeaddress = storeaddress;
@@ -152,7 +166,7 @@ public class Store implements Parcelable {
         this.id=id;
         this.imageUrl =imageUrl;
         this.reviewcount=reviewcount;
-        this.discoveredBy=discoveredBy;
+        this.finder=finder;
         this.averagerating=averagerating;
         this.bookmarkcount=bookmarkcount;
         this.phone=phone;
@@ -173,10 +187,10 @@ public class Store implements Parcelable {
         dest.writeString(storefood);
         dest.writeString(storeprice);
         dest.writeString(imageUrl);
-        dest.writeString(reviewcount);
-        dest.writeString(discoveredBy);
-        dest.writeString(averagerating);
-        dest.writeString(bookmarkcount);
+        dest.writeInt(reviewcount);
+        dest.writeString(finder);
+        dest.writeFloat(averagerating);
+        dest.writeInt(bookmarkcount);
         dest.writeString(phone);
         dest.writeString(longni);
         dest.writeString(latit);
@@ -191,10 +205,10 @@ public class Store implements Parcelable {
         storefood=in.readString();
         storeprice=in.readString();
         imageUrl=in.readString();
-        reviewcount=in.readString();
-        discoveredBy=in.readString();
-        averagerating=in.readString();
-        bookmarkcount=in.readString();
+        reviewcount=in.readInt();
+        finder=in.readString();
+        averagerating=in.readFloat();
+        bookmarkcount=in.readInt();
         phone=in.readString();
         longni=in.readString();
         latit=in.readString();

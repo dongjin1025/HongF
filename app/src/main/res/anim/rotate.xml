@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:duration="500"
+    android:fillAfter="true"
+    android:fromDegrees="0"
+    android:toDegrees="360"
+    >
+</rotate>
+<!--
+    duration : 지속시간
+    fromDegrees : 회전 시작값
+    toDegress : 회전 종료값
+-->

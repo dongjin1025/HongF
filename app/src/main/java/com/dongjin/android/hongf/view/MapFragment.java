@@ -206,15 +206,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
             if (tag != "") {
                 getMarkerItems2(tag);
-                }else{
-                    if(markers.size()!=0){
-                        for(int i=0;i<markers.size();i++){
-                            markers.get(i).remove();
-                        }
+            } else if (tag=="") {
+                if (markers.size() != 0) {
+                    for (int i = 0; i < markers.size(); i++) {
+                        markers.get(i).remove();
                     }
+                }
                 getMarkerItems();
             }
-            resetPager(inflater,tag);
+            resetPager(inflater, tag);
             setFilterInfo(tag);
 
         }
@@ -516,17 +516,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         ArrayList<Store> stores;
         ArrayList<Uri> uris;
         String url;
-        String tag;
+
         Context context;
         DatabaseReference storeRef;
-
-        public void resetDatas(ArrayList<Store> stores) {
-            this.stores.clear();
-            this.stores = stores;
-            notifyDataSetChanged();
-
-
-        }
 
         public MapPagerAdapter(LayoutInflater inflater, Context context, String foodTag) {
             // TODO Auto-generated constructor stub
@@ -535,15 +527,18 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
             stores = new ArrayList<>();
             uris = new ArrayList<>();
 
-            this.tag = foodTag;
-            if (tag == "") {
+
+            Log.e("mappageradapter tag tag",foodTag);
+            if (foodTag=="") {
                 storeRef = FirebaseDatabase.getInstance().getReference().child("Store");
                 storeRef.keepSynced(true);
-            } else if(tag!=null) {
-                storeRef = FirebaseDatabase.getInstance().getReference().child("Store2").child(tag);
+            } else if(foodTag!="") {
+                storeRef = FirebaseDatabase.getInstance().getReference().child("Store2").child(foodTag);
                 storeRef.keepSynced(true);
 
             }
+
+            Log.e("mappageradapter ref tag",storeRef.getKey().toString());
 
 
             storeRef.addChildEventListener(new ChildEventListener() {
@@ -656,5 +651,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         }
     }
 
-
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        storeRef.keepSynced(false);
+    }
 }

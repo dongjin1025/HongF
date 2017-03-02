@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
-import com.dongjin.android.hongf.view.SearchForReviewActivity;
+import com.dongjin.android.hongf.view.PostReviewActivity;
 import com.dongjin.android.hongf.view.StoreDetail_View;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -33,13 +33,16 @@ public class DetailPresenter implements Presenter<StoreDetail_View> {
     public void getReviewImages(ArrayList<Uri> uris){
         view.showStorePhotos(uris);
     }
-    public void navigateToPostReview(Context context, Class<SearchForReviewActivity> activity){
-        Intent intent = new Intent(context,activity);
+    public void navigateToPostReview(Context context, Class<PostReviewActivity> activity,String title,String id){
+        Intent intent =new Intent(context,activity);
+        intent.putExtra("title",title);
+        intent.putExtra("id",id);
         context.startActivity(intent);
     }
     public void setBookMakrk(){
         view.setClickedBookmark();
     }
+
 
 }
 
