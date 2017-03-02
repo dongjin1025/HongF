@@ -110,6 +110,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 keyArray.add(key);
                 Log.e("keyArrayTag",""+keyArray.size());
                 reviews.add(review);
+
+
                 notifyDataSetChanged();
             }
 

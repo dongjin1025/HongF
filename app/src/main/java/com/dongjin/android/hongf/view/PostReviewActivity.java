@@ -23,7 +23,6 @@ import com.dongjin.android.hongf.adapter.PostReivewPhotosAdapter;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.PostReviewPresenter;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -52,6 +51,7 @@ public class PostReviewActivity extends AppCompatActivity {
 
     private EditText etContent;
     private float rate;
+    private float currentRate;
 
 
     private PostReviewPresenter presenter;
@@ -64,6 +64,7 @@ public class PostReviewActivity extends AppCompatActivity {
     private String kakoProfile;
     private int likeCountl;
     private int commentCount;
+    private float averageRating;
     private String username;
     private String storename;
     private String content;
@@ -71,6 +72,41 @@ public class PostReviewActivity extends AppCompatActivity {
     KaKaoInfo kaKaoInfo;
     Store store;
     DatabaseReference storeRef;
+    int reviewcount;
+    HashMap<String,Object> countHashmap;
+    HashMap<String,Object> rateHashmap;
+    Store ratingStore;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        storyRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                reviewcount = (int) dataSnapshot.getChildrenCount();
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        storeRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                ratingStore=dataSnapshot.getValue(Store.class);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +116,14 @@ public class PostReviewActivity extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
         storename=bundle.getString("title");
         id=bundle.getString("id");
+
         storyRef= FirebaseDatabase.getInstance().getReference().child("story2").child(id);
         storeRef=FirebaseDatabase.getInstance().getReference().child("Store").child(id);
         storeRef.keepSynced(true);
         storyRef.keepSynced(true);
 
+        countHashmap=new HashMap<String, Object>();
+        rateHashmap=new HashMap<>();
 
         kaKaoInfo=KaKaoInfo.getInstance();
         if(kaKaoInfo.read_picture_kakao()!=null){
@@ -118,6 +157,17 @@ public class PostReviewActivity extends AppCompatActivity {
                     rate=0;
                 }
 
+                if(reviewcount!=0){
+
+                    currentRate=ratingStore.getAveragerating()*reviewcount;
+                    float crating=(currentRate+rate)/(reviewcount+1)*100;
+                    int crating2=(int)crating/100;
+                    averageRating=(float)crating2;
+                }
+
+
+
+
                 if(content==""){
                     Toast.makeText(PostReviewActivity.this,"내용을 입력해주세요!",Toast.LENGTH_LONG).show();
                 }else if(selectedIg==null){
@@ -131,8 +181,25 @@ public class PostReviewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 presenter.postReviewAndPhotosAsWell(images,username,storename,kakoProfile,id,content,rate);
-                                store=null;
+
+                                if (reviewcount != 0) {
+                                    countHashmap.put("reviewcount", reviewcount + 1);
+                                    rateHashmap.put("averagerating", averageRating);
+                                    storeRef.updateChildren(rateHashmap);
+                                    storeRef.updateChildren(countHashmap);
+                                }else{
+                                    countHashmap.put("reviewcount", 1);
+                                    rateHashmap.put("averagerating", rate);
+                                    storeRef.updateChildren(rateHashmap);
+                                    storeRef.updateChildren(countHashmap);
+
+                                }
+
+                                store = null;
                                 finish();
+
+
+
 
                             }
                         });
@@ -155,6 +222,18 @@ public class PostReviewActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 presenter.postReview(username,storename,kakoProfile,id,content,rate);
+                                if (reviewcount != 0) {
+                                    countHashmap.put("reviewcount", reviewcount + 1);
+                                    rateHashmap.put("averagerating", averageRating);
+                                    storeRef.updateChildren(rateHashmap);
+                                    storeRef.updateChildren(countHashmap);
+                                }else{
+                                    countHashmap.put("reviewcount", 1);
+                                    rateHashmap.put("averagerating", rate);
+                                    storeRef.updateChildren(rateHashmap);
+                                    storeRef.updateChildren(countHashmap);
+
+                                }
                                 store=null;
                                 finish();
 
@@ -173,52 +252,6 @@ public class PostReviewActivity extends AppCompatActivity {
                     }
 
 
-                    storyRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            final int count = (int) dataSnapshot.getChildrenCount();
-
-                            HashMap<String,Object> hashMap =new HashMap<String, Object>();
-                            hashMap.put("reviewcount",count);
-                            storeRef.updateChildren(hashMap);
-
-
-                            storeRef.addChildEventListener(new ChildEventListener() {
-                                @Override
-                                public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                                    Store store=dataSnapshot.getValue(Store.class);
-
-
-                                }
-
-                                @Override
-                                public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-                                }
-
-                                @Override
-                                public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-                                }
-
-                                @Override
-                                public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-                                }
-
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-
-                                }
-                            });
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
 
                 }
 
