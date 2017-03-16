@@ -63,7 +63,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/korean"
+                        app:srcCompat="@drawable/foodicon1"
                         android:id="@+id/register_ig_korean"
                         android:layout_height="70dp"
                         android:background="@color/cardview_light_background" />
@@ -83,7 +83,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/chinease"
+                        app:srcCompat="@drawable/foodicon4"
                         android:id="@+id/register_ig_chinease"
                         android:layout_height="70dp" />
 
@@ -102,7 +102,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/japan"
+                        app:srcCompat="@drawable/foodicon3"
                         android:id="@+id/register_ig_japanease"
                         android:layout_height="70dp" />
 
@@ -122,7 +122,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/wastern"
+                        app:srcCompat="@drawable/foodicon2"
                         android:id="@+id/register_ig_wastern"
                         android:layout_height="70dp" />
 
@@ -142,7 +142,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/world"
+                        app:srcCompat="@drawable/foodicon5"
                         android:id="@+id/register_ig_world"
                         android:layout_height="70dp" />
 
@@ -172,7 +172,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/cafe"
+                        app:srcCompat="@drawable/foodicon8"
                         android:id="@+id/register_ig_cafe"
                         android:layout_height="70dp" />
 
@@ -191,7 +191,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/bar"
+                        app:srcCompat="@drawable/foodicon10"
                         android:id="@+id/register_ig_bar"
                         android:layout_height="70dp" />
 
@@ -210,7 +210,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/hope"
+                        app:srcCompat="@drawable/foodicon9"
                         android:id="@+id/register_ig_hope"
                         android:layout_height="70dp" />
 
@@ -231,7 +231,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/fastfood"
+                        app:srcCompat="@drawable/foodicon7"
                         android:id="@+id/register_ig_fastfood"
                         android:layout_height="70dp" />
 
@@ -251,7 +251,7 @@
 
                     <ImageView
                         android:layout_width="match_parent"
-                        app:srcCompat="@drawable/korean_snack"
+                        app:srcCompat="@drawable/foodicon6"
                         android:id="@+id/register_ig_koreansnack"
                         android:layout_height="70dp" />
 

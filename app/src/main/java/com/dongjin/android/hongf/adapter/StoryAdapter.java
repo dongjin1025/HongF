@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -47,7 +48,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
     DatabaseReference likeRef;
 
-    public StoryAdapter(Context context){
+    public StoryAdapter(final Context context){
         this.context=context;
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
@@ -62,6 +63,8 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 keyArray.add(key);
                 Log.e("keyArrayTag",""+keyArray.size());
                 reviews.add(review);
+                Collections.reverse(reviews);
+                Collections.reverse(keyArray);
                 notifyDataSetChanged();
             }
 
@@ -108,8 +111,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 Review review=dataSnapshot.getValue(Review.class);
                 String key=dataSnapshot.getKey();
                 keyArray.add(key);
+                Collections.reverse(keyArray);
                 Log.e("keyArrayTag",""+keyArray.size());
                 reviews.add(review);
+                Collections.reverse(keyArray);
 
 
                 notifyDataSetChanged();

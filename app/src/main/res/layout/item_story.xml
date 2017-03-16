@@ -46,17 +46,14 @@
                     android:textSize="18sp" />
 
                 <TextView
-                    android:text="StoreName"
+                    android:text="TextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/story_tv_storename"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginStart="5dp"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:textSize="14sp" />
+                    android:id="@+id/Story_tv_date"
+                    android:background="@color/cardview_light_background"
+                    android:textColor="@color/divider_color"
+                    android:layout_marginLeft="5dp" />
+
             </LinearLayout>
 
         </LinearLayout>
@@ -76,18 +73,23 @@
 
     </RelativeLayout>
 
+    <TextView
+        android:text="StoreName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/story_tv_storename"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:layout_marginRight="5dp"
+        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="5dp"
+        android:textSize="14sp"
+        android:textStyle="normal|bold"
+        android:background="@color/white" />
+
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/story_photos_recy" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/Story_tv_date"
-        android:background="@color/cardview_light_background"
-        android:textColor="@color/divider_color" />
 
     <TextView
         android:text="TextView"
@@ -101,9 +103,50 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+
+            <TextView
+                android:text="좋아요 0개"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/story_tv_likeCount"
+                android:textStyle="normal|bold"
+                android:background="@color/cardview_light_background"
+                android:layout_weight="1"
+                android:layout_marginLeft="5dp" />
+
+            <TextView
+                android:text="댓글 0개"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/story_tv_commentCount"
+                android:layout_marginLeft="5dp" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/cardview_light_background">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/cardview_light_background"
-        android:layout_marginTop="0.5dp">
+        android:layout_marginTop="0.5dp"
+        android:layout_marginBottom="0.5dp">
 
         <ImageView
             android:layout_width="60dp"
@@ -122,31 +165,6 @@
             android:paddingTop="2dp"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp" />
-    </LinearLayout>
-
-    <TextView
-        android:text="34people like it "
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/story_tv_likeCount"
-        android:textStyle="normal|bold"
-        android:background="@color/cardview_light_background"
-        android:layout_marginTop="0.5dp"
-        android:paddingLeft="5dp" />
-
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/cardview_light_background">
-
-        <TextView
-            android:text="12 Comments"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/story_tv_commentCount"
-            android:layout_margin="3dp"
-            android:paddingLeft="2dp" />
     </LinearLayout>
 
 </LinearLayout>

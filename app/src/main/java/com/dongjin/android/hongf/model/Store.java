@@ -23,7 +23,19 @@ public class Store implements Parcelable {
         this.imageUrl = imageUrl;
     }
 
-    private String imageUrl;
+    public String imageUrl;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String date;
+
+
 
     public String getId() {
         return id;
@@ -158,7 +170,7 @@ public class Store implements Parcelable {
 
     public Store(String storename, String storeaddress, String storefood, String storeprice, String id, String imageUrl,
                  int reviewcount, String finder, float averagerating, int bookmarkcount, String phone
-    , String latit, String longni) {
+    , String latit, String longni,String date) {
         this.storename = storename;
         this.storeaddress = storeaddress;
         this.storefood = storefood;
@@ -172,6 +184,7 @@ public class Store implements Parcelable {
         this.phone=phone;
         this.latit=latit;
         this.longni=longni;
+        this.date=date;
     }
 
     @Override
@@ -194,7 +207,7 @@ public class Store implements Parcelable {
         dest.writeString(phone);
         dest.writeString(longni);
         dest.writeString(latit);
-
+        dest.writeString(date);
 
     }
     private void readFromParcel(Parcel in){
@@ -212,6 +225,7 @@ public class Store implements Parcelable {
         phone=in.readString();
         longni=in.readString();
         latit=in.readString();
+        date=in.readString();
 
     }
 

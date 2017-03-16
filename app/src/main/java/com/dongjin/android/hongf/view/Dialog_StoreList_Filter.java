@@ -8,10 +8,11 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 
 import com.dongjin.android.hongf.R;
 
-public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClickListener {
+public class Dialog_StoreList_Filter extends AppCompatActivity implements View.OnClickListener {
 
     private ImageView igKoreanF;
     private ImageView chinease;
@@ -27,6 +28,8 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
 
     private Button btnApply;
     private Button btnCancel;
+    private String orderby;
+    RadioGroup rg;
 
     private String foodTag;
 
@@ -34,17 +37,37 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
-        setContentView(R.layout.dialog_map_filter);
+        setContentView(R.layout.dialog_storelist_filter);
         foodTag="null";
+        orderby="null";
 
 
         setImages();
+        rg=(RadioGroup)findViewById(R.id.dialog_rg);
+        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId){
+                    case R.id.dialog_rb_bookmark:
+                        orderby="bookmarkcount";
+                        break;
+
+                    case R.id.dialog_rb_rate:
+                        orderby="averagerating";
+                        break;
+                    case R.id.dialog_rb_review:
+                        orderby="reviewcount";
+                        break;
+                }
+            }
+        });
         btnApply=(Button)findViewById(R.id.filter_btn_apply);
         btnApply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent =new Intent();
                 intent.putExtra("tagkey",foodTag);
+                intent.putExtra("orderby",orderby);
                 setResult(RESULT_OK,intent);
                 finish();
 
@@ -54,10 +77,11 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                foodTag="null";
+                foodTag="";
                 Intent intent =new Intent();
                 intent.putExtra("tagkey",foodTag);
-                setResult(700,intent);
+                intent.putExtra("orderby",orderby);
+                setResult(990,intent);
 
                 finish();
             }

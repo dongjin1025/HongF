@@ -68,10 +68,12 @@ public class PostReviewActivity extends AppCompatActivity {
     private String username;
     private String storename;
     private String content;
+    private String foodtag;
     ArrayList<Image> images;
     KaKaoInfo kaKaoInfo;
     Store store;
     DatabaseReference storeRef;
+    DatabaseReference storeRef2;
     int reviewcount;
     HashMap<String,Object> countHashmap;
     HashMap<String,Object> rateHashmap;
@@ -116,9 +118,12 @@ public class PostReviewActivity extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
         storename=bundle.getString("title");
         id=bundle.getString("id");
+        foodtag=bundle.getString("foodtag");
+
 
         storyRef= FirebaseDatabase.getInstance().getReference().child("story2").child(id);
         storeRef=FirebaseDatabase.getInstance().getReference().child("Store").child(id);
+        storeRef2=FirebaseDatabase.getInstance().getReference().child("Store2").child(foodtag).child(id);
         storeRef.keepSynced(true);
         storyRef.keepSynced(true);
 
@@ -187,11 +192,15 @@ public class PostReviewActivity extends AppCompatActivity {
                                     rateHashmap.put("averagerating", averageRating);
                                     storeRef.updateChildren(rateHashmap);
                                     storeRef.updateChildren(countHashmap);
+                                    storeRef2.updateChildren(rateHashmap);
+                                    storeRef2.updateChildren(countHashmap);
                                 }else{
                                     countHashmap.put("reviewcount", 1);
                                     rateHashmap.put("averagerating", rate);
                                     storeRef.updateChildren(rateHashmap);
                                     storeRef.updateChildren(countHashmap);
+                                    storeRef2.updateChildren(rateHashmap);
+                                    storeRef2.updateChildren(countHashmap);
 
                                 }
 
@@ -227,11 +236,15 @@ public class PostReviewActivity extends AppCompatActivity {
                                     rateHashmap.put("averagerating", averageRating);
                                     storeRef.updateChildren(rateHashmap);
                                     storeRef.updateChildren(countHashmap);
+                                    storeRef2.updateChildren(rateHashmap);
+                                    storeRef2.updateChildren(countHashmap);
                                 }else{
                                     countHashmap.put("reviewcount", 1);
                                     rateHashmap.put("averagerating", rate);
                                     storeRef.updateChildren(rateHashmap);
                                     storeRef.updateChildren(countHashmap);
+                                    storeRef2.updateChildren(rateHashmap);
+                                    storeRef2.updateChildren(countHashmap);
 
                                 }
                                 store=null;

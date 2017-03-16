@@ -62,11 +62,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     private ArrayList<Marker> markers;
     private MapPagerAdapter adapter;
     private ImageView filter_map;
-    private String foodTag;
     private ImageView map_ig_filter;
     private TextView map_tv_filter;
-    HashMap<Marker,Integer> hashMap;
-    HashMap<Integer,Marker> hashMap2;
+
+    HashMap<Integer,Marker> hashMap;
+    HashMap<LatLng,Integer> hashmap2;
     DatabaseReference storeRef;
     LayoutInflater inflater;
 
@@ -103,7 +103,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         map_ig_filter=(ImageView)v.findViewById(R.id.map_ig_filter);
         map_tv_filter=(TextView)v.findViewById(R.id.map_tv_filter);
 
-        resetPager(inflater,"");
+        resetPager(inflater,"null");
 
         filter_map=(ImageView)v.findViewById(R.id.map_btn_filter);
         filter_map.setOnClickListener(new View.OnClickListener() {
@@ -139,9 +139,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
             @Override
             public void onPageScrollStateChanged(int state) {
 
-                if(state==markers.size()-1){
-                    pager.setCurrentItem(0,true);
-                }
+
 
             }
         });
@@ -149,44 +147,44 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     public void setFilterInfo(String tag){
         switch (tag) {
             case "korean":
-                map_ig_filter.setImageResource(R.drawable.korean);
+                map_ig_filter.setImageResource(R.drawable.foodicon1);
                 map_tv_filter.setText("한식");
                 break;
             case "japanease":
-                map_ig_filter.setImageResource(R.drawable.japan);
+                map_ig_filter.setImageResource(R.drawable.foodicon3);
                 map_tv_filter.setText("일식");
 
                 break;
             case "chinease":
-                map_ig_filter.setImageResource(R.drawable.chinease);
+                map_ig_filter.setImageResource(R.drawable.foodicon4);
                 map_tv_filter.setText("중식");
                 break;
             case "wastern":
-                map_ig_filter.setImageResource(R.drawable.wastern);
+                map_ig_filter.setImageResource(R.drawable.foodicon2);
                 map_tv_filter.setText("양식");
                 break;
             case "world":
-                map_ig_filter.setImageResource(R.drawable.world);
+                map_ig_filter.setImageResource(R.drawable.foodicon5);
                 map_tv_filter.setText("세계음식");
                 break;
             case "cafe":
-                map_ig_filter.setImageResource(R.drawable.cafe);
+                map_ig_filter.setImageResource(R.drawable.foodicon8);
                 map_tv_filter.setText("까페");
                 break;
             case "bar":
-                map_ig_filter.setImageResource(R.drawable.bar);
+                map_ig_filter.setImageResource(R.drawable.foodicon10);
                 map_tv_filter.setText("Bar");
                 break;
             case "hope":
-                map_ig_filter.setImageResource(R.drawable.hope);
+                map_ig_filter.setImageResource(R.drawable.foodicon9);
                 map_tv_filter.setText("술집");
                 break;
             case "fastfood":
-                map_ig_filter.setImageResource(R.drawable.fastfood);
+                map_ig_filter.setImageResource(R.drawable.foodicon7);
                 map_tv_filter.setText("패스트푸드");
                 break;
             case "koreansnack":
-                map_ig_filter.setImageResource(R.drawable.korean_snack);
+                map_ig_filter.setImageResource(R.drawable.foodicon6);
                 map_tv_filter.setText("분식");
                 break;
             case "":
@@ -203,10 +201,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         if (resultCode == RESULT_OK) {
             String tag = data.getStringExtra("tagkey");
 
-
-            if (tag != "") {
+            Log.e("MAP FILTER TAG",tag);
+            if (!tag.equals("null")) {
                 getMarkerItems2(tag);
-            } else if (tag=="") {
+            } else if (tag.equals("null")) {
                 if (markers.size() != 0) {
                     for (int i = 0; i < markers.size(); i++) {
                         markers.get(i).remove();
@@ -230,6 +228,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
         setCustomMarkerView();
         getMarkerItems();
+
+
         LatLng hongdae = new LatLng(37.551593, 126.924979);
         //googleMap.addMarker(new MarkerOptions().position(hongdae).title("Marker in hongdae"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hongdae,14));
@@ -246,10 +246,12 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
                 if(marker!=selectedMarker){
                     changeSelectedMarker(marker);
-                }
-                marker.setZIndex(markers.size());
+                    marker.setZIndex(markers.size());
+                    Log.e("hashmap marker position",hashmap2.get(marker.getPosition())+"");
+                    pager.setCurrentItem(hashmap2.get(marker.getPosition()),true);
 
-                pager.setCurrentItem(hashMap.get(marker),true);
+                }
+
 
 
                 return true;
@@ -280,19 +282,19 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     private void changeSelectedMarkerWithPager(int position){
         if(selectedMarker !=null){
 
-            Marker seleMarker;
-            seleMarker=addMarker(selectedMarker,false);
+
+            addMarker(selectedMarker,false);
+
+
             selectedMarker.remove();
 
 
         }
         try{
-            Marker marker=hashMap2.get(position);
+            Marker marker=hashMap.get(position);
+
             selectedMarker=addMarker(marker,true);
             selectedMarker.setZIndex(markers.size());
-            hashMap.put(selectedMarker,position);
-            hashMap2.remove(position);
-            hashMap2.put(position,selectedMarker);
 
             center = CameraUpdateFactory.newLatLng(selectedMarker.getPosition());
             googleMap.animateCamera(center);
@@ -305,26 +307,27 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
     }
     private void changeSelectedMarker(Marker marker) {
-        // 선택했던 마커 되돌리기
+
 
         if (selectedMarker != null) {
-            int tag=hashMap.get(selectedMarker);
-            addMarker(selectedMarker, false);
 
+            addMarker(selectedMarker, false);
 
             selectedMarker.remove();
 
-
         }
+        int positionM=0;
 
-        // 선택한 마커 표시
-        if (marker != null && marker!=selectedMarker) {
-            int tag=hashMap.get(marker);
-           // hashMap.remove(marker);
-            hashMap2.remove(tag);
+
+        if (marker != null) {
+
+            positionM=hashmap2.get(marker.getPosition());
             selectedMarker = addMarker(marker, true);
-            hashMap.put(selectedMarker,tag);
-            hashMap2.put(tag,selectedMarker);
+            selectedMarker.setZIndex(markers.size());
+
+
+
+            pager.setCurrentItem(positionM,true);
             marker.remove();
 
         }
@@ -334,8 +337,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
 
     private void getMarkerItems() {
+        Log.e("getmarkerit-----","dddddddddd");
         hashMap=new HashMap<>();
-        hashMap2=new HashMap<>();
+        hashmap2=new HashMap<>();
+
         markers=new ArrayList<>();
         items=new ArrayList<>();
         markerRef.addChildEventListener(new ChildEventListener() {
@@ -346,17 +351,22 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
                 MarkerItem item=dataSnapshot.getValue(MarkerItem.class);
 
-                if(item!=null){
-                Marker marker;
-                items.add(item);
-                Log.e("ITEM TAG",item.getLat()+"");
-                marker=addMarker(item, false);
-                marker.setTag(i);
-                markers.add(marker);
-                Log.e("MARKER TAG TAG",marker.getTag()+"");
-                hashMap.put(marker,i);
-                hashMap2.put(i,marker);
-                i++;}
+                if (item != null) {
+                    Marker marker;
+                    items.add(item);
+                    Log.e("ITEM TAG", item.getLat() + "");
+                    marker = addMarker(item, false);
+                    marker.setTag(i);
+                    markers.add(marker);
+
+                    hashmap2.put(marker.getPosition(),i);
+
+                    hashMap.put(i, marker);
+                    if(i==0){
+                        changeSelectedMarker(hashMap.get(0));
+                    }
+                    i++;
+                }
 
             }
 
@@ -383,6 +393,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
 
 
+
     }
     private void getMarkerItems2(final String tag) {
         for(int i=0;i<markers.size();i++){
@@ -390,7 +401,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         }
 
         hashMap=new HashMap<>();
-        hashMap2=new HashMap<>();
         markers=new ArrayList<>();
         items=new ArrayList<>();
         markerRef.addChildEventListener(new ChildEventListener() {
@@ -413,10 +423,11 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
                     marker.setTag(i);
                     markers.add(marker);
+                    hashmap2.put(marker.getPosition(),i);
 
-                    hashMap.put(marker, i);
-                    hashMap2.put(i, marker);
-                    i++;
+                    hashMap.put(i, marker);
+
+                    ++i;
                 }
 
 
@@ -458,6 +469,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     private Marker addMarker(Marker marker, boolean isSelectedMarker) {
         double lat = marker.getPosition().latitude;
         double lon = marker.getPosition().longitude;
+
         //int order = ((int) marker.getZIndex());
 
 
@@ -529,12 +541,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
 
             Log.e("mappageradapter tag tag",foodTag);
-            if (foodTag=="") {
+            if (foodTag.equals("null")) {
                 storeRef = FirebaseDatabase.getInstance().getReference().child("Store");
                 storeRef.keepSynced(true);
-            } else if(foodTag!="") {
+                Log.e(" tStoreRef1 excuted!!!!",foodTag);
+
+            } else if(!foodTag.equals("null")) {
                 storeRef = FirebaseDatabase.getInstance().getReference().child("Store2").child(foodTag);
                 storeRef.keepSynced(true);
+                Log.e(" tStoreRef2 excuted!!!!",foodTag);
 
             }
 
@@ -586,7 +601,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
             final Store store = stores.get(position);
 
             View view = null;
-            view = inflater.inflate(R.layout.item_map, null);
+            view = inflater.inflate(R.layout.item_map_pager, null);
 
             CardView cardView = (CardView) view.findViewById(R.id.cardView);
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView4);
@@ -612,7 +627,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
             }
 
             tvStoreName.setText(store.getStorename());
-            tvRating.setText(store.getStoreaddress());
+            tvRating.setText("평점 :"+store.getAveragerating()+" 즐겨찾기 :"+store.getBookmarkcount()+" ");
             tvAddress.setText(store.getStoreaddress());
 
 
@@ -654,6 +669,5 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     @Override
     public void onDestroy() {
         super.onDestroy();
-        storeRef.keepSynced(false);
     }
 }

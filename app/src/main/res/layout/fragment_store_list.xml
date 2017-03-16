@@ -1,0 +1,268 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context="com.dongjin.android.hongf.view.StoreListFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/foodicon1"
+                    android:id="@+id/list_ig_korean"
+                    android:layout_width="100dp" />
+
+                <TextView
+                    android:text="한식"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_ko"
+                    android:layout_weight="0.33"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_height="100dp"
+                    app:srcCompat="@drawable/foodicon3"
+                    android:id="@+id/list_ig_japan"
+                    android:layout_width="100dp" />
+
+                <TextView
+                    android:text="일식"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_jp"
+                    android:layout_weight="0.33"
+                    android:gravity="center_horizontal"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    app:srcCompat="@drawable/foodicon4"
+                    android:id="@+id/list_ig_china"
+                    android:layout_height="100dp"
+                    android:layout_width="100dp" />
+
+                <TextView
+                    android:text="중식"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_ch"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/foodicon2"
+                android:id="@+id/list_ig_western"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="양식"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_west"
+                android:layout_weight="0.33"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/foodicon6"
+                android:id="@+id/list_ig_koreanSnack"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="분식"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_koreansnack"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <ImageView
+                app:srcCompat="@drawable/foodicon5"
+                android:id="@+id/list_ig_world"
+                android:layout_height="100dp"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="기타 세계 음식"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_world"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/foodicon9"
+                android:id="@+id/list_ig_pub"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="술집"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_pub"
+                android:layout_weight="0.33"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/foodicon10"
+                android:id="@+id/list_ig_bar"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="Bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_bar"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <ImageView
+                app:srcCompat="@drawable/foodicon8"
+                android:id="@+id/list_ig_cafe"
+                android:layout_height="100dp"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="디저트/까페"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_cafe"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:paddingLeft="10dp">
+
+            <ImageView
+                android:layout_height="100dp"
+                app:srcCompat="@drawable/foodicon7"
+                android:id="@+id/list_ig_fastfood"
+                android:layout_width="100dp" />
+
+            <TextView
+                android:text="패스트푸드"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_fast"
+                android:layout_weight="1"
+                android:gravity="center_horizontal" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/bottomicon5"
+            android:id="@+id/imageView"
+            android:layout_weight="0.91" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
+

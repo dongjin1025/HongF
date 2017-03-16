@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by kimdongjin on 2017. 2. 17..
@@ -33,6 +34,7 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
     public StoryPhotoAdapter(String key,Context context){
         this.context=context;
         images=new ArrayList<>();
+
         storyRef.child("Story_Urls").child(key).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -40,8 +42,12 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
                 Log.e("ur TAG1",ur);
 
                 if(ur!=null){
-                    images.add(Uri.parse(ur));
-                    notifyDataSetChanged();
+                    if(!images.contains(ur)){
+
+                        images.add(Uri.parse(ur));
+                        Collections.reverse(images);
+                        notifyDataSetChanged();
+                    }
                 }
 
 

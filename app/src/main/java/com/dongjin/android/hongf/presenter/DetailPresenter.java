@@ -33,10 +33,11 @@ public class DetailPresenter implements Presenter<StoreDetail_View> {
     public void getReviewImages(ArrayList<Uri> uris){
         view.showStorePhotos(uris);
     }
-    public void navigateToPostReview(Context context, Class<PostReviewActivity> activity,String title,String id){
+    public void navigateToPostReview(Context context, Class<PostReviewActivity> activity,String title,String id,String foodtag){
         Intent intent =new Intent(context,activity);
         intent.putExtra("title",title);
         intent.putExtra("id",id);
+        intent.putExtra("foodtag",foodtag);
         context.startActivity(intent);
     }
     public void setBookMakrk(){

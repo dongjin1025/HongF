@@ -47,7 +47,7 @@ public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.ViewHolder
         if(uri!=null) {
             Glide.with(context).load(uri).into(holder.image);
         }else{
-            holder.image.setImageResource(R.drawable.korean);
+            holder.image.setImageResource(R.drawable.foodicon1);
         }
         holder.tvStoreName.setText(stores.get(position).getStorename());
 

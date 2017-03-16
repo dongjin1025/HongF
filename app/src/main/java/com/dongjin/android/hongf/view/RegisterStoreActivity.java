@@ -3,6 +3,7 @@ package com.dongjin.android.hongf.view;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -19,6 +20,9 @@ import com.dongjin.android.hongf.model.Item;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.RegisterPresenter;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class RegisterStoreActivity extends AppCompatActivity implements Register_View,View.OnClickListener {
 
@@ -46,12 +50,34 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
     Item item;
     Boolean checkChecked= false;
     Store store;
+    private Handler handler;
+    private Runnable runnable;
+    private String stringdate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_register_store);
         this.setFinishOnTouchOutside(false);
+
+        handler=new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                handler.postDelayed(this, 1000);
+                try {
+                    Date date = new Date();
+                    Date newDate = new Date(date.getTime());
+                    SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd");
+                    stringdate= dt.format(newDate);
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        handler.postDelayed(runnable, 1 * 1000);
 
         store = new Store();
         presenter=new RegisterPresenter();
@@ -123,6 +149,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
                         store.setLongni(item.getLongitude());
                         store.setFinder(kaKaoInfo.read_name_kakao());
                         store.setFinderId(kaKaoInfo.read_id_kakao());
+                        store.setDate(stringdate);
                         store.setAveragerating(0);
                         store.setReviewcount(0);
                         store.setBookmarkcount(0);

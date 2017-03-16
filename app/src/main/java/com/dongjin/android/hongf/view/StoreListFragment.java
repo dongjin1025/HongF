@@ -1,126 +1,104 @@
 package com.dongjin.android.hongf.view;
 
-
-import android.app.Fragment;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.dongjin.android.hongf.R;
-import com.dongjin.android.hongf.adapter.StoreListAdapter;
-import com.dongjin.android.hongf.model.Store;
-import com.dongjin.android.hongf.presenter.StoreListPresenter;
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.melnykov.fab.FloatingActionButton;
-
-import java.util.ArrayList;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class StoreListFragment extends android.support.v4.app.Fragment implements StoreList_View{
+public class StoreListFragment extends Fragment implements View.OnClickListener {
 
 
-    private RecyclerView recyclerView;
-    private FloatingActionButton fab;
-    private StoreListPresenter presenter;
-    private StoreListAdapter adapter;
-    private ArrayList<Store> stores;
-    FirebaseDatabase database = FirebaseDatabase.getInstance();
-    DatabaseReference storeListRefer= database.getReference().child("Store");
-    ChildEventListener childEventListener;
-
+    ImageView list_ig_korean;
+    ImageView list_ig_japan;
+    ImageView list_ig_china;
+    ImageView list_ig_western;
+    ImageView list_ig_world;
+    ImageView list_ig_bar;
+    ImageView list_ig_koreanSnack;
+    ImageView list_ig_fastfood;
+    ImageView list_ig_cafe;
+    ImageView list_ig_pub;
 
     public StoreListFragment() {
         // Required empty public constructor
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        stores=new ArrayList<>();
-        childEventListener=new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Store store=dataSnapshot.getValue(Store.class);
-                stores.add(store);
-                presenter.setSotreListData();
-            }
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        };
-        storeListRefer.addChildEventListener(childEventListener);
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_list, container, false);
-        presenter=new StoreListPresenter();
-        presenter.attachView(this);
 
+        View view= inflater.inflate(R.layout.fragment_store_list, container, false);
+        list_ig_korean=(ImageView)view.findViewById(R.id.list_ig_korean);
+        list_ig_japan=(ImageView)view.findViewById(R.id.list_ig_japan);
+        list_ig_china=(ImageView)view.findViewById(R.id.list_ig_china);
+        list_ig_western=(ImageView)view.findViewById(R.id.list_ig_western);
+        list_ig_world=(ImageView)view.findViewById(R.id.list_ig_world);
+        list_ig_bar=(ImageView)view.findViewById(R.id.list_ig_bar);
+        list_ig_koreanSnack=(ImageView)view.findViewById(R.id.list_ig_koreanSnack);
+        list_ig_fastfood=(ImageView)view.findViewById(R.id.list_ig_fastfood);
+        list_ig_cafe=(ImageView)view.findViewById(R.id.list_ig_cafe);
+        list_ig_pub=(ImageView)view.findViewById(R.id.list_ig_pub);
 
-        recyclerView=(RecyclerView)view.findViewById(R.id.recyclerview);
-        adapter = new StoreListAdapter(getActivity());
-        recyclerView.setAdapter(adapter);
-
-
-
-        RecyclerView.LayoutManager manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(manager);
-
-
-
-
-        final CollapsingToolbarLayout collapsingToolbarLayout =
-                (CollapsingToolbarLayout) view.findViewById(R.id.toolbar);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#ff000000"));
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.parseColor("#ff000000"));
-
-
-
-
+        list_ig_korean.setOnClickListener(this);
+        list_ig_japan.setOnClickListener(this);
+        list_ig_china.setOnClickListener(this);
+        list_ig_western.setOnClickListener(this);
+        list_ig_world.setOnClickListener(this);
+        list_ig_bar.setOnClickListener(this);
+        list_ig_koreanSnack.setOnClickListener(this);
+        list_ig_cafe.setOnClickListener(this);
+        list_ig_fastfood.setOnClickListener(this);
+        list_ig_pub=(ImageView)view.findViewById(R.id.list_ig_pub);
         return view;
+
     }
 
-    @Override
-    public void showStoreList() {
-        adapter.setAdapterData(stores);
-    }
 
     @Override
-    public void onStop() {
-        super.onStop();
-        storeListRefer.removeEventListener(childEventListener);
+    public void onClick(View v) {
+        String tag="";
+        switch (v.getId()){
+            case R.id.list_ig_korean:
+                tag="korean";
+                break;
+            case R.id.list_ig_japan:
+                tag="japanease";
+                break;
+            case R.id.list_ig_china:
+                tag="chinease";
+                break;
+            case R.id.list_ig_western:
+                tag="wastern";
+                break;
+            case R.id.list_ig_world:
+                tag="world";
+                break;
+            case R.id.list_ig_bar:
+                tag="bar";
+                break;
+            case R.id.list_ig_pub:
+                tag="hope";
+                break;
+            case R.id.list_ig_cafe:
+                tag="cafe";
+                break;
+            case R.id.list_ig_fastfood:
+                tag="fastfood";
+                break;
+            case R.id.list_ig_koreanSnack:
+                tag="koreansnack";
+                break;
+        }
+        Intent intent=new Intent(getContext(),StoreListActivity.class);
+        intent.putExtra("tag",tag);
+        startActivity(intent);
     }
 }

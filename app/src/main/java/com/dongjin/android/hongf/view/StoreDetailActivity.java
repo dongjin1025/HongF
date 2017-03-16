@@ -29,6 +29,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -50,6 +51,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     DetailPresenter presenter;
     private String detail_id;
     Store store;
+    private String foodtag;
     DetailPhotoAdapter photoAdapter;
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     DatabaseReference myRef=firebaseDatabase.getReference();
@@ -76,6 +78,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
                 Log.e("BOOKMARKREF KEYUYYY123",ur);
 
                 uris.add(Uri.parse(ur));
+                Collections.reverse(uris);
                 presenter.getReviewImages(uris);
 
 
@@ -151,6 +154,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
 
         store=bundle.getParcelable("Store");
         detail_id=store.getId();
+        foodtag=store.getStorefood();
         bookmarkRef=myRef.child("Store").child(detail_id).child("Bookmark");
         storePhotosRef=myRef.child("Store").child(detail_id).child("Urls");
         bookmarkRef2=myRef.child("bookmark").child(kaKaoInfo.read_id_kakao()).child(detail_id);
@@ -188,7 +192,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             public void onClick(View v) {
 
 
-                presenter.navigateToPostReview(getContext(),PostReviewActivity.class,store.getStorename(),store.getId());
+                presenter.navigateToPostReview(getContext(),PostReviewActivity.class,store.getStorename(),store.getId(),store.getStorefood());
             }
         });
         linearLayout_bookmark.setOnClickListener(new View.OnClickListener() {
@@ -258,6 +262,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
                 HashMap<String,Object> hashmap=new HashMap<>();
                 hashmap.put("bookmarkcount",count);
                 myRef.child("Store").child(detail_id).updateChildren(hashmap);
+                myRef.child("Store2").child(foodtag).child(detail_id).updateChildren(hashmap);
 
             }
 

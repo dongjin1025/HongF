@@ -94,7 +94,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
         }
 
         adapter=new SimpleAdapter(this,itemLists,R.layout.item_search_for_review,new
-                String[]{"title","address","id"},new int[]{R.id.tvTitle,R.id.tvAddress,R.id.tvId_search_for_review});
+                String[]{"title","address","id"},new int[]{R.id.tvTitle,R.id.tvAddress});
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -105,6 +105,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
                 Intent intent =new Intent(SearchForReviewActivity.this,PostReviewActivity.class);
                 intent.putExtra("title",itemLists.get(position).get("title"));
                 intent.putExtra("id",itemLists.get(position).get("id"));
+                intent.putExtra("foodtag",itemLists.get(position).get("foodtag"));
                 startActivity(intent);
             }
         });
@@ -120,6 +121,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
                 tempoMap.put("title",stores.get(i).getStorename());
                 tempoMap.put("address",stores.get(i).getStorename());
                 tempoMap.put("id",stores.get(i).getId());
+                tempoMap.put("foodtag",stores.get(i).getStorefood());
                 itemLists.add(tempoMap);
             }
         }

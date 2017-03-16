@@ -19,10 +19,4 @@
         android:layout_height="wrap_content"
         android:id="@+id/tvAddress" />
 
-    <TextView
-        android:text="TextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvId_search_for_review"
-        android:visibility="gone" />
 </LinearLayout>

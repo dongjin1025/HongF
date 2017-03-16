@@ -33,6 +33,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         this.context=context;
     }
     public void setAdapterData(ArrayList<Store> stores){
+        this.stores=new ArrayList<>();
         this.stores=stores;
         notifyDataSetChanged();
 

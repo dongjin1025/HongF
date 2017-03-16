@@ -28,6 +28,7 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".view.StoreDetailActivity" />
         <activity android:name=".view.PostReviewActivity" />
+        <activity android:name=".view.StoreListActivity" />
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
             android:theme="@style/OverrideMultipleImageSelectTheme"
@@ -51,18 +52,23 @@
             android:name=".view.RegisterStoreActivity"
             android:theme="@style/Dialog" />
         <activity android:name=".view.SearchForReviewActivity" />
-        <activity android:name=".view.LoginActivity">
+        <activity android:name=".view.LoginActivity"></activity>
+        <activity android:name=".view.CommentActivity" />
+        <activity android:name=".view.LikeDetailActivity" />
+        <activity
+            android:name=".view.Dialog_Map_Filter"
+            android:theme="@style/Dialog" />
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.CommentActivity" />
-        <activity android:name=".view.LikeDetailActivity" />
-        <activity android:name=".view.Dialog_Map_Filter"
-            android:theme="@style/Dialog"
-        />
+        <activity
+            android:name=".view.Dialog_StoreList_Filter"
+            android:theme="@style/Dialog" />
+        <activity android:name=".view.CheckHongik"></activity>
     </application>
 
 </manifest>

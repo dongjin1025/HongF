@@ -74,16 +74,22 @@ public class MainActivity extends AppCompatActivity{
                         fragment=addFragment;
                         break;
                     case 3:
-                        fragment =myPageFragment;
+                        fragment =storyFragment;
 
                         break;
                     case 4:
-                        fragment = storyFragment;
+                        fragment = myPageFragment;
 
                 }
                 return fragment;
             }
         });
+//        TabLayout tabLayout = (TabLayout) findViewById(R.id.tablay);
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.map_normal));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.list_normal));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.add_normal));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.review_normal));
+//        tabLayout.addTab(tabLayout.newTab().setIcon(R.drawable.mypage_normal));
 
         final String[] colors = getResources().getStringArray(R.array.france);
 
@@ -91,25 +97,25 @@ public class MainActivity extends AppCompatActivity{
         final ArrayList<NavigationTabBar.Model> models = new ArrayList<>();
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_fourth),
+                        getResources().getDrawable(R.drawable.bottomicon1),
                         Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.bottomicon1))
                         .title("Map")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_first),
+                        getResources().getDrawable(R.drawable.bottomicon2),
                         Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.ic_sixth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.bottomicon2))
                         .title("List")
                         .build()
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_second),
+                        getResources().getDrawable(R.drawable.bottomicon3),
                         Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.bottomicon3))
                         .title("Add")
                         .build()
 
@@ -117,18 +123,18 @@ public class MainActivity extends AppCompatActivity{
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_second),
+                        getResources().getDrawable(R.drawable.bottomicon6),
                         Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.bottomicon6))
                         .title("Story")
                         .build()
 
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.ic_second),
+                        getResources().getDrawable(R.drawable.bottomicon7),
                         Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.ic_eighth))
+                        .selectedIcon(getResources().getDrawable(R.drawable.bottomicon7))
                         .title("Mon Page")
                         .build()
 

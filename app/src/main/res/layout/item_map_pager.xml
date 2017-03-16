@@ -7,26 +7,26 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="56dp">
+        android:layout_height="70dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:gravity="center_vertical"
-            android:layout_height="56dp">
+            android:layout_height="70dp">
 
             <ImageView
                 app:srcCompat="@android:drawable/sym_def_app_icon"
                 android:id="@+id/imageView4"
                 android:elevation="0dp"
                 android:layout_width="100dp"
-                android:layout_height="56dp" />
+                android:scaleType="fitXY"
+                android:layout_height="70dp" />
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center_vertical">
+                android:layout_height="70dp">
 
                 <TextView
                     android:text="TextView"
@@ -36,8 +36,9 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:paddingTop="5dp"
                     android:paddingLeft="5dp"
-                    android:maxEms="10"
-                    android:textSize="12sp" />
+                    android:textSize="20sp"
+                    style="@android:style/Widget.DeviceDefault.Light.TextView"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:text="TextView"
@@ -45,7 +46,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvRating"
                     android:paddingLeft="5dp"
-                    android:textSize="12sp" />
+                    android:textSize="14sp"
+                    android:layout_marginTop="3dp"
+                    android:textStyle="italic" />
 
                 <TextView
                     android:text="TextView"
@@ -53,8 +56,8 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tvAddress"
                     android:paddingLeft="5dp"
-                    android:maxEms="20"
-                    android:textSize="10sp" />
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
 
             </LinearLayout>
 
