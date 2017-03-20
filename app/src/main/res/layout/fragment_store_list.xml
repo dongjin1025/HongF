@@ -4,22 +4,30 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
-    tools:context="com.dongjin.android.hongf.view.StoreListFragment">
+    tools:context="com.dongjin.android.hongf.view.StoreListFragment"
+    android:gravity="center">
 
     <!-- TODO: Update blank fragment layout -->
+    <!--<include-->
+        <!--android:id="@+id/tb_maps"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--layout="@layout/toolbar_main"-->
+        <!--android:visibility="visible"-->
+        <!--android:layout_alignParentEnd="true" />-->
 
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
+        android:gravity="center_horizontal">
 
             <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
 
                 <ImageView
                     android:layout_height="100dp"
@@ -42,7 +50,7 @@
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
 
                 <ImageView
                     android:layout_height="100dp"
@@ -65,7 +73,7 @@
                 android:orientation="vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_margin="10dp">
+                android:layout_margin="5dp">
 
                 <ImageView
                     app:srcCompat="@drawable/foodicon4"
@@ -88,13 +96,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp">
+        android:gravity="center_horizontal">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 android:layout_height="100dp"
@@ -115,7 +123,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 android:layout_height="100dp"
@@ -136,7 +144,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 app:srcCompat="@drawable/foodicon5"
@@ -159,13 +167,13 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp">
+        android:gravity="center_horizontal">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 android:layout_height="100dp"
@@ -186,7 +194,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 android:layout_height="100dp"
@@ -207,7 +215,7 @@
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_margin="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 app:srcCompat="@drawable/foodicon8"
@@ -229,15 +237,14 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_marginLeft="10dp"
-            android:paddingLeft="10dp">
+            android:layout_margin="5dp">
 
             <ImageView
                 android:layout_height="100dp"
@@ -253,13 +260,6 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal" />
         </LinearLayout>
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/bottomicon5"
-            android:id="@+id/imageView"
-            android:layout_weight="0.91" />
 
     </LinearLayout>
 

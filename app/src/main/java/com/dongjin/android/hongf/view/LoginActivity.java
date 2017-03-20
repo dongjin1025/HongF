@@ -16,9 +16,11 @@
 package com.dongjin.android.hongf.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -109,6 +111,7 @@ public class LoginActivity extends BaseActivity implements Login_View {
         if (mAuthListener != null) {
             mAuth.removeAuthStateListener(mAuthListener);
         }
+        finish();
     }
 
     @Override
@@ -120,6 +123,30 @@ public class LoginActivity extends BaseActivity implements Login_View {
     @Override
     public Context getContext() {
         return this;
+    }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("종료");
+        dialog.setMessage("정말 앱을 종료 하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                finish();
+
+            }
+        });
+        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+            }
+        });
+
+        dialog.show();
     }
 
     private class SessionCallback implements ISessionCallback {

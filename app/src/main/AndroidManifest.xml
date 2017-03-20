@@ -27,7 +27,9 @@
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".view.StoreDetailActivity" />
-        <activity android:name=".view.PostReviewActivity" />
+        <activity android:name=".view.PostReviewActivity"
+            android:windowSoftInputMode="adjustNothing"
+            android:theme="@style/Dialog"/>
         <activity android:name=".view.StoreListActivity" />
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
@@ -47,11 +49,20 @@
         </activity>
         <activity
             android:name=".view.SearchActivity"
-            android:theme="@style/Dialog" />
+            android:theme="@style/Dialog"
+            android:windowSoftInputMode="adjustNothing"/>
+
+
+
         <activity
             android:name=".view.RegisterStoreActivity"
-            android:theme="@style/Dialog" />
-        <activity android:name=".view.SearchForReviewActivity" />
+            android:theme="@style/Dialog"
+            />
+
+        <activity
+            android:name=".view.SearchForReviewActivity"
+            android:theme="@style/Dialog"/>
+
         <activity android:name=".view.LoginActivity"></activity>
         <activity android:name=".view.CommentActivity" />
         <activity android:name=".view.LikeDetailActivity" />

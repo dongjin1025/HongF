@@ -8,28 +8,41 @@
     android:background="@color/divider_color"
 
     android:fitsSystemWindows="true"
-    tools:context="com.dongjin.android.hongf.view.PostReviewActivity"
-    android:padding="30dp">
+    tools:context="com.dongjin.android.hongf.view.PostReviewActivity">
 
 
     <LinearLayout
             android:layout_width="match_parent"
         android:orientation="vertical"
             android:background="@color/white"
-            android:padding="10dp"
         android:id="@+id/linear"
-        android:layout_height="500dp"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
-        <TextView
-            android:id="@+id/textView4"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="리뷰쓰기"
-            android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
-            android:textSize="24sp" />
+            android:layout_marginTop="5dp">
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="리뷰쓰기"
+                android:textAppearance="@style/TextAppearance.AppCompat.Widget.ActionBar.Menu"
+                android:textSize="24sp"
+                android:layout_centerInParent="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+                android:id="@+id/postReview_btn_cancel"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="10dp" />
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
@@ -165,7 +178,8 @@
             android:layout_height="match_parent"
             android:layout_alignParentEnd="false"
             android:layout_below="@+id/linear"
-            android:background="@color/white">
+            android:background="@color/white"
+            android:gravity="bottom">
 
             <Button
                 android:text="사진 추가"

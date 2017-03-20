@@ -46,7 +46,7 @@ public class SearchPresenter implements Presenter<Search_View> {
         if (subscription != null) subscription.unsubscribe();
         GlobalApplication application = GlobalApplication.getGlobalApplicationContext().get(search_view.getContext());
         DaumSearchApi daumSearchApi = application.getDaumSearchApi();
-        subscription = daumSearchApi.daumSearch(application.getPackageName(),"android","a40a441f065ed60aecb1b3a05805a68c",enteredPlace)
+        subscription = daumSearchApi.daumSearch(application.getPackageName(),"android","a40a441f065ed60aecb1b3a05805a68c",enteredPlace,"37.551593,126.924979",3000)
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(application.defaultSubscribeScheduler())
                 .subscribe(new Subscriber<RootData>() {
@@ -56,12 +56,8 @@ public class SearchPresenter implements Presenter<Search_View> {
 
                         if (rootData!=null) {
 
-                            items=rootData.getChannel().getItem();
+                            items = rootData.getChannel().getItem();
                             search_view.showSearchedPlaces(items);
-
-                        } else {
-                            search_view.showNoResult();
-
                         }
                     }
 

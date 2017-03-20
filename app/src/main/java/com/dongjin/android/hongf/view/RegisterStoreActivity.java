@@ -1,10 +1,12 @@
 package com.dongjin.android.hongf.view;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -53,6 +55,33 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
     private Handler handler;
     private Runnable runnable;
     private String stringdate;
+    private ImageView btnCancel;
+
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("취소");
+        dialog.setMessage("정말로 취소 하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                finish();
+
+            }
+        });
+        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+            }
+        });
+
+        dialog.show();
+    }
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +159,35 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
         setImages();
 
         btnRegister=(Button) findViewById(R.id.btnRegister);
+
+        btnCancel=(ImageView)findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                AlertDialog.Builder dialog = new AlertDialog.Builder(RegisterStoreActivity.this);
+                dialog.setTitle("취소");
+                dialog.setMessage("정말로 취소 하시겠습니까?");
+                dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        finish();
+
+                    }
+                });
+                dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                    }
+                });
+
+                dialog.show();
+
+            }
+        });
 
 
 
@@ -255,7 +313,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
 
     public void clickImageView (ImageView imageView){
         if(clickedIg==null){
-            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color));
             clickedIg=imageView;
         }else if(clickedIg==imageView){
             imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
@@ -263,7 +321,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
             foodTag=null;
         }else if(clickedIg!=null && clickedIg!=imageView){
             clickedIg.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
-            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color));
             clickedIg=imageView;
         }
     }

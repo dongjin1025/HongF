@@ -1,7 +1,9 @@
 package com.dongjin.android.hongf.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +38,30 @@ public class CheckHongik extends AppCompatActivity {
             }
         });
     }
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle("종료");
+        dialog.setMessage("정말 앱을 종료 하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                finish();
+
+            }
+        });
+        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+            }
+        });
+
+        dialog.show();
+    }
 
     public void checkNum(String n){
 
@@ -52,5 +78,11 @@ public class CheckHongik extends AppCompatActivity {
         }
 
         Log.e("STUDENT NUM",charArray[2]+"");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
     }
 }

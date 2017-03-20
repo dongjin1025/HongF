@@ -14,11 +14,13 @@ import rx.Observable;
 
 public interface DaumSearchApi {
 
-    @GET("/local/v1/search/keyword.json?location=37.551593, 126.924979&radius=20000")
+    @GET("/local/v1/search/keyword.json?")
     Observable<RootData> daumSearch(@Header("x-appid")String appid,
                                             @Header("x-platform")String android,
                                             @Query("apikey") String apiKey,
-                                            @Query("query") String query);
+                                            @Query("query") String query,
+                                    @Query("location") String location,
+                                    @Query("radius") int radius);
 
 
 

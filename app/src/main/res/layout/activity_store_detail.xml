@@ -7,19 +7,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.dongjin.android.hongf.view.StoreDetailActivity"
-    android:background="@color/divider_color">
-'
-
-    <android.support.v7.widget.Toolbar
+    android:background="@color/white">
+    <include
+        android:id="@+id/tb_detail"
         android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:theme="?attr/actionBarTheme"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/toolbar2"
-        android:background="@color/cardview_light_background" />
+        android:layout_height="60dp"
+        layout="@layout/toolbar_submain"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true" />
 
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/divider_color"
+        android:layout_margin="10dp"></LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -222,6 +225,13 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_margin="10dp"
+                android:background="@color/divider_color"></LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"

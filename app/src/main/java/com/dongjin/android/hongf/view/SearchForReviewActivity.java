@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -34,6 +35,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
     private ArrayList<String> list;
     private ArrayList<Store> stores;
     private EditText etSeatch;
+    private ImageView btnCancel;
     SearchForReviewPresenter presenter;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference storeListRefer= database.getReference().child("Store");
@@ -43,14 +45,19 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_for_review);
+        this.setFinishOnTouchOutside(false);
 
         stores=new ArrayList<>();
         presenter=new SearchForReviewPresenter();
         listView=(ListView)findViewById(R.id.listview);
 
-        initList();
-
-
+        btnCancel=(ImageView)findViewById(R.id.sr_btn_cancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         etSeatch=(EditText) findViewById(R.id.etSearch);
         etSeatch.addTextChangedListener(new TextWatcher() {
             @Override
@@ -88,6 +95,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
             Map<String,String> map=new HashMap<>();
             map.put("title",stores.get(i).getStorename());
             map.put("address",stores.get(i).getStoreaddress());
+            map.put("foodtag",stores.get(i).getStorefood());
             map.put("id",stores.get(i).getId());
             itemLists.add(map);
             list.add(stores.get(i).getStorename());
@@ -107,6 +115,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
                 intent.putExtra("id",itemLists.get(position).get("id"));
                 intent.putExtra("foodtag",itemLists.get(position).get("foodtag"));
                 startActivity(intent);
+                finish();
             }
         });
 
@@ -119,7 +128,7 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
             if(stores.get(i).getStorename().contains(textToSearch)){
                 Map<String,String> tempoMap=new HashMap<>();
                 tempoMap.put("title",stores.get(i).getStorename());
-                tempoMap.put("address",stores.get(i).getStorename());
+                tempoMap.put("address",stores.get(i).getStoreaddress());
                 tempoMap.put("id",stores.get(i).getId());
                 tempoMap.put("foodtag",stores.get(i).getStorefood());
                 itemLists.add(tempoMap);
@@ -131,13 +140,12 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
     @Override
     public void onStart() {
         super.onStart();
-
         childEventListener=new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Store store=dataSnapshot.getValue(Store.class);
                 stores.add(store);
-
+                initList();
             }
 
             @Override
@@ -161,6 +169,8 @@ public class SearchForReviewActivity extends AppCompatActivity implements Search
             }
         };
         storeListRefer.addChildEventListener(childEventListener);
+
+
 
     }
 

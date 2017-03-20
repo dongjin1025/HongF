@@ -7,9 +7,11 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dongjin.android.hongf.R;
@@ -28,6 +30,7 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
     private Button btnSearch;
     private EditText etSearch;
     private InputMethodManager inputMethodManager;
+    private ImageView btnCancel;
 
     @Override
     public void onStart() {
@@ -40,8 +43,7 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
         requestWindowFeature(Window.FEATURE_ACTION_BAR);
         setContentView(R.layout.activity_search);
         this.setFinishOnTouchOutside(false);
-
-
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
         inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
@@ -69,6 +71,13 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
                 presenter.loadPlace(query);
             }
         });
+        btnCancel=(ImageView)findViewById(R.id.btn_cancel);
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
 
@@ -84,13 +93,18 @@ public class SearchActivity extends AppCompatActivity implements Search_View {
     @Override
     public void showSearchedPlaces(ArrayList<Item> items) {
         adapter.setAdapterData(items);
-        tvNoResult.setVisibility(View.INVISIBLE);
+        if(items.size()==0){
+            tvNoResult.setVisibility(View.VISIBLE);
+        }else{
+            tvNoResult.setVisibility(View.GONE);
+        }
+
 
     }
 
     @Override
     public void showNoResult() {
-        tvNoResult.setVisibility(View.VISIBLE);
+
     }
 
     @Override

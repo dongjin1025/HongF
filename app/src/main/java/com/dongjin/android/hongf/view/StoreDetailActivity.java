@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -19,7 +19,6 @@ import com.dongjin.android.hongf.adapter.DetailPhotoAdapter;
 import com.dongjin.android.hongf.adapter.StoryAdapter;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Store;
-import com.dongjin.android.hongf.model.Urls;
 import com.dongjin.android.hongf.presenter.DetailPresenter;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -31,11 +30,9 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 public class StoreDetailActivity extends AppCompatActivity implements StoreDetail_View {
 
-    private Toolbar toolbar;
     private LinearLayout linearLayout_addReview;
     private LinearLayout linearLayout_bookmark;
     private ImageView detail_ig_bookmark;
@@ -47,18 +44,18 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     private TextView tvInfo;
     private RecyclerView recyclerView;
     private RecyclerView review_recycler;
+    private View view;
     StoryAdapter adapter;
     DetailPresenter presenter;
     private String detail_id;
     Store store;
+    private String dt_id;
     private String foodtag;
+    private ImageButton btnBack;
     DetailPhotoAdapter photoAdapter;
     FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
     DatabaseReference myRef=firebaseDatabase.getReference();
     ArrayList<Uri> uris;
-
-    private List<Urls> mModels;
-    private List<String> mKeys;
     private Boolean bookmarked=false;
     private KaKaoInfo kaKaoInfo;
     DatabaseReference bookmarkRef;
@@ -152,8 +149,12 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
 
+
+
+
         store=bundle.getParcelable("Store");
         detail_id=store.getId();
+        dt_id=bundle.getString("id");
         foodtag=store.getStorefood();
         bookmarkRef=myRef.child("Store").child(detail_id).child("Bookmark");
         storePhotosRef=myRef.child("Store").child(detail_id).child("Urls");
@@ -175,6 +176,15 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         review_recycler.setAdapter(adapter);
         review_recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
+
+        view=findViewById(R.id.tb_detail);
+        btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
 
         tvAddress=(TextView)findViewById(R.id.detail_tv_address);
@@ -203,6 +213,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             }
         });
 
+
         tvAddress.setText(store.getStoreaddress());
         tvTell.setText(store.getPhone());
         tvType.setText(store.getStorefood());
@@ -211,16 +222,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
 
 
 
-        toolbar=(Toolbar)findViewById(R.id.toolbar2);
-        toolbar.setTitle(store.getStorename());;
-        toolbar.setTitleTextColor(getResources().getColor(R.color.black));
 
-        toolbar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
         linearLayout_addReview=(LinearLayout)findViewById(R.id.detail_review_btn);
 
 

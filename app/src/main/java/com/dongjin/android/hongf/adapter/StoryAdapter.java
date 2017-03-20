@@ -43,8 +43,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
     ArrayList<Review> reviews;
     ArrayList<String> keyArray;
+    ArrayList<Integer> commentCounts;
     boolean isLiking=false;
     KaKaoInfo kaKaoInfo;
+    String storeId;
 
     DatabaseReference likeRef;
 
@@ -52,6 +54,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         this.context=context;
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
+        commentCounts=new ArrayList<>();
         kaKaoInfo=KaKaoInfo.getInstance();
 
 
@@ -70,6 +73,11 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Review review=dataSnapshot.getValue(Review.class);
+                int commentCount= review.getCommentCount();
+                commentCounts.add(commentCount);
+                notifyDataSetChanged();
+
 
 
 
@@ -102,6 +110,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         this.context=context;
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
+        commentCounts=new ArrayList<>();
         kaKaoInfo=KaKaoInfo.getInstance();
 
 
@@ -122,6 +131,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Review review=dataSnapshot.getValue(Review.class);
+                int commentCount= review.getCommentCount();
+                commentCounts.add(commentCount);
+                notifyDataSetChanged();
 
 
 
@@ -182,9 +195,20 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
 
         holder.username.setText(review.getUsername());
-        holder.storename.setText(review.getStoreName());
+        holder.storename.setText("@ "+review.getStoreName());
+        holder.storename.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         holder.content.setText(review.getContent());
-        holder.commentCount.setText("뎃글 "+ review.getCommentCount()+"개");
+        if(commentCounts.size()!=0){
+            holder.commentCount.setText("뎃글 "+ commentCounts.get(position)+"개");
+        }else{
+            holder.commentCount.setText("뎃글 "+ review.getCommentCount()+"개");
+        }
+
 
         holder.commentCount.setTag(position);
         holder.commentCount.setOnClickListener(new View.OnClickListener() {
@@ -229,7 +253,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             holder.rate.setColorFilter(ContextCompat.getColor(context, R.color.black));
         }
         holder.date.setText(review.getDate());
-        holder.likeCount.setText(review.getLikeCount()+"명이 이 게시물을 좋아합니다");
+        holder.likeCount.setText("좋아요 "+review.getLikeCount()+"개");
 
         holder.likeCount.setTag(position);
         holder.likeCount.setOnClickListener(new View.OnClickListener() {

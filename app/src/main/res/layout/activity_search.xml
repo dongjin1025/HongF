@@ -4,15 +4,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/activity_search"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     tools:context="com.dongjin.android.hongf.view.SearchActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@android:drawable/ic_menu_close_clear_cancel"
+            android:id="@+id/btn_cancel"
+            android:layout_alignParentRight="true" />
+    </RelativeLayout>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp">
+        android:layout_marginTop="15dp">
 
         <EditText
             android:layout_width="match_parent"
@@ -37,14 +49,14 @@
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:id="@+id/search_recyclerview"
-        android:layout_height="300dp" />
+        android:layout_height="wrap_content" />
 
     <TextView
-        android:text="Nothing to show"
+        android:text="결과가 없습니다"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvNoResult"
-        android:gravity="center_vertical|center_horizontal"
+        android:gravity="center_vertical"
         android:textSize="36sp"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 </LinearLayout>

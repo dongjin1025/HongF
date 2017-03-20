@@ -9,6 +9,7 @@
     tools:context="com.dongjin.android.hongf.view.MapFragment">
 
 
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -23,7 +24,7 @@
             <ImageView
                 android:layout_width="77dp"
                 android:layout_height="match_parent"
-                app:srcCompat="@drawable/btn_location_restaurant_map"
+                app:srcCompat="@drawable/bottomicon4"
                 android:id="@+id/map_ig_filter" />
 
             <TextView

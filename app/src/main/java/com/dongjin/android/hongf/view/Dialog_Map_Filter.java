@@ -146,7 +146,7 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
     public void clickImageView(ImageView imageView) {
 
         if(clickedIg==null){
-            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color));
             clickedIg=imageView;
         }else if(clickedIg==imageView){
             imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
@@ -154,7 +154,7 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
             foodTag="null";
         }else if(clickedIg!=null && clickedIg!=imageView){
             clickedIg.setBackgroundColor(ContextCompat.getColor(this, R.color.white));
-            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.black));
+            imageView.setBackgroundColor(ContextCompat.getColor(this, R.color.divider_color));
             clickedIg=imageView;
         }
 

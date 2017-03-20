@@ -246,7 +246,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
                 if(marker!=selectedMarker){
                     changeSelectedMarker(marker);
-                    marker.setZIndex(markers.size());
+                    //marker.setZIndex(markers.size());
                     Log.e("hashmap marker position",hashmap2.get(marker.getPosition())+"");
                     pager.setCurrentItem(hashmap2.get(marker.getPosition()),true);
 
@@ -283,7 +283,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         if(selectedMarker !=null){
 
 
-            addMarker(selectedMarker,false);
+            markers.add(addMarker(selectedMarker,false));
 
 
             selectedMarker.remove();
@@ -294,7 +294,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
             Marker marker=hashMap.get(position);
 
             selectedMarker=addMarker(marker,true);
-            selectedMarker.setZIndex(markers.size());
+            markers.add(selectedMarker);
+            //selectedMarker.setZIndex(markers.size());
 
             center = CameraUpdateFactory.newLatLng(selectedMarker.getPosition());
             googleMap.animateCamera(center);
@@ -311,7 +312,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
         if (selectedMarker != null) {
 
-            addMarker(selectedMarker, false);
+            markers.add(addMarker(selectedMarker, false));
 
             selectedMarker.remove();
 
@@ -323,7 +324,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
             positionM=hashmap2.get(marker.getPosition());
             selectedMarker = addMarker(marker, true);
-            selectedMarker.setZIndex(markers.size());
+            markers.add(selectedMarker);
+            //selectedMarker.setZIndex(markers.size());
 
 
 

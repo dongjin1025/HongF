@@ -54,7 +54,7 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
 
 
         if(stores.get(position).getImageUrl()!=null){
-            Glide.with(context).load(stores.get(position).getImageUrl()).into(holder.image);
+            Glide.with(context).load(stores.get(position).getImageUrl()).override(500,200).into(holder.image);
         }else{
             holder.image.setImageResource(android.R.drawable.ic_menu_camera);
         }
@@ -68,6 +68,9 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
             }
         });
         holder.storeName.setText(stores.get(position).getStorename());
+        holder.storeInfo.setText("평점 "+stores.get(position).getAveragerating()+"  즐겨찾기 "+stores.get(position).getBookmarkcount()+
+                "리뷰 "+stores.get(position).getReviewcount());
+
 
     }
 
@@ -82,12 +85,14 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         ImageView image;
         TextView storeName;
         CardView cardItem;
+        TextView storeInfo;
 
         public ViewHolder(View itemView) {
             super(itemView);
             storeName=(TextView)itemView.findViewById(R.id.tvStoreName);
             image=(ImageView)itemView.findViewById(R.id.image);
             cardItem=(CardView)itemView.findViewById(R.id.cardItem);
+            storeInfo=(TextView)itemView.findViewById(R.id.tvStoreInfo);
 
         }
     }

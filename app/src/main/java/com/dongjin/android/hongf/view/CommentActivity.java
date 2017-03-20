@@ -14,16 +14,22 @@ import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.CommentAdapter;
 import com.dongjin.android.hongf.model.InterestedUser;
 import com.dongjin.android.hongf.model.KaKaoInfo;
+import com.dongjin.android.hongf.model.Review;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 public class CommentActivity extends AppCompatActivity {
 
     String key;
     DatabaseReference commentRef;
+    DatabaseReference storyRef;
 
     CommentAdapter adapter;
     RecyclerView recyclerView;
@@ -34,11 +40,13 @@ public class CommentActivity extends AppCompatActivity {
     String stringdate;
     Handler handler;
     Runnable runnable;
+    private int commentCount;
 
 
     @Override
     protected void onStart() {
         super.onStart();
+
 
 
     }
@@ -71,7 +79,23 @@ public class CommentActivity extends AppCompatActivity {
         Bundle bundle=intent.getExtras();
         key=bundle.getString("key");
         commentRef= FirebaseDatabase.getInstance().getReference().child("comments").child(key);
+        storyRef=FirebaseDatabase.getInstance().getReference().child("Story").child(key);
+        storyRef.keepSynced(true);
         commentRef.keepSynced(true);
+
+        storyRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Review review=dataSnapshot.getValue(Review.class);
+                commentCount=review.getCommentCount();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         adapter=new CommentAdapter(this,key);
 
@@ -99,6 +123,14 @@ public class CommentActivity extends AppCompatActivity {
                 user.setProfilepath(kaKaoInfo.read_picture_kakao());
                 user.setDate(stringdate);
                 commentRef.push().setValue(user);
+
+                commentCount +=1;
+                HashMap<String,Object> hashMap= new HashMap<>();
+                hashMap.put("commentCount",commentCount);
+                storyRef.updateChildren(hashMap);
+
+
+
                 etContent.setText("");
             }
         });

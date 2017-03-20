@@ -1,6 +1,7 @@
 
 
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,36 +13,26 @@
 
     >
 
+    <include
+        android:id="@+id/tb_list"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        layout="@layout/toolbar_list"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true" />
+
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:minHeight="?attr/actionBarSize"
-            android:id="@+id/toolbar3" />
-
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-
-            >
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="50dp"
-                android:id="@+id/list_tv_orderfilter"
-                android:layout_weight="1"
-                android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:gravity="center"
-                android:text="최신순 V" />
-
-        </LinearLayout>
+            android:layout_height="0.5dp"
+            android:background="@color/divider_color"
+            android:layout_marginTop="5dp"></LinearLayout>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="match_parent"
@@ -49,9 +40,12 @@
             android:id="@+id/recyclerview"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             android:background="@color/white"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</LinearLayout>
 

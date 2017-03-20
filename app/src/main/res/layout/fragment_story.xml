@@ -1,14 +1,29 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.dongjin.android.hongf.view.StoryFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <include
+        android:id="@+id/tb_maps"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        layout="@layout/toolbar_main"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black"
+        android:layout_margin="5dp"></LinearLayout>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/storyList_Recy" />
 
-</RelativeLayout>
+</LinearLayout>

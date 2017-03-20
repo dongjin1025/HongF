@@ -10,6 +10,9 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dongjin.android.hongf.R;
@@ -38,8 +41,13 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
     private StoreListPresenter presenter;
     private StoreListAdapter adapter;
     private ArrayList<Store> stores;
-    private TextView list_tv_orderfilter;
     private String tag;
+    private LinearLayout filter_lay;
+    private TextView list_tv_orderfilter;
+    private ImageView list_ig_foodfilter;
+    private TextView tv_fliter_order;
+    private View subView;
+    private ImageButton btnBack;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference storeListRefer;
     DatabaseReference storeListRefer2;
@@ -64,6 +72,7 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
 
         Bundle bundle=intent.getExtras();
         tag=bundle.getString("tag");
+
         Log.e("LIST TAGTAGTAG",tag);
 
 
@@ -81,15 +90,30 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
         presenter=new StoreListPresenter();
         presenter.attachView(this);
         stores=new ArrayList<>();
-
-
-        list_tv_orderfilter=(TextView)findViewById(R.id.list_tv_orderfilter);
-        list_tv_orderfilter.setOnClickListener(new View.OnClickListener() {
+        subView=findViewById(R.id.tb_list);
+        list_ig_foodfilter=(ImageView)subView.findViewById(R.id.list_ig_foodfilter);
+        list_tv_orderfilter=(TextView)subView.findViewById(R.id.list_tv_orderfilter);
+        tv_fliter_order=(TextView)subView.findViewById(R.id.tv_fliter_order);
+        btnBack=(ImageButton)subView.findViewById(R.id.ib_back_toolbar);
+        btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+
+        filter_lay=(LinearLayout)findViewById(R.id.lay_filterOrder);
+        filter_lay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(StoreListActivity.this,Dialog_StoreList_Filter.class);
+                startActivityForResult(intent,990);
 
             }
         });
+        setFilterInfo(tag);
+
+
 
 
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
@@ -98,8 +122,27 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
         RecyclerView.LayoutManager manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
 
+    }
 
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(resultCode==RESULT_OK){
+            String orderTag=data.getStringExtra("orderby");
+            Log.e("ListActivity Result tag",orderTag);
+            switch (orderTag){
+                case "bookmarkcount":
+                    tv_fliter_order.setText("즐겨찾기순");
+                    break;
+                case "averagerating":
+                    tv_fliter_order.setText("평점순");
+                    break;
+                case "reviewcount":
+                    tv_fliter_order.setText("리뷰순");
+                    break;
+            }
+            setFilterOnList(tag,orderTag);
+        }
     }
 
     @Override
@@ -195,53 +238,53 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
     public Context getContext() {
         return this;
     }
-//    public void setFilterInfo(String tag){
-//        switch (tag) {
-//            case "korean":
-//                list_ig_foodfilter.setImageResource(R.drawable.korean);
-//                list_tv_orderfilter.setText("한식");
-//                break;
-//            case "japanease":
-//                list_ig_foodfilter.setImageResource(R.drawable.japan);
-//                list_tv_orderfilter.setText("일식");
-//
-//                break;
-//            case "chinease":
-//                list_ig_foodfilter.setImageResource(R.drawable.chinease);
-//                list_tv_orderfilter.setText("중식");
-//                break;
-//            case "wastern":
-//                list_ig_foodfilter.setImageResource(R.drawable.wastern);
-//                list_tv_orderfilter.setText("양식");
-//                break;
-//            case "world":
-//                list_ig_foodfilter.setImageResource(R.drawable.world);
-//                list_tv_orderfilter.setText("세계음식");
-//                break;
-//            case "cafe":
-//                list_ig_foodfilter.setImageResource(R.drawable.cafe);
-//                list_tv_orderfilter.setText("까페");
-//                break;
-//            case "bar":
-//                list_ig_foodfilter.setImageResource(R.drawable.bar);
-//                list_tv_orderfilter.setText("Bar");
-//                break;
-//            case "hope":
-//                list_ig_foodfilter.setImageResource(R.drawable.hope);
-//                list_tv_orderfilter.setText("술집");
-//                break;
-//            case "fastfood":
-//                list_ig_foodfilter.setImageResource(R.drawable.fastfood);
-//                list_tv_orderfilter.setText("패스트푸드");
-//                break;
-//            case "koreansnack":
-//                list_ig_foodfilter.setImageResource(R.drawable.korean_snack);
-//                list_tv_orderfilter.setText("분식");
-//                break;
-//            case "null":
-//                list_ig_foodfilter.setImageResource(R.drawable.places_ic_clear);
-//                list_tv_orderfilter.setText("All");
-//        }
-//
-//    }
+    public void setFilterInfo(String tag){
+        switch (tag) {
+            case "korean":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon1);
+                list_tv_orderfilter.setText("한식");
+                break;
+            case "japanease":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon3);
+                list_tv_orderfilter.setText("일식");
+
+                break;
+            case "chinease":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon4);
+                list_tv_orderfilter.setText("중식");
+                break;
+            case "wastern":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon2);
+                list_tv_orderfilter.setText("양식");
+                break;
+            case "world":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon5);
+                list_tv_orderfilter.setText("세계음식");
+                break;
+            case "cafe":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon8);
+                list_tv_orderfilter.setText("까페");
+                break;
+            case "bar":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon10);
+                list_tv_orderfilter.setText("Bar");
+                break;
+            case "hope":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon9);
+                list_tv_orderfilter.setText("술집");
+                break;
+            case "fastfood":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon7);
+                list_tv_orderfilter.setText("패스트푸드");
+                break;
+            case "koreansnack":
+                list_ig_foodfilter.setImageResource(R.drawable.foodicon6);
+                list_tv_orderfilter.setText("분식");
+                break;
+            case "null":
+                list_ig_foodfilter.setImageResource(R.drawable.places_ic_clear);
+                list_tv_orderfilter.setText("All");
+        }
+
+    }
 }

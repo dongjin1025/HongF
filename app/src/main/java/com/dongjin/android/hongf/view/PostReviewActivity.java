@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -49,6 +50,8 @@ public class PostReviewActivity extends AppCompatActivity {
     private LinearLayout linearSoSo;
     private LinearLayout linearFuck;
 
+    private ImageView btn_cancel;
+
     private EditText etContent;
     private float rate;
     private float currentRate;
@@ -69,6 +72,8 @@ public class PostReviewActivity extends AppCompatActivity {
     private String storename;
     private String content;
     private String foodtag;
+
+
     ArrayList<Image> images;
     KaKaoInfo kaKaoInfo;
     Store store;
@@ -111,6 +116,35 @@ public class PostReviewActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+        AlertDialog.Builder dialog = new AlertDialog.Builder(PostReviewActivity.this);
+        dialog.setTitle("취소");
+        dialog.setMessage("정말 취소 하시겠습니까?");
+        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                finish();
+
+            }
+        });
+        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+            }
+        });
+
+        dialog.show();
+
+    }
+
+
+
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_review);
@@ -119,6 +153,7 @@ public class PostReviewActivity extends AppCompatActivity {
         storename=bundle.getString("title");
         id=bundle.getString("id");
         foodtag=bundle.getString("foodtag");
+        Log.e("postReview foodtag id",foodtag+id);
 
 
         storyRef= FirebaseDatabase.getInstance().getReference().child("story2").child(id);
@@ -272,6 +307,34 @@ public class PostReviewActivity extends AppCompatActivity {
             }
         });
         etContent=(EditText)findViewById(R.id.etContent);
+
+        btn_cancel=(ImageView)findViewById(R.id.postReview_btn_cancel);
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(PostReviewActivity.this);
+                dialog.setTitle("취소");
+                dialog.setMessage("정말 취소 하시겠습니까?");
+                dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        finish();
+
+                    }
+                });
+                dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                    }
+                });
+
+                dialog.show();
+
+            }
+        });
 
         igGood=(ImageView)findViewById(R.id.igGood);
         igSoSo=(ImageView)findViewById(R.id.igSoSo);
