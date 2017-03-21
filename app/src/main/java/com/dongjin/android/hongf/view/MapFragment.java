@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -64,6 +65,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     private ImageView filter_map;
     private ImageView map_ig_filter;
     private TextView map_tv_filter;
+    private ProgressBar pb;
 
     HashMap<Integer,Marker> hashMap;
     HashMap<LatLng,Integer> hashmap2;
@@ -96,6 +98,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
         }
         this.inflater=inflater;
+        pb=(ProgressBar)v.findViewById(R.id.pbar);
+
         markerRef = FirebaseDatabase.getInstance().getReference().child("storeMarker");
         markerRef2 = FirebaseDatabase.getInstance().getReference().child("storeMarker2");
         markerRef.keepSynced(true);
@@ -104,6 +108,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         map_tv_filter=(TextView)v.findViewById(R.id.map_tv_filter);
 
         resetPager(inflater,"null");
+
 
         filter_map=(ImageView)v.findViewById(R.id.map_btn_filter);
         filter_map.setOnClickListener(new View.OnClickListener() {
@@ -143,6 +148,13 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
             }
         });
+        pager.setOnSystemUiVisibilityChangeListener(new View.OnSystemUiVisibilityChangeListener() {
+            @Override
+            public void onSystemUiVisibilityChange(int visibility) {
+                pb.setVisibility(View.GONE);
+            }
+        });
+
     }
     public void setFilterInfo(String tag){
         switch (tag) {
@@ -225,6 +237,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         this.googleMap = googleMap;
 
 
+        pb.setVisibility(View.VISIBLE);
+        pb.bringToFront();
 
         setCustomMarkerView();
         getMarkerItems();
@@ -257,6 +271,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
                 return true;
             }
         });
+
 
 
 
@@ -368,6 +383,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
                         changeSelectedMarker(hashMap.get(0));
                     }
                     i++;
+                    pb.setVisibility(View.GONE);
                 }
 
             }

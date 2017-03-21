@@ -6,6 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.LikeDetailAdapter;
@@ -25,6 +28,9 @@ public class LikeDetailActivity extends AppCompatActivity {
     ArrayList<InterestedUser> users;
     LikeDetailAdapter adapter;
     RecyclerView recyclerView;
+    private View view;
+    private TextView tvCo;
+    private ImageButton btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,16 @@ public class LikeDetailActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
+        view=findViewById(R.id.tb_like);
+        tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
+        tvCo.setText("좋아요");
+        btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         likePeople = FirebaseDatabase.getInstance().getReference().child("likeReview").child(key);
         likePeople.keepSynced(true);
         likePeople.addChildEventListener(new ChildEventListener() {

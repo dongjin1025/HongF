@@ -90,7 +90,7 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
         presenter=new StoreListPresenter();
         presenter.attachView(this);
         stores=new ArrayList<>();
-        subView=findViewById(R.id.tb_list);
+        subView=findViewById(R.id.tb_comment);
         list_ig_foodfilter=(ImageView)subView.findViewById(R.id.list_ig_foodfilter);
         list_tv_orderfilter=(TextView)subView.findViewById(R.id.list_tv_orderfilter);
         tv_fliter_order=(TextView)subView.findViewById(R.id.tv_fliter_order);

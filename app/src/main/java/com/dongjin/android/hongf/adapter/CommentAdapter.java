@@ -1,6 +1,9 @@
 package com.dongjin.android.hongf.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +15,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.InterestedUser;
+import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +38,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     DatabaseReference commentRef;
     ArrayList<InterestedUser> users;
     ArrayList<String> mCommentIds;
+    KaKaoInfo kaKaoInfo;
 
     public CommentAdapter(Context context,String key){
 
@@ -41,6 +46,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         commentRef.keepSynced(true);
         users=new ArrayList<>();
         mCommentIds=new ArrayList<>();
+        kaKaoInfo=KaKaoInfo.getInstance();
 
         this.context=context;
 
@@ -90,9 +96,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
-        InterestedUser user= users.get(position);
+        final InterestedUser user= users.get(position);
         Log.e("USERS SIZE",users.size()+"");
 
 
@@ -106,6 +112,61 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         holder.user.setText(user.getUsername());
         holder.date.setText(user.getDate());
         holder.content.setText(user.getComment());
+        holder.commentCard.setTag(position);
+        holder.commentCard.setOnClickListener(new View.OnClickListener() {
+
+            int posi= (int) holder.commentCard.getTag();
+
+            @Override
+            public void onClick(View v) {
+
+                if(user.getUserId()==kaKaoInfo.read_id_kakao()){
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                    dialog.setTitle("삭제");
+                    dialog.setMessage("뎃글을 삭제 하시겠습니까?");
+                    dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                            dialog.setTitle("삭제");
+                            dialog.setMessage("정말로 삭제 하시겠습니까?");
+                            dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    commentRef.child(mCommentIds.get(posi)).removeValue();
+                                    users.remove(posi);
+                                    notifyDataSetChanged();
+
+
+                                }
+                            });
+                            dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                                }
+                            });
+
+                            dialog.show();
+
+                        }
+                    });
+                    dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                        }
+                    });
+
+                    dialog.show();
+                }
+
+            }
+
+
+        });
 
 
     }
@@ -116,12 +177,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
+        CardView commentCard;
         ImageView profile;
         TextView user;
         TextView content;
         TextView date;
         public ViewHolder(View itemView) {
             super(itemView);
+            commentCard=(CardView)itemView.findViewById(R.id.comment_card);
             profile=(ImageView)itemView.findViewById(R.id.item_comment_profile);
             user=(TextView)itemView.findViewById(R.id.item_comment_username);
             content=(TextView)itemView.findViewById(R.id.item_comment_content);

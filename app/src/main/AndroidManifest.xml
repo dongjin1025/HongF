@@ -64,7 +64,9 @@
             android:theme="@style/Dialog"/>
 
         <activity android:name=".view.LoginActivity"></activity>
-        <activity android:name=".view.CommentActivity" />
+        <activity android:name=".view.CommentActivity"
+            android:windowSoftInputMode="adjustPan">
+            </activity>
         <activity android:name=".view.LikeDetailActivity" />
         <activity
             android:name=".view.Dialog_Map_Filter"

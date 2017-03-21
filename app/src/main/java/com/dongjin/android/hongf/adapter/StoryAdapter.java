@@ -20,7 +20,6 @@ import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Review;
 import com.dongjin.android.hongf.view.CommentActivity;
 import com.dongjin.android.hongf.view.LikeDetailActivity;
-import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -28,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -43,120 +41,27 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
     ArrayList<Review> reviews;
     ArrayList<String> keyArray;
-    ArrayList<Integer> commentCounts;
+
     boolean isLiking=false;
     KaKaoInfo kaKaoInfo;
     String storeId;
 
     DatabaseReference likeRef;
 
+    public void setAdapterData(ArrayList<Review> reivews,ArrayList<String> keyArray){
+
+        this.reviews=reivews;
+        this.keyArray=keyArray;
+        notifyDataSetChanged();
+    }
+
     public StoryAdapter(final Context context){
         this.context=context;
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
-        commentCounts=new ArrayList<>();
+
         kaKaoInfo=KaKaoInfo.getInstance();
 
-
-        storyRef.child("Story").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Review review=dataSnapshot.getValue(Review.class);
-                String key=dataSnapshot.getKey();
-                keyArray.add(key);
-                Log.e("keyArrayTag",""+keyArray.size());
-                reviews.add(review);
-                Collections.reverse(reviews);
-                Collections.reverse(keyArray);
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Review review=dataSnapshot.getValue(Review.class);
-                int commentCount= review.getCommentCount();
-                commentCounts.add(commentCount);
-                notifyDataSetChanged();
-
-
-
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-        storyRef.child("Story").keepSynced(true);
-
-        Log.e("keyArrayTag2",""+keyArray.size());
-
-
-
-    }
-    public StoryAdapter(Context context,String id){
-        this.context=context;
-        reviews=new ArrayList<>();
-        keyArray=new ArrayList<>();
-        commentCounts=new ArrayList<>();
-        kaKaoInfo=KaKaoInfo.getInstance();
-
-
-        storyRef.child("story2").child(id).addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Review review=dataSnapshot.getValue(Review.class);
-                String key=dataSnapshot.getKey();
-                keyArray.add(key);
-                Collections.reverse(keyArray);
-                Log.e("keyArrayTag",""+keyArray.size());
-                reviews.add(review);
-                Collections.reverse(keyArray);
-
-
-                notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Review review=dataSnapshot.getValue(Review.class);
-                int commentCount= review.getCommentCount();
-                commentCounts.add(commentCount);
-                notifyDataSetChanged();
-
-
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
-        storyRef.child("Story").keepSynced(true);
 
         Log.e("keyArrayTag2",""+keyArray.size());
 
@@ -173,7 +78,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
         final Review review=reviews.get(position);
@@ -203,11 +108,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             }
         });
         holder.content.setText(review.getContent());
-        if(commentCounts.size()!=0){
-            holder.commentCount.setText("뎃글 "+ commentCounts.get(position)+"개");
-        }else{
-            holder.commentCount.setText("뎃글 "+ review.getCommentCount()+"개");
-        }
+
+        holder.commentCount.setText("뎃글 "+ review.getCommentCount()+"개");
+
 
 
         holder.commentCount.setTag(position);
@@ -217,6 +120,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 int tag= (int) holder.commentCount.getTag();
                 Intent intent =new Intent(context, CommentActivity.class);
                 intent.putExtra("key",keyArray.get(tag));
+                intent.putExtra("id",reviews.get(tag).getStoreId());
                 context.startActivity(intent);
 
 
@@ -229,6 +133,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 int tag= (int) holder.btnComment.getTag();
                 Intent intent =new Intent(context, CommentActivity.class);
                 intent.putExtra("key",keyArray.get(tag));
+                intent.putExtra("id",reviews.get(tag).getStoreId());
                 context.startActivity(intent);
 
             }
@@ -276,6 +181,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
                 storyRef.child("likeReview").child(keyArray.get(posi)).addListenerForSingleValueEvent(new ValueEventListener() {
 
+                    int posi2=(int)holder.btnLike.getTag();
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -290,7 +196,9 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                                 HashMap<String, Object> hashMap= new HashMap<>();
                                 hashMap.put("likeCount", (int) dataSnapshot.getChildrenCount()+1);
                                 review.setLikeCount((int) dataSnapshot.getChildrenCount()+1);
+                                holder.likeCount.setText("좋아요 "+review.getLikeCount()+"개");
                                 storyRef.child("Story").child(key).updateChildren(hashMap);
+                                storyRef.child("story2").child(reviews.get(posi2).getStoreId()).child(key).updateChildren(hashMap);
 
                                 isLiking = false;
 
@@ -301,12 +209,16 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                                 HashMap<String, Object> hashMap= new HashMap<>();
                                 hashMap.put("likeCount", (int) dataSnapshot.getChildrenCount()-1);
                                 review.setLikeCount((int) dataSnapshot.getChildrenCount()-1);
+                                holder.likeCount.setText("좋아요 "+review.getLikeCount()+"개");
                                 storyRef.child("Story").child(key).updateChildren(hashMap);
+                                storyRef.child("story2").child(reviews.get(posi2).getStoreId()).child(key).updateChildren(hashMap);
+
 
 
                                 isLiking = false;
                             }
-                            notifyDataSetChanged();
+
+
                         }
 
                     }

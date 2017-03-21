@@ -12,6 +12,16 @@ public class Review {
     String userPicture;
     String key;
 
+    public String getStoreId() {
+        return storeId;
+    }
+
+    public void setStoreId(String storeId) {
+        this.storeId = storeId;
+    }
+
+    String storeId;
+
 
 
     public String getDate() {

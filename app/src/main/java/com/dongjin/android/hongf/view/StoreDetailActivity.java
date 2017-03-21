@@ -18,6 +18,7 @@ import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.DetailPhotoAdapter;
 import com.dongjin.android.hongf.adapter.StoryAdapter;
 import com.dongjin.android.hongf.model.KaKaoInfo;
+import com.dongjin.android.hongf.model.Review;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.presenter.DetailPresenter;
 import com.google.firebase.database.ChildEventListener;
@@ -58,6 +59,9 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     ArrayList<Uri> uris;
     private Boolean bookmarked=false;
     private KaKaoInfo kaKaoInfo;
+    DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
+    ArrayList<Review> reviews;
+    ArrayList<String> keyArray;
     DatabaseReference bookmarkRef;
     DatabaseReference bookmarkRef2;
     DatabaseReference storePhotosRef;
@@ -137,6 +141,49 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
 
             }
         });
+        reviews=new ArrayList<>();
+        keyArray=new ArrayList<>();
+        storyRef.child("story2").child(detail_id).addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Review review=dataSnapshot.getValue(Review.class);
+                String key=dataSnapshot.getKey();
+                keyArray.add(key);
+                Collections.reverse(keyArray);
+                Log.e("keyArrayTag",""+keyArray.size());
+                reviews.add(review);
+                Collections.reverse(keyArray);
+                adapter.setAdapterData(reviews,keyArray);
+
+
+
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+
+        });
+        storyRef.child("Story").keepSynced(true);
+
+
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,7 +211,8 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         bookmarkRef2.keepSynced(true);
 
         photoAdapter=new DetailPhotoAdapter(this);
-        adapter=new StoryAdapter(this,detail_id);
+        adapter=new StoryAdapter(this);
+
 
 
         recyclerView=(RecyclerView)findViewById(R.id.detail_recycler);

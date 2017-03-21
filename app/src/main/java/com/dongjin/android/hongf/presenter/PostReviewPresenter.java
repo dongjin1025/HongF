@@ -108,6 +108,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setUsername(username);
         review.setStoreName(storename);
         review.setDate(stringdate);
+        review.setStoreId(id);
 
         pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
@@ -127,6 +128,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setUsername(username);
         review.setStoreName(storename);
         review.setDate(stringdate);
+        review.setStoreId(id);
 
 
 

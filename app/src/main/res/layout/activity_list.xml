@@ -14,7 +14,7 @@
     >
 
     <include
-        android:id="@+id/tb_list"
+        android:id="@+id/tb_comment"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         layout="@layout/toolbar_list"

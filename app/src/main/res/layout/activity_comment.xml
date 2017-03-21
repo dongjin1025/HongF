@@ -1,52 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_comment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context="com.dongjin.android.hongf.view.CommentActivity">
+    tools:context="com.dongjin.android.hongf.view.CommentActivity"
+    android:background="@color/white">
 
 
-    <ScrollView
+    <include
+        android:id="@+id/tb_comment"
         android:layout_width="match_parent"
-        android:layout_height="500dp">
+        android:layout_height="60dp"
+        layout="@layout/toolbar_submain"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/comment_recy"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true" />
-        </LinearLayout>
-    </ScrollView>
 
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="0.5dp"
+        android:background="@color/divider_color"
+        android:id="@+id/divider"
+        android:layout_below="@+id/tb_comment"></LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/btnlay"
+        android:layout_marginBottom="10dp"
+        android:padding="5dp">
 
         <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
+            android:inputType="text|textMultiLine"
             android:id="@+id/comment_et_content"
-            android:layout_weight="1.00"
             android:singleLine="false"
-            android:layout_marginRight="5dp" />
+            android:layout_marginRight="5dp"
+            android:textColorLink="@android:color/black"
+            android:background="?android:attr/listDivider"
+            android:textColorHighlight="@color/black"
+            android:textColor="@color/black" />
 
-        <ImageButton
+        <Button
+            android:text="보내기"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/btn_comment_gray_a"
             android:id="@+id/comment_ig_sendbtn"
-            android:layout_weight="0.2"
-            android:background="@color/cardview_light_background" />
+            android:background="@color/divider_color" />
+
     </LinearLayout>
-</LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/comment_recy"
+        android:layout_below="@+id/divider"
+        android:layout_alignParentStart="false"
+        android:layout_above="@+id/btnlay" />
+</RelativeLayout>

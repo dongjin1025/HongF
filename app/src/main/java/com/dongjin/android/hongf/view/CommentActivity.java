@@ -1,5 +1,6 @@
 package com.dongjin.android.hongf.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,8 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.CommentAdapter;
@@ -27,20 +31,27 @@ import java.util.HashMap;
 
 public class CommentActivity extends AppCompatActivity {
 
-    String key;
-    DatabaseReference commentRef;
-    DatabaseReference storyRef;
+    private String key;
+    private DatabaseReference commentRef;
+    private DatabaseReference storyRef;
+    private DatabaseReference storyRef2;
 
-    CommentAdapter adapter;
-    RecyclerView recyclerView;
-    ImageView btnSend;
-    EditText etContent;
-    KaKaoInfo kaKaoInfo;
+    private CommentAdapter adapter;
+    private RecyclerView recyclerView;
+    private Button btnSend;
+    private EditText etContent;
+    private KaKaoInfo kaKaoInfo;
 
-    String stringdate;
-    Handler handler;
-    Runnable runnable;
+
+    private String storeId;
+    private String stringdate;
+    private Handler handler;
+    private Runnable runnable;
+    private View view;
+    private ImageButton btnBack;
+    private TextView tvCo;
     private int commentCount;
+    private InputMethodManager imm;
 
 
     @Override
@@ -75,13 +86,27 @@ public class CommentActivity extends AppCompatActivity {
         };
         handler.postDelayed(runnable, 1 * 1000);
 
+
         Intent intent=getIntent();
         Bundle bundle=intent.getExtras();
         key=bundle.getString("key");
+        storeId=bundle.getString("id");
         commentRef= FirebaseDatabase.getInstance().getReference().child("comments").child(key);
         storyRef=FirebaseDatabase.getInstance().getReference().child("Story").child(key);
+        storyRef2=FirebaseDatabase.getInstance().getReference().child("story2").child(storeId).child(key);
         storyRef.keepSynced(true);
+        storyRef2.keepSynced(true);
         commentRef.keepSynced(true);
+        view=findViewById(R.id.tb_comment);
+        tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
+        tvCo.setText("뎃글");
+        btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         storyRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -103,13 +128,18 @@ public class CommentActivity extends AppCompatActivity {
 
         recyclerView=(RecyclerView)findViewById(R.id.comment_recy);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        LinearLayoutManager manager=new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false);
+        manager.setStackFromEnd(true);
+        recyclerView.setLayoutManager(manager);
 
 
 
 
-        btnSend=(ImageView)findViewById(R.id.comment_ig_sendbtn);
+
+        btnSend=(Button)findViewById(R.id.comment_ig_sendbtn);
         etContent=(EditText)findViewById(R.id.comment_et_content);
+        imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
 
         btnSend.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,10 +158,14 @@ public class CommentActivity extends AppCompatActivity {
                 HashMap<String,Object> hashMap= new HashMap<>();
                 hashMap.put("commentCount",commentCount);
                 storyRef.updateChildren(hashMap);
+                storyRef2.updateChildren(hashMap);
 
 
 
                 etContent.setText("");
+                imm.hideSoftInputFromWindow(etContent.getWindowToken(), 0);
+
+
             }
         });
 
