@@ -220,7 +220,7 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReviewAndPhotosAsWell(images,username,storename,kakoProfile,id,content,rate);
+                                presenter.postReviewAndPhotosAsWell(images,username,storename,kakoProfile,id,content,rate,foodtag);
 
                                 if (reviewcount != 0) {
                                     countHashmap.put("reviewcount", reviewcount + 1);
@@ -265,7 +265,7 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReview(username,storename,kakoProfile,id,content,rate);
+                                presenter.postReview(username,storename,kakoProfile,id,content,rate,foodtag);
                                 if (reviewcount != 0) {
                                     countHashmap.put("reviewcount", reviewcount + 1);
                                     rateHashmap.put("averagerating", averageRating);

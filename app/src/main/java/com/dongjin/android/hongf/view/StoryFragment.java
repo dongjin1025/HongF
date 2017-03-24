@@ -23,7 +23,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 /**
@@ -31,14 +30,15 @@ import java.util.Collections;
  */
 public class StoryFragment extends Fragment implements Story_View {
     private StoryAdapter storyAdapter;
-    DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
+    private DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
 
-    ArrayList<ArrayList<Uri>> uris;
-    ArrayList<Uri> smallUris;
-    StoryPresenter presenter;
-    ArrayList<Review> reviews;
-    ArrayList<String> keyArray;
-    RecyclerView recyclerView;
+    private ArrayList<ArrayList<Uri>> uris;
+
+    private StoryPresenter presenter;
+    private ArrayList<Review> reviews;
+    private ArrayList<String> keyArray;
+    private RecyclerView recyclerView;
+    private LinearLayoutManager manager;
 
 
 
@@ -54,14 +54,19 @@ public class StoryFragment extends Fragment implements Story_View {
         storyRef.child("Story").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+
                 Review review=dataSnapshot.getValue(Review.class);
+                int chilCount= (int) dataSnapshot.getChildrenCount();
                 String key=dataSnapshot.getKey();
                 keyArray.add(key);
-                Log.e("keyArrayTag",""+keyArray.size());
+                Log.e("Log CHIL COUNT",""+chilCount);
                 reviews.add(review);
-                Collections.reverse(reviews);
-                Collections.reverse(keyArray);
+                Log.e("Log CHIL reviews count",""+chilCount+"  "+reviews.size());
+
+
                 storyAdapter.setAdapterData(reviews,keyArray);
+
+
 
             }
 
@@ -95,6 +100,8 @@ public class StoryFragment extends Fragment implements Story_View {
 
 
 
+
+
     }
     public StoryFragment() {
         // Required empty public constructor
@@ -106,8 +113,7 @@ public class StoryFragment extends Fragment implements Story_View {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view=inflater.inflate(R.layout.fragment_story, container, false);
-        reviews=new ArrayList<>();
-        keyArray=new ArrayList<>();
+
 
         storyAdapter =new StoryAdapter(getContext() );
         presenter=new StoryPresenter();
@@ -119,7 +125,12 @@ public class StoryFragment extends Fragment implements Story_View {
         recyclerView= (RecyclerView) view.findViewById(R.id.storyList_Recy);
         recyclerView.setAdapter(storyAdapter);
 
-        LinearLayoutManager manager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+
+        manager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        manager.setReverseLayout(true);
+        manager.setStackFromEnd(true);
+
+
 
         recyclerView.setLayoutManager(manager);
 

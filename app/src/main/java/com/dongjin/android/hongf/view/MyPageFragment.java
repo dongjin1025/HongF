@@ -158,11 +158,12 @@ public class MyPageFragment extends Fragment {
             }
         });
 
-        if(kaKaoInfo.read_picture_kakao()!=""){
+
+        if(!kaKaoInfo.read_picture_kakao().equals("")){
             Glide.with(getContext()).load(kaKaoInfo.read_picture_kakao()).
                     bitmapTransform(new CropCircleTransformation(getContext())).into(profileImage);
 
-        }else{
+        }else if(kaKaoInfo.read_picture_kakao().equals("")){
             profileImage.setImageResource(R.drawable.ic_account_24dp);
         }
         profileName.setText(kaKaoInfo.read_name_kakao());

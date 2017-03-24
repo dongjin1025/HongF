@@ -76,7 +76,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="50dp"
-                            app:srcCompat="@drawable/ic_egmt_review_rating_3_normal"
+                            app:srcCompat="@drawable/ic_egmt_review_rating_1_normal"
                             android:id="@+id/igGood"
                             android:layout_weight="1"
                             android:tint="@color/divider_color" />

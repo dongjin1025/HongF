@@ -99,7 +99,7 @@ public class CommentActivity extends AppCompatActivity {
         commentRef.keepSynced(true);
         view=findViewById(R.id.tb_comment);
         tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
-        tvCo.setText("뎃글");
+        tvCo.setText("댓글");
         btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +122,7 @@ public class CommentActivity extends AppCompatActivity {
             }
         });
 
-        adapter=new CommentAdapter(this,key);
+        adapter=new CommentAdapter(this,key,storeId);
 
         kaKaoInfo=KaKaoInfo.getInstance();
 

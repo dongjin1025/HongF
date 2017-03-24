@@ -169,7 +169,7 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
 
 
                 stores.add(store);
-                Collections.reverse(stores);
+                //Collections.reverse(stores);
                 presenter.setSotreListData();
 
             }

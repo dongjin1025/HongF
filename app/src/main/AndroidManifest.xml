@@ -27,9 +27,10 @@
             android:name=".view.MainActivity"
             android:theme="@style/AppTheme" />
         <activity android:name=".view.StoreDetailActivity" />
-        <activity android:name=".view.PostReviewActivity"
-            android:windowSoftInputMode="adjustNothing"
-            android:theme="@style/Dialog"/>
+        <activity
+            android:name=".view.PostReviewActivity"
+            android:theme="@style/Dialog"
+            android:windowSoftInputMode="adjustNothing" />
         <activity android:name=".view.StoreListActivity" />
         <activity
             android:name="com.darsh.multipleimageselect.activities.AlbumSelectActivity"
@@ -50,23 +51,17 @@
         <activity
             android:name=".view.SearchActivity"
             android:theme="@style/Dialog"
-            android:windowSoftInputMode="adjustNothing"/>
-
-
-
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".view.RegisterStoreActivity"
-            android:theme="@style/Dialog"
-            />
-
+            android:theme="@style/Dialog" />
         <activity
             android:name=".view.SearchForReviewActivity"
-            android:theme="@style/Dialog"/>
-
-        <activity android:name=".view.LoginActivity"></activity>
-        <activity android:name=".view.CommentActivity"
-            android:windowSoftInputMode="adjustPan">
-            </activity>
+            android:theme="@style/Dialog" />
+        <activity android:name=".view.LoginActivity" />
+        <activity
+            android:name=".view.CommentActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".view.LikeDetailActivity" />
         <activity
             android:name=".view.Dialog_Map_Filter"
@@ -81,7 +76,9 @@
         <activity
             android:name=".view.Dialog_StoreList_Filter"
             android:theme="@style/Dialog" />
-        <activity android:name=".view.CheckHongik"></activity>
+        <activity android:name=".view.CheckHongik" />
+        <activity android:name=".view.ToDeveloper" />
+        <activity android:name=".view.Activity_deve_detail"></activity>
     </application>
 
 </manifest>

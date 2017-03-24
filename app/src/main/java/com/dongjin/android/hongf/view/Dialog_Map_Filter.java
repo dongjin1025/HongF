@@ -85,8 +85,8 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
         world.setOnClickListener(this);
         bar = (ImageView) findViewById(R.id.register_ig_bar);
         bar.setOnClickListener(this);
-        hope = (ImageView) findViewById(R.id.register_ig_hope);
-        hope.setOnClickListener(this);
+//        hope = (ImageView) findViewById(R.id.register_ig_hope);
+//        hope.setOnClickListener(this);
         koreansnack = (ImageView) findViewById(R.id.register_ig_koreansnack);
         koreansnack.setOnClickListener(this);
         fastfood = (ImageView) findViewById(R.id.register_ig_fastfood);
@@ -123,13 +123,13 @@ public class Dialog_Map_Filter extends AppCompatActivity implements View.OnClick
                 clickImageView(cafe);
                 break;
             case R.id.register_ig_bar:
-                foodTag="bar";
+                foodTag="hope";
                 clickImageView(bar);
                 break;
-            case R.id.register_ig_hope:
-                foodTag="hope";
-                clickImageView(hope);
-                break;
+//            case R.id.register_ig_hope:
+//                foodTag="hope";
+//                clickImageView(hope);
+//                break;
             case R.id.register_ig_fastfood:
                 foodTag="fastfood";
                 clickImageView(fastfood);

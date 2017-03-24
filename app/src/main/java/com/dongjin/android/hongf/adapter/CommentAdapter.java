@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -34,15 +35,20 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
 
 
+    DatabaseReference storyRef2;
+    DatabaseReference storyRef;
+
     Context context;
     DatabaseReference commentRef;
     ArrayList<InterestedUser> users;
     ArrayList<String> mCommentIds;
     KaKaoInfo kaKaoInfo;
 
-    public CommentAdapter(Context context,String key){
+    public CommentAdapter(Context context,String key,String storeId){
 
         commentRef= FirebaseDatabase.getInstance().getReference().child("comments").child(key);
+        storyRef=FirebaseDatabase.getInstance().getReference().child("Story").child(key);
+        storyRef2=FirebaseDatabase.getInstance().getReference().child("story2").child(storeId).child(key);
         commentRef.keepSynced(true);
         users=new ArrayList<>();
         mCommentIds=new ArrayList<>();
@@ -102,10 +108,10 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
         Log.e("USERS SIZE",users.size()+"");
 
 
-        if(user.getProfilepath()!=""){
+        if(!user.getProfilepath().equals("")){
             Glide.with(context).load(user.getProfilepath()).bitmapTransform(new CropCircleTransformation(context)
             ).into(holder.profile);
-        }else{
+        }else if(user.getProfilepath().equals("")) {
             holder.profile.setImageResource(R.drawable.kakao_default_profile_image);
         }
 
@@ -120,10 +126,11 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
             @Override
             public void onClick(View v) {
 
-                if(user.getUserId()==kaKaoInfo.read_id_kakao()){
+                Log.e("posi",posi+"");
+                if(users.get(posi).getUserId().equals(kaKaoInfo.read_id_kakao())){
                     AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                     dialog.setTitle("삭제");
-                    dialog.setMessage("뎃글을 삭제 하시겠습니까?");
+                    dialog.setMessage("댓글을 삭제 하시겠습니까?");
                     dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
@@ -135,7 +142,13 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     commentRef.child(mCommentIds.get(posi)).removeValue();
                                     users.remove(posi);
+                                    int cocount=users.size();
+                                    HashMap<String,Object> hashMap= new HashMap<>();
+                                    hashMap.put("commentCount",cocount);
+                                    storyRef.updateChildren(hashMap);
+                                    storyRef2.updateChildren(hashMap);
                                     notifyDataSetChanged();
+
 
 
                                 }

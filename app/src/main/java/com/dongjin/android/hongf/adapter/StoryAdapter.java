@@ -18,8 +18,10 @@ import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.InterestedUser;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Review;
+import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.view.CommentActivity;
 import com.dongjin.android.hongf.view.LikeDetailActivity;
+import com.dongjin.android.hongf.view.StoreDetailActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -39,14 +41,12 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
     Context context;
     DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
+    DatabaseReference storeRef= FirebaseDatabase.getInstance().getReference();
     ArrayList<Review> reviews;
     ArrayList<String> keyArray;
 
     boolean isLiking=false;
     KaKaoInfo kaKaoInfo;
-    String storeId;
-
-    DatabaseReference likeRef;
 
     public void setAdapterData(ArrayList<Review> reivews,ArrayList<String> keyArray){
 
@@ -104,12 +104,27 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         holder.storename.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                storyRef.child("Store").child(review.getStoreId()).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Store store=dataSnapshot.getValue(Store.class);
+                        Intent intent=new Intent(context, StoreDetailActivity.class);
+                        intent.putExtra("Store",store);
+                        context.startActivity(intent);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
 
             }
         });
         holder.content.setText(review.getContent());
 
-        holder.commentCount.setText("뎃글 "+ review.getCommentCount()+"개");
+        holder.commentCount.setText("댓글 "+ review.getCommentCount()+"개");
 
 
 
@@ -139,7 +154,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             }
         });
 
-        if(review.getUserPicture()!=""){
+        if(!review.getUserPicture().equals("")){
             Uri uri= Uri.parse(review.getUserPicture());
             Glide.with(context).load(uri).bitmapTransform(new CropCircleTransformation(context)).into(holder.profile);
         }else

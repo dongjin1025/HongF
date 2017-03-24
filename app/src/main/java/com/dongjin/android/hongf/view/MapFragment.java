@@ -183,14 +183,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
                 map_ig_filter.setImageResource(R.drawable.foodicon8);
                 map_tv_filter.setText("까페");
                 break;
-            case "bar":
-                map_ig_filter.setImageResource(R.drawable.foodicon10);
-                map_tv_filter.setText("Bar");
-                break;
             case "hope":
-                map_ig_filter.setImageResource(R.drawable.foodicon9);
+                map_ig_filter.setImageResource(R.drawable.foodicon10);
                 map_tv_filter.setText("술집");
                 break;
+//            case "hope":
+//                map_ig_filter.setImageResource(R.drawable.foodicon9);
+//                map_tv_filter.setText("술집");
+//                break;
             case "fastfood":
                 map_ig_filter.setImageResource(R.drawable.foodicon7);
                 map_tv_filter.setText("패스트푸드");
@@ -417,6 +417,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         for(int i=0;i<markers.size();i++){
             markers.get(i).remove();
         }
+        if(selectedMarker!=null){
+            selectedMarker=null;
+        }
 
         hashMap=new HashMap<>();
         markers=new ArrayList<>();
@@ -636,10 +639,9 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
                 }
             });
 
-            if (store.getImageUrl() == "") {
-                imageView.setImageResource(R.drawable.cast_expanded_controller_seekbar_thumb);
+            if (store.getImageUrl().equals("")) {
+                imageView.setImageResource(android.R.drawable.ic_menu_camera);
             } else {
-
 
                 Glide.with(context).load(store.getImageUrl()).into(imageView);
             }

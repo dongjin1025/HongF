@@ -49,6 +49,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference myRef = database.getReference();
     DatabaseReference storeRef;
+    DatabaseReference storeRef2;
 
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReferenceFromUrl("gs://hongf-153308.appspot.com");
@@ -96,7 +97,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         postReviewActivity.startActivityForResult(intent, Constants.REQUEST_CODE);
     }
 
-    public void postReview(String username,String storename,String photo,String id,String content,float rate){
+    public void postReview(String username,String storename,String photo,String id,String content,float rate,String foodtag){
         Review review=new Review();
 
 
@@ -112,13 +113,16 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
 
         pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
+        storeRef2=myRef.child("Store2").child(foodtag).child(id);
+
         myRef.child("Story").child(pushKey).setValue(review);
         myRef.child("story2").child(id).child(pushKey).setValue(review);
 
     }
 
     String pushKey;
-    public void postReviewAndPhotosAsWell(ArrayList<Image> images,String username,String storename,String photo, final String id, String content, float rate){
+    public void postReviewAndPhotosAsWell(ArrayList<Image> images,String username,String storename,String photo, final String id,
+                                          String content, float rate,String foodtag){
         final Review review=new Review();
         review.setContent(content);
         review.setRate(rate);
@@ -133,6 +137,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
 
 
         storeRef=myRef.child("Store").child(id);
+        storeRef2=myRef.child("Store2").child(foodtag).child(id);
         pushKey=myRef.child("Story").push().getKey();
         myRef.child("Story").child(pushKey).setValue(review);
         myRef.child("story2").child(id).child(pushKey).setValue(review);
@@ -158,6 +163,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
                     HashMap<String,Object> hashMap=new HashMap<String, Object>();
                     hashMap.put("imageUrl",downloadUrl.toString());
                     storeRef.updateChildren(hashMap);
+                    storeRef2.updateChildren(hashMap);
                 }
             });
         }

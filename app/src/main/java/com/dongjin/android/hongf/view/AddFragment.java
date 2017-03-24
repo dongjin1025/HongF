@@ -1,6 +1,7 @@
 package com.dongjin.android.hongf.view;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -49,6 +50,13 @@ public class AddFragment extends Fragment implements Add_View {
             @Override
             public void onClick(View v) {
                 presenter.navigateToPostReview(getContext(),SearchForReviewActivity.class);
+            }
+        });
+        btnToDeveloper.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(),ToDeveloper.class);
+                startActivity(intent);
             }
         });
         return view;

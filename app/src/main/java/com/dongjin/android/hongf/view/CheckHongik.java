@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,12 +26,16 @@ public class CheckHongik extends AppCompatActivity {
 
 
         et=(EditText)findViewById(R.id.check_et_number);
+        et.setText("");
         btn=(Button)findViewById(R.id.check_btn_ok);
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 String sNumber=et.getText().toString();
+                if(et.equals("")){
+                    Toast.makeText(CheckHongik.this,"잘못된 학번입니다",Toast.LENGTH_LONG).show();
+                }
                 checkNum(sNumber);
 
             }
@@ -77,7 +80,6 @@ public class CheckHongik extends AppCompatActivity {
             }
         }
 
-        Log.e("STUDENT NUM",charArray[2]+"");
     }
 
     @Override

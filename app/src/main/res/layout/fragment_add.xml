@@ -6,7 +6,7 @@
 
     tools:context="com.dongjin.android.hongf.view.AddFragment"
     android:weightSum="1"
-    android:background="@color/divider_color">
+    android:background="@drawable/hongik2">
 
     <!-- TODO: Update blank fragment layout -->
 

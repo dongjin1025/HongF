@@ -50,7 +50,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     DetailPresenter presenter;
     private String detail_id;
     Store store;
-    private String dt_id;
+
     private String foodtag;
     private ImageButton btnBack;
     DetailPhotoAdapter photoAdapter;
@@ -65,6 +65,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     DatabaseReference bookmarkRef;
     DatabaseReference bookmarkRef2;
     DatabaseReference storePhotosRef;
+    DatabaseReference storeref;
 
 
 
@@ -198,35 +199,39 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
 
 
 
+        store = bundle.getParcelable("Store");
 
-        store=bundle.getParcelable("Store");
-        detail_id=store.getId();
-        dt_id=bundle.getString("id");
-        foodtag=store.getStorefood();
-        bookmarkRef=myRef.child("Store").child(detail_id).child("Bookmark");
-        storePhotosRef=myRef.child("Store").child(detail_id).child("Urls");
-        bookmarkRef2=myRef.child("bookmark").child(kaKaoInfo.read_id_kakao()).child(detail_id);
+
+
+        detail_id = store.getId();
+
+
+        foodtag = store.getStorefood();
+        bookmarkRef = myRef.child("Store").child(detail_id).child("Bookmark");
+        storePhotosRef = myRef.child("Store").child(detail_id).child("Urls");
+        bookmarkRef2 = myRef.child("bookmark").child(kaKaoInfo.read_id_kakao()).child(detail_id);
         storePhotosRef.keepSynced(true);
         bookmarkRef.keepSynced(true);
         bookmarkRef2.keepSynced(true);
 
-        photoAdapter=new DetailPhotoAdapter(this);
-        adapter=new StoryAdapter(this);
+        photoAdapter = new DetailPhotoAdapter(this);
+        adapter = new StoryAdapter(this);
 
 
-
-        recyclerView=(RecyclerView)findViewById(R.id.detail_recycler);
+        recyclerView = (RecyclerView) findViewById(R.id.detail_recycler);
         recyclerView.setAdapter(photoAdapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        review_recycler=(RecyclerView)findViewById(R.id.detail_review_recycler);
+        review_recycler = (RecyclerView) findViewById(R.id.detail_review_recycler);
 
         review_recycler.setAdapter(adapter);
-        review_recycler.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
+        LinearLayoutManager manager=new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        manager.setReverseLayout(true);
+        review_recycler.setLayoutManager(manager);
 
 
-        view=findViewById(R.id.tb_detail);
-        btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
+        view = findViewById(R.id.tb_detail);
+        btnBack = (ImageButton) view.findViewById(R.id.ib_back_toolbar);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

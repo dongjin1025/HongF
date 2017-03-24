@@ -204,25 +204,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         app:srcCompat="@drawable/foodicon10"
-                        android:id="@+id/register_ig_bar"
-                        android:layout_height="70dp" />
-
-                    <TextView
-                        android:text="Bar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:gravity="center_horizontal" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        app:srcCompat="@drawable/foodicon9"
                         android:id="@+id/register_ig_hope"
                         android:layout_height="70dp" />
 
@@ -233,6 +214,7 @@
                         android:layout_weight="1"
                         android:gravity="center_horizontal" />
                 </LinearLayout>
+
 
 
                 <LinearLayout
@@ -269,6 +251,27 @@
 
                     <TextView
                         android:text="분식"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal" />
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:visibility="invisible"
+                    android:clickable="false">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        app:srcCompat="@drawable/foodicon9"
+                        android:id="@+id/register_ig_hope"
+                        android:layout_height="70dp" />
+
+                    <TextView
+                        android:text="술집"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

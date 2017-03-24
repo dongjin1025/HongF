@@ -40,7 +40,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
     private ImageView wastern;
     private ImageView bar;
     private ImageView koreansnack;
-    private ImageView hope;
+    //private ImageView hope;
     private ImageView world;
     private ImageView cafe;
     private ImageView fastfood;
@@ -250,10 +250,10 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
         wastern.setOnClickListener(this);
         world=(ImageView) findViewById(R.id.register_ig_world);
         world.setOnClickListener(this);
-        bar=(ImageView) findViewById(R.id.register_ig_bar);
+        bar=(ImageView) findViewById(R.id.register_ig_hope);
         bar.setOnClickListener(this);
-        hope=(ImageView) findViewById(R.id.register_ig_hope);
-        hope.setOnClickListener(this);
+        //hope=(ImageView) findViewById(R.id.register_ig_hope);
+        //hope.setOnClickListener(this);
         koreansnack=(ImageView) findViewById(R.id.register_ig_koreansnack);
         koreansnack.setOnClickListener(this);
         fastfood=(ImageView) findViewById(R.id.register_ig_fastfood);
@@ -296,7 +296,7 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
                 break;
             case R.id.register_ig_hope:
                 foodTag="hope";
-                clickImageView(hope);
+                clickImageView(bar);
                 break;
             case R.id.register_ig_fastfood:
                 foodTag="fastfood";

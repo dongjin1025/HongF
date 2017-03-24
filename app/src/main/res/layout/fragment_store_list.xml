@@ -177,16 +177,16 @@
 
             <ImageView
                 android:layout_height="100dp"
-                app:srcCompat="@drawable/foodicon9"
-                android:id="@+id/list_ig_pub"
+                app:srcCompat="@drawable/foodicon7"
+                android:id="@+id/list_ig_fastfood"
                 android:layout_width="100dp" />
 
             <TextView
-                android:text="술집"
+                android:text="패스트푸드"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_pub"
-                android:layout_weight="0.33"
+                android:id="@+id/tv_fast"
+                android:layout_weight="1"
                 android:gravity="center_horizontal" />
         </LinearLayout>
 
@@ -203,7 +203,7 @@
                 android:layout_width="100dp" />
 
             <TextView
-                android:text="Bar"
+                android:text="술집"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_bar"
@@ -240,26 +240,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp">
 
-            <ImageView
-                android:layout_height="100dp"
-                app:srcCompat="@drawable/foodicon7"
-                android:id="@+id/list_ig_fastfood"
-                android:layout_width="100dp" />
-
-            <TextView
-                android:text="패스트푸드"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_fast"
-                android:layout_weight="1"
-                android:gravity="center_horizontal" />
-        </LinearLayout>
 
     </LinearLayout>
 

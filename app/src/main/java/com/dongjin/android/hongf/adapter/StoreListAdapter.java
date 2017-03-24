@@ -53,11 +53,12 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
     public void onBindViewHolder(ViewHolder holder, final int position) {
 
 
-        if(stores.get(position).getImageUrl()!=null){
+        if(!stores.get(position).getImageUrl().equals("")){
             Glide.with(context).load(stores.get(position).getImageUrl()).override(500,200).into(holder.image);
-        }else{
+        }else if(stores.get(position).getImageUrl().equals("")){
             holder.image.setImageResource(android.R.drawable.ic_menu_camera);
         }
+
         holder.cardItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
