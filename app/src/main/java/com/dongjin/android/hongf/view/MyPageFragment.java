@@ -11,8 +11,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,6 +47,7 @@ public class MyPageFragment extends Fragment {
     private ImageView mypage_ig_ifound;
     private TextView mypage_tv_bookmark;
     private TextView mypage_tv_ifound;
+    private ChildEventListener childEventListener;
 
     public MyPageFragment() {
         // Required empty public constructor
@@ -59,8 +58,9 @@ public class MyPageFragment extends Fragment {
         super.onStart();
         myListRef= FirebaseDatabase.getInstance().getReference().child("Store");
         myListRef.keepSynced(true);
-
-        myListRef.addChildEventListener(new ChildEventListener() {
+        stores_finder.clear();
+        stores_bookmark.clear();
+        childEventListener= new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Store store = dataSnapshot.getValue(Store.class);
@@ -81,6 +81,7 @@ public class MyPageFragment extends Fragment {
 
                     }
                 }
+
             }
 
             @Override
@@ -102,7 +103,7 @@ public class MyPageFragment extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };myListRef.addChildEventListener(childEventListener);
 
     }
 
@@ -131,7 +132,7 @@ public class MyPageFragment extends Fragment {
         mypage_ig_bookmark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onClickRotate(mypage_ig_bookmark);
+                //onClickRotate(mypage_ig_bookmark);
                 mypage_tv_bookmark.setVisibility(View.VISIBLE);
                 mypage_tv_ifound.setVisibility(View.INVISIBLE);
                 mypage_ig_bookmark.setImageResource(R.drawable.btn_common_card_like_pressed);
@@ -151,7 +152,7 @@ public class MyPageFragment extends Fragment {
                 mypage_ig_ifound.setColorFilter(ContextCompat.getColor(getContext(), R.color.red));
                 mypage_ig_bookmark.setImageResource(R.drawable.btn_unpress_like);
                 mypage_ig_bookmark.setColorFilter(colorFilter1);
-                onClickRotate(mypage_ig_ifound);
+                //onClickRotate(mypage_ig_ifound);
                 adapter=new MyPageAdapter(stores_finder,getContext());
                 recyclerView.setAdapter(adapter);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
@@ -171,10 +172,15 @@ public class MyPageFragment extends Fragment {
         return view;
     }
 
-    public void onClickRotate(View v) {
-        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate);
-        v.startAnimation(animation);
+//    public void onClickRotate(View v) {
+//        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.rotate);
+//        v.startAnimation(animation);
+//    }
+
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        myListRef.removeEventListener(childEventListener);
     }
-
-
 }

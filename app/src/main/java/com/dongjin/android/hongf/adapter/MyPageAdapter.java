@@ -6,9 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Store;
 
@@ -42,10 +46,23 @@ public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
         String uri=stores.get(position).getImageUrl();
         if(uri!=null) {
-            Glide.with(context).load(uri).into(holder.image);
+            holder.progressBar.setVisibility(View.VISIBLE);
+            Glide.with(context).load(uri).listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    holder.progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    holder.progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+            }).into(holder.image);
         }else{
             holder.image.setImageResource(R.drawable.foodicon1);
         }
@@ -62,8 +79,10 @@ public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.ViewHolder
         ImageView image;
         TextView tvStoreName;
         TextView tvStoreInfo;
+        ProgressBar progressBar;
         public ViewHolder(View itemView) {
             super(itemView);
+            progressBar=(ProgressBar)itemView.findViewById(R.id.list_pb);
             image=(ImageView)itemView.findViewById(R.id.image);
             tvStoreName=(TextView)itemView.findViewById(R.id.tvStoreName);
             tvStoreInfo=(TextView)itemView.findViewById(R.id.tvStoreInfo);

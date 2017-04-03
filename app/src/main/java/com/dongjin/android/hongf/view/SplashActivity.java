@@ -4,16 +4,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.RelativeLayout;
 
 import com.dongjin.android.hongf.R;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private RelativeLayout conta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+        conta=(RelativeLayout)findViewById(R.id.activity_splash);
         loadMain();
     }
     private final int SPLASH_DISPLAY_LENGTH = 1500;

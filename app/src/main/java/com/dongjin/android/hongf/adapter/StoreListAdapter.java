@@ -9,9 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Store;
 import com.dongjin.android.hongf.view.StoreDetailActivity;
@@ -50,11 +54,24 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
 
 
         if(!stores.get(position).getImageUrl().equals("")){
-            Glide.with(context).load(stores.get(position).getImageUrl()).override(500,200).into(holder.image);
+            holder.progressBar.setVisibility(View.VISIBLE);
+            Glide.with(context).load(stores.get(position).getImageUrl()).listener(new RequestListener<String, GlideDrawable>() {
+                @Override
+                public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                    holder.progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+
+                @Override
+                public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                    holder.progressBar.setVisibility(View.GONE);
+                    return false;
+                }
+            }).override(500,200).into(holder.image);
         }else if(stores.get(position).getImageUrl().equals("")){
             holder.image.setImageResource(android.R.drawable.ic_menu_camera);
         }
@@ -87,9 +104,11 @@ public class StoreListAdapter extends RecyclerView.Adapter<StoreListAdapter.View
         TextView storeName;
         CardView cardItem;
         TextView storeInfo;
+        ProgressBar progressBar;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            progressBar=(ProgressBar)itemView.findViewById(R.id.list_pb);
             storeName=(TextView)itemView.findViewById(R.id.tvStoreName);
             image=(ImageView)itemView.findViewById(R.id.image);
             cardItem=(CardView)itemView.findViewById(R.id.cardItem);

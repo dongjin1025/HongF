@@ -240,6 +240,8 @@ public class PostReviewActivity extends AppCompatActivity {
                                 }
 
                                 store = null;
+                                Toast.makeText(PostReviewActivity.this,"리뷰가 등록 되었습니다." +
+                                        "사진 업로드는 시간이 약간 걸릴 수 있어요!",Toast.LENGTH_LONG).show();
                                 finish();
 
 
@@ -283,6 +285,7 @@ public class PostReviewActivity extends AppCompatActivity {
 
                                 }
                                 store=null;
+                                Toast.makeText(PostReviewActivity.this,"리뷰가 등록 되었습니다",Toast.LENGTH_LONG).show();
                                 finish();
 
                             }

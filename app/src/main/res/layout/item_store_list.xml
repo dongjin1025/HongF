@@ -11,6 +11,16 @@
         android:id="@+id/cardItem"
         card_view:cardCornerRadius="10dp">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list_pb"
+            android:indeterminateTint="@color/black"
+            android:layout_marginLeft="160dp"
+            android:layout_marginTop="90dp"
+            android:visibility="gone" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

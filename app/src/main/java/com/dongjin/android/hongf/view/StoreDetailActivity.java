@@ -16,7 +16,7 @@ import android.widget.TextView;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.adapter.DetailPhotoAdapter;
-import com.dongjin.android.hongf.adapter.StoryAdapter;
+import com.dongjin.android.hongf.adapter.StoryAdapter2;
 import com.dongjin.android.hongf.model.KaKaoInfo;
 import com.dongjin.android.hongf.model.Review;
 import com.dongjin.android.hongf.model.Store;
@@ -46,7 +46,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     private RecyclerView recyclerView;
     private RecyclerView review_recycler;
     private View view;
-    StoryAdapter adapter;
+    StoryAdapter2 adapter;
     DetailPresenter presenter;
     private String detail_id;
     Store store;
@@ -66,14 +66,18 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
     DatabaseReference bookmarkRef2;
     DatabaseReference storePhotosRef;
     DatabaseReference storeref;
+    private ChildEventListener photoChildL;
+    private ChildEventListener bookChildL;
+    private ChildEventListener storyChildL;
+    private TextView naviToReviewList;
+
 
 
 
     @Override
     protected void onStart() {
         super.onStart();
-
-        storePhotosRef.addChildEventListener(new ChildEventListener() {
+        photoChildL=new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String ur= (String) dataSnapshot.getValue();
@@ -82,7 +86,6 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
                 uris.add(Uri.parse(ur));
                 Collections.reverse(uris);
                 presenter.getReviewImages(uris);
-
 
             }
 
@@ -105,8 +108,10 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
-        bookmarkRef.addChildEventListener(new ChildEventListener() {
+        };
+        storePhotosRef.addChildEventListener(photoChildL);
+
+        bookChildL=new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 String id=dataSnapshot.getKey().toString();
@@ -120,6 +125,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
                     }
 
                 }
+
             }
 
             @Override
@@ -141,28 +147,28 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+        bookmarkRef.addChildEventListener(bookChildL);
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
-        storyRef.child("story2").child(detail_id).addChildEventListener(new ChildEventListener() {
+
+        storyChildL=new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Review review=dataSnapshot.getValue(Review.class);
                 String key=dataSnapshot.getKey();
-                keyArray.add(key);
+                if(!key.equals("")){
+                    keyArray.add(key);
+                }
                 Collections.reverse(keyArray);
                 Log.e("keyArrayTag",""+keyArray.size());
                 reviews.add(review);
                 Collections.reverse(keyArray);
                 adapter.setAdapterData(reviews,keyArray);
-
-
-
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
 
             }
 
@@ -180,12 +186,25 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             public void onCancelled(DatabaseError databaseError) {
 
             }
-
-        });
+        };
+        storyRef.child("story2").child(detail_id).addChildEventListener(storyChildL);
         storyRef.child("Story").keepSynced(true);
 
 
     }
+
+    @Override
+    protected void onStop() {
+        storyRef.child("story2").child(detail_id).removeEventListener(storyChildL);
+        bookmarkRef.removeEventListener(bookChildL);
+        storePhotosRef.removeEventListener(photoChildL);
+
+        reviews.clear();
+        keyArray.clear();
+
+        super.onStop();
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -215,7 +234,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         bookmarkRef2.keepSynced(true);
 
         photoAdapter = new DetailPhotoAdapter(this);
-        adapter = new StoryAdapter(this);
+        adapter = new StoryAdapter2(this);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.detail_recycler);
@@ -240,6 +259,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         });
 
 
+        naviToReviewList=(TextView)findViewById(R.id.detail_tv_morereview);
         tvAddress=(TextView)findViewById(R.id.detail_tv_address);
         tvPrice=(TextView)findViewById(R.id.detail_tv_price);
         tvTell=(TextView)findViewById(R.id.detail_tv_tell);
@@ -254,7 +274,6 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             @Override
             public void onClick(View v) {
 
-
                 presenter.navigateToPostReview(getContext(),PostReviewActivity.class,store.getStorename(),store.getId(),store.getStorefood());
             }
         });
@@ -265,6 +284,16 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
 
             }
         });
+        naviToReviewList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(StoreDetailActivity.this,Detail_ReviwList.class);
+                intent.putExtra("keyarray",keyArray);
+                intent.putExtra("reviews",reviews);
+                startActivity(intent);
+            }
+        });
+
 
 
         tvAddress.setText(store.getStoreaddress());
@@ -272,9 +301,8 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         tvType.setText(store.getStorefood());
         tvPrice.setText(store.getStoreprice());
         tvStoreName.setText(store.getStorename());
-
-
-
+        tvInfo.setText("즐겨찾기: "+store.getBookmarkcount()+
+        " 평점: "+store.getAveragerating()+" 리뷰: "+store.getReviewcount());
 
         linearLayout_addReview=(LinearLayout)findViewById(R.id.detail_review_btn);
 
@@ -302,6 +330,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
             bookmarkRef.updateChildren(hashmap);
             bookmarkRef2.updateChildren(hashmap);
             bookmarked=true;
+
         }else{
             detail_ig_bookmark.setImageResource(R.drawable.btn_unpress_like);
             bookmarkRef.child(kaKaoInfo.read_id_kakao()).removeValue();

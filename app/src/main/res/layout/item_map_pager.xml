@@ -9,6 +9,14 @@
     android:layout_width="match_parent"
         android:layout_height="70dp">
 
+        <ProgressBar
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/map_pb"
+            android:layout_weight="1"
+            android:layout_marginLeft="10dp" />
+
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"

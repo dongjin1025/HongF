@@ -214,7 +214,34 @@ public class RegisterStoreActivity extends AppCompatActivity implements Register
 
                         presenter.writeNewStore(store);
 
-                        Toast.makeText(RegisterStoreActivity.this,"등록 되었습니다",Toast.LENGTH_LONG).show();
+                        //Toast.makeText(RegisterStoreActivity.this,"등록 되었습니다",Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(RegisterStoreActivity.this);
+                        dialog.setTitle("리뷰");
+                        dialog.setMessage("가게가 등록되었습니다.바로 리뷰를 등록 하시겠습니까?");
+                        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+                                Intent intent=new Intent(RegisterStoreActivity.this,PostReviewActivity.class);
+                                intent.putExtra("title",store.getStorename());
+                                intent.putExtra("id",store.getId());
+                                intent.putExtra("foodtag",store.getStorefood());
+                                startActivity(intent);
+                                finish();
+
+                            }
+                        });
+                        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+                            }
+                        });
+
+                        dialog.show();
+
+
                         finish();
                         
                     }else{

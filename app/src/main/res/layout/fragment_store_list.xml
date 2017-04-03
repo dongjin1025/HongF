@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.dongjin.android.hongf.view.StoreListFragment"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@drawable/effeil">
 
     <!-- TODO: Update blank fragment layout -->
     <!--<include-->
@@ -42,8 +43,9 @@
                     android:id="@+id/tv_ko"
                     android:layout_weight="0.33"
                     android:gravity="center_horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="italic" />
+
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
             </LinearLayout>
 
             <LinearLayout
@@ -65,8 +67,9 @@
                     android:id="@+id/tv_jp"
                     android:layout_weight="0.33"
                     android:gravity="center_horizontal"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                    android:textStyle="italic" />
+                    android:textColor="@color/black"
+                    android:background="@color/white"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -87,7 +90,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/tv_ch"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal" />
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:background="@color/white" />
             </LinearLayout>
 
         </LinearLayout>
@@ -116,7 +121,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_west"
                 android:layout_weight="0.33"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:background="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -137,7 +144,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_koreansnack"
                 android:layout_weight="1"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:background="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -158,7 +167,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_world"
                 android:layout_weight="1"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:background="@color/white" />
         </LinearLayout>
 
     </LinearLayout>
@@ -187,7 +198,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_fast"
                 android:layout_weight="1"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:background="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -208,7 +221,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_bar"
                 android:layout_weight="1"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:background="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -229,7 +244,9 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_cafe"
                 android:layout_weight="1"
-                android:gravity="center_horizontal" />
+                android:gravity="center_horizontal"
+                android:textColor="@color/black"
+                android:background="@color/white" />
         </LinearLayout>
 
     </LinearLayout>

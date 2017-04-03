@@ -60,6 +60,7 @@ public class LoginActivity extends BaseActivity implements Login_View {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         presenter=new LoginPresenter();
         presenter.attachView(this);
 
@@ -134,7 +135,7 @@ public class LoginActivity extends BaseActivity implements Login_View {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                finish();
+                finishAndRemoveTask();
 
             }
         });

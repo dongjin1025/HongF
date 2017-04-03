@@ -22,6 +22,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.MarkerItem;
 import com.dongjin.android.hongf.model.Store;
@@ -66,7 +69,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     private ImageView map_ig_filter;
     private TextView map_tv_filter;
     private ProgressBar pb;
-
+    private String tag;
     HashMap<Integer,Marker> hashMap;
     HashMap<LatLng,Integer> hashmap2;
     DatabaseReference storeRef;
@@ -84,6 +87,14 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     @Override
     public void onStart() {
         super.onStart();
+        if (!tag.equals("null")) {
+            getMarkerItems2(tag);
+        } else if (tag.equals("null")) {
+
+            getMarkerItems();
+        }
+        resetPager(inflater, tag);
+        setFilterInfo(tag);
 
     }
 
@@ -100,6 +111,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
         this.inflater=inflater;
         pb=(ProgressBar)v.findViewById(R.id.pbar);
 
+        tag="null";
         markerRef = FirebaseDatabase.getInstance().getReference().child("storeMarker");
         markerRef2 = FirebaseDatabase.getInstance().getReference().child("storeMarker2");
         markerRef.keepSynced(true);
@@ -199,8 +211,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
                 map_ig_filter.setImageResource(R.drawable.foodicon6);
                 map_tv_filter.setText("분식");
                 break;
-            case "":
-                map_ig_filter.setImageResource(R.drawable.places_ic_clear);
+            case "null":
+                map_ig_filter.setImageResource(R.drawable.bottomicon4);
                 map_tv_filter.setText("All");
         }
 
@@ -210,18 +222,21 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        if(markers.size()!=0){
+            for(int i=0;i<markers.size();i++){
+                markers.get(i).remove();
+            }
+
+        }
+
         if (resultCode == RESULT_OK) {
-            String tag = data.getStringExtra("tagkey");
+            tag= data.getStringExtra("tagkey");
 
             Log.e("MAP FILTER TAG",tag);
             if (!tag.equals("null")) {
                 getMarkerItems2(tag);
             } else if (tag.equals("null")) {
-                if (markers.size() != 0) {
-                    for (int i = 0; i < markers.size(); i++) {
-                        markers.get(i).remove();
-                    }
-                }
+
                 getMarkerItems();
             }
             resetPager(inflater, tag);
@@ -246,6 +261,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
         LatLng hongdae = new LatLng(37.551593, 126.924979);
         //googleMap.addMarker(new MarkerOptions().position(hongdae).title("Marker in hongdae"));
+
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(hongdae,14));
 
 
@@ -376,6 +392,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
                     marker.setTag(i);
                     markers.add(marker);
 
+
                     hashmap2.put(marker.getPosition(),i);
 
                     hashMap.put(i, marker);
@@ -414,9 +431,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
     }
     private void getMarkerItems2(final String tag) {
-        for(int i=0;i<markers.size();i++){
-            markers.get(i).remove();
-        }
+
         if(selectedMarker!=null){
             selectedMarker=null;
         }
@@ -624,6 +639,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
             View view = null;
             view = inflater.inflate(R.layout.item_map_pager, null);
 
+            final ProgressBar mappb=(ProgressBar)view.findViewById(R.id.map_pb);
             CardView cardView = (CardView) view.findViewById(R.id.cardView);
             ImageView imageView = (ImageView) view.findViewById(R.id.imageView4);
             TextView tvStoreName = (TextView) view.findViewById(R.id.tvStoreName);
@@ -641,13 +657,27 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 
             if (store.getImageUrl().equals("")) {
                 imageView.setImageResource(android.R.drawable.ic_menu_camera);
+                mappb.setVisibility(View.GONE);
             } else {
+                mappb.bringToFront();
+                mappb.setVisibility(View.VISIBLE);
+                Glide.with(context).load(store.getImageUrl()).listener(new RequestListener<String, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, String model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        mappb.setVisibility(View.GONE);
+                        return false;
+                    }
 
-                Glide.with(context).load(store.getImageUrl()).into(imageView);
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, String model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        mappb.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(imageView);
             }
 
             tvStoreName.setText(store.getStorename());
-            tvRating.setText("평점 :"+store.getAveragerating()+" 즐겨찾기 :"+store.getBookmarkcount()+" ");
+            tvRating.setText("평점 :"+store.getAveragerating()+" 즐겨찾기 :"+store.getBookmarkcount()+" 리뷰 :"+store.getReviewcount());
             tvAddress.setText(store.getStoreaddress());
 
 
@@ -689,5 +719,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     @Override
     public void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void onStop() {
+        hashMap.clear();
+        hashmap2.clear();
+
+        markers.clear();
+        items.clear();
+        super.onStop();
     }
 }

@@ -1,16 +1,20 @@
 package com.dongjin.android.hongf.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by kimdongjin on 2017. 2. 9..
  */
 
-public class Review {
-    String username;
-    String storeName;
-    String content;
-    float rate;
-    String userPicture;
-    String key;
+public class Review implements Parcelable{
+
+    public Review(Parcel in) {
+        readFromParcel(in);
+    }
+    public Review(){
+
+    }
 
     public String getStoreId() {
         return storeId;
@@ -20,10 +24,6 @@ public class Review {
         this.storeId = storeId;
     }
 
-    String storeId;
-
-
-
     public String getDate() {
         return date;
     }
@@ -32,7 +32,7 @@ public class Review {
         this.date = date;
     }
 
-    String date;
+
 
     public String getKey() {
         return key;
@@ -65,9 +65,6 @@ public class Review {
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
     }
-
-    int likeCount;
-    int commentCount;
 
 
     public String getUsername() {
@@ -105,5 +102,73 @@ public class Review {
     }
 
 
+    String username;
+    String storeName;
+    String content;
+    float rate;
+    String userPicture;
+    String key;
+    String storeId;
+    String date;
+    int likeCount;
+    int commentCount;
+
+
+    public Review(String username, String storeName, String content, String userPicture, String key, String storeId,
+                 int likeCount, float rate, int commentCount ,String date) {
+        this.username = username;
+        this.storeName = storeName;
+        this.content = content;
+        this.userPicture = userPicture;
+        this.key=key;
+        this.storeId =storeId;
+        this.likeCount=likeCount;
+        this.rate=rate;
+        this.commentCount=commentCount;
+        this.date=date;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(username);
+        dest.writeString(storeName);
+        dest.writeString(content);
+        dest.writeString(userPicture);
+        dest.writeString(key);
+        dest.writeString(storeId);
+        dest.writeInt(likeCount);
+        dest.writeString(date);
+        dest.writeFloat(rate);
+        dest.writeInt(commentCount);
+
+    }
+    private void readFromParcel(Parcel in){
+
+        username=in.readString();
+        storeName=in.readString();
+        content=in.readString();
+        userPicture=in.readString();
+        key=in.readString();
+        storeId=in.readString();
+        likeCount=in.readInt();
+        date=in.readString();
+        rate=in.readFloat();
+        commentCount=in.readInt();
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Review createFromParcel(Parcel in) {
+            return new Review(in);
+        }
+
+        public Review[] newArray(int size) {
+            return new Review[size];
+        }
+    };
 
 }

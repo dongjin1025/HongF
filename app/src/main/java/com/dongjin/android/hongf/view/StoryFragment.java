@@ -39,6 +39,7 @@ public class StoryFragment extends Fragment implements Story_View {
     private ArrayList<String> keyArray;
     private RecyclerView recyclerView;
     private LinearLayoutManager manager;
+    private  ChildEventListener childEventListener;
 
 
 
@@ -47,54 +48,44 @@ public class StoryFragment extends Fragment implements Story_View {
     @Override
     public void onStart() {
         super.onStart();
-        reviews=new ArrayList<>();
-        keyArray=new ArrayList<>();
 
 
-        storyRef.child("Story").addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-
-                Review review=dataSnapshot.getValue(Review.class);
-                int chilCount= (int) dataSnapshot.getChildrenCount();
-                String key=dataSnapshot.getKey();
-                keyArray.add(key);
-                Log.e("Log CHIL COUNT",""+chilCount);
-                reviews.add(review);
-                Log.e("Log CHIL reviews count",""+chilCount+"  "+reviews.size());
-
-
-                storyAdapter.setAdapterData(reviews,keyArray);
+       childEventListener= new ChildEventListener() {
+           @Override
+           public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+               Review review=dataSnapshot.getValue(Review.class);
+               int chilCount= (int) dataSnapshot.getChildrenCount();
+               String key=dataSnapshot.getKey();
+               keyArray.add(key);
+               Log.e("Log CHIL COUNT",""+chilCount);
+               reviews.add(review);
+               Log.e("Log CHIL reviews count",""+chilCount+"  "+reviews.size());
 
 
+               storyAdapter.setAdapterData(reviews,keyArray);
+           }
 
-            }
+           @Override
+           public void onChildChanged(DataSnapshot dataSnapshot, String s) {
 
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+           }
 
+           @Override
+           public void onChildRemoved(DataSnapshot dataSnapshot) {
 
+           }
 
+           @Override
+           public void onChildMoved(DataSnapshot dataSnapshot, String s) {
 
+           }
 
-            }
+           @Override
+           public void onCancelled(DatabaseError databaseError) {
 
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-
-        });
+           }
+       };
+        storyRef.child("Story").addChildEventListener(childEventListener);
         storyRef.child("Story").keepSynced(true);
 
 
@@ -121,13 +112,13 @@ public class StoryFragment extends Fragment implements Story_View {
         context=getContext();
         uris=new ArrayList<>();
         reviews=new ArrayList<>();
+        keyArray=new ArrayList<>();
 
         recyclerView= (RecyclerView) view.findViewById(R.id.storyList_Recy);
         recyclerView.setAdapter(storyAdapter);
 
 
-        manager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        manager.setReverseLayout(true);
+        manager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, true);
         manager.setStackFromEnd(true);
 
 
@@ -149,6 +140,15 @@ public class StoryFragment extends Fragment implements Story_View {
 
     @Override
     public void showReviewPhotos() {
+
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        reviews.clear();
+        keyArray.clear();
+        storyRef.child("Story").removeEventListener(childEventListener);
 
     }
 }

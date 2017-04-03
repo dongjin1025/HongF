@@ -12,13 +12,15 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:gravity="center"
-        android:layout_height="250dp">
+        android:layout_height="250dp"
+        android:background="@drawable/ratatouiil">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
             app:srcCompat="@drawable/ic_account_24dp"
-            android:id="@+id/mypage_ig_profile" />
+            android:id="@+id/mypage_ig_profile"
+            android:layout_marginTop="50dp" />
 
         <TextView
             android:text="Name"
@@ -27,6 +29,7 @@
             android:id="@+id/mypage_tv_name"
             android:gravity="center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+
     </LinearLayout>
 
     <LinearLayout
@@ -37,7 +40,8 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp">
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -58,7 +62,7 @@
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="40dp">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:text="내가 가고 싶은 곳"
@@ -79,7 +83,8 @@
                 android:layout_weight="1"
                 android:text="내가 발견한 곳"
                 android:visibility="invisible"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView

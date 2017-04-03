@@ -38,7 +38,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * Created by kimdongjin on 2017. 1. 16..
  */
 
-public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> {
+public class StoryAdapter2 extends RecyclerView.Adapter<StoryAdapter2.ViewHolder> {
 
     Context context;
     DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
@@ -52,18 +52,25 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
 
     public void setAdapterData(ArrayList<Review> reivews,ArrayList<String> keyArray){
 
-        this.reviews=reivews;
-        this.keyArray=keyArray;
+        if(reivews.size()!=0){
+            this.reviews=reivews;
+            tempSize=1;
+        }
+        if(keyArray.size()!=0){
+            this.keyArray=keyArray;
+            tempSize=1;
+        }
+
         notifyDataSetChanged();
     }
 
-    public StoryAdapter(final Context context){
+    public StoryAdapter2(final Context context){
         this.context=context;
         reviews=new ArrayList<>();
         keyArray=new ArrayList<>();
 
         kaKaoInfo=KaKaoInfo.getInstance();
-
+        tempSize=0;
 
         Log.e("keyArrayTag2",""+keyArray.size());
 
@@ -76,7 +83,7 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
         View itemView= LayoutInflater.from(parent.getContext()).inflate(R.layout.item_story,parent,false);
 
 
-        return new StoryAdapter.ViewHolder(itemView);
+        return new StoryAdapter2.ViewHolder(itemView);
     }
 
     @Override
@@ -142,7 +149,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
             }
         });
         holder.content.setText(review.getContent());
+
         holder.commentCount.setText("댓글 "+ review.getCommentCount()+"개");
+
+
 
         holder.commentCount.setTag(position);
         holder.commentCount.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +163,10 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                 intent.putExtra("key",keyArray.get(tag));
                 intent.putExtra("id",reviews.get(tag).getStoreId());
                 context.startActivity(intent);
+
+
             }
         });
-
         holder.btnComment.setTag(position);
         holder.btnComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,22 +270,15 @@ public class StoryAdapter extends RecyclerView.Adapter<StoryAdapter.ViewHolder> 
                     }
                 });
 
-
-
-
             }
         });
 
-
-
-
     }
-
-
 
     @Override
     public int getItemCount() {
-        return reviews.size();
+
+        return tempSize;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {

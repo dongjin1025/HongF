@@ -77,8 +77,12 @@
             android:name=".view.Dialog_StoreList_Filter"
             android:theme="@style/Dialog" />
         <activity android:name=".view.CheckHongik" />
-        <activity android:name=".view.ToDeveloper" />
-        <activity android:name=".view.Activity_deve_detail"></activity>
+        <activity
+            android:name=".view.ToDeveloper"
+            android:windowSoftInputMode="adjustNothing" />
+        <activity android:name=".view.Activity_deve_detail" />
+        <activity android:name=".view.Detail_ReviwList" />
+        <activity android:name=".view.Detail_photo_Activity"></activity>
     </application>
 
 </manifest>

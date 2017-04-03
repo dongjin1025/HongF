@@ -8,8 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.dongjin.android.hongf.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,6 +31,7 @@ import java.util.Collections;
 public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.ViewHolder> {
 
     ArrayList<Uri> images;
+    ArrayList<String> urls;
     Context context;
     String ur;
     DatabaseReference storyRef= FirebaseDatabase.getInstance().getReference();
@@ -34,16 +39,17 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
     public StoryPhotoAdapter(String key,Context context){
         this.context=context;
         images=new ArrayList<>();
+        urls=new ArrayList<>();
 
-        storyRef.child("Story_Urls").child(key).addChildEventListener(new ChildEventListener() {
+        ChildEventListener childEventListener=new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                ur= dataSnapshot.getValue(String.class);
-                Log.e("ur TAG1",ur);
+                ur = dataSnapshot.getValue(String.class);
+                Log.e("ur TAG1", ur);
 
-                if(ur!=null){
-                    if(!images.contains(ur)){
-
+                if (ur != null) {
+                    if (!images.contains(ur)) {
+                        urls.add(ur);
                         images.add(Uri.parse(ur));
                         Collections.reverse(images);
                         notifyDataSetChanged();
@@ -51,10 +57,7 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
                 }
 
 
-
-
             }
-
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
@@ -75,7 +78,8 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
             public void onCancelled(DatabaseError databaseError) {
 
             }
-        });
+        };
+        storyRef.child("Story_Urls").child(key).addChildEventListener(childEventListener);
 
     }
 
@@ -91,13 +95,47 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
+
+        holder.pb.setVisibility(View.VISIBLE);
+        if(images.size()==0||images.get(0).equals("")){
+            holder.ig_detail.setVisibility(View.GONE);
+
+        }else{
+            if(!images.get(0).equals("")){
 
 
-        Log.e("images size Tag",images.get(position).toString());
-        if(images.get(0)!=null){
-            Glide.with(context).load(images.get(position)).into(holder.ig_detail);
+                Glide.with(context).load(images.get(position)).listener(new RequestListener<Uri, GlideDrawable>() {
+                    @Override
+                    public boolean onException(Exception e, Uri model, Target<GlideDrawable> target, boolean isFirstResource) {
+                        holder.pb.setVisibility(View.GONE);
+                        return false;
+
+                    }
+
+                    @Override
+                    public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                        holder.pb.setVisibility(View.GONE);
+                        return false;
+                    }
+                }).into(holder.ig_detail);
+//                //holder.ig_detail.setTag(position);
+//                holder.ig_detail.setOnClickListener(new View.OnClickListener() {
+//                    //int posi= (int) holder.ig_detail.getTag();
+//                    @Override
+//                    public void onClick(View v) {
+//                        Intent intent=new Intent(context,Detail_photo_Activity.class);
+//                        intent.putExtra("url",urls);
+//                        context.startActivity(intent);
+//                    }
+//                });
+            }
+
+
+
         }
+
+
 
 
     }
@@ -109,13 +147,16 @@ public class StoryPhotoAdapter extends RecyclerView.Adapter<StoryPhotoAdapter.Vi
         return images.size();
 
 
+
     }
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ig_detail;
+        ProgressBar pb;
         public ViewHolder(View itemView) {
             super(itemView);
+            pb=(ProgressBar)itemView.findViewById(R.id.pb_photo);
             ig_detail=(ImageView)itemView.findViewById(R.id.ig_detail);
         }
 
