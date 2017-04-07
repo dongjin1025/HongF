@@ -8,8 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.drawable.GlideDrawable;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.dongjin.android.hongf.R;
 
 import java.util.ArrayList;
@@ -42,10 +46,22 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
+        holder.progressBar.setVisibility(View.VISIBLE);
+        Glide.with(context).load(images.get(position)).listener(new RequestListener<Uri, GlideDrawable>() {
+            @Override
+            public boolean onException(Exception e, Uri model, Target<GlideDrawable> target, boolean isFirstResource) {
+                holder.progressBar.setVisibility(View.GONE);
+                return false;
+            }
 
-        Glide.with(context).load(images.get(position)).into(holder.ig_detail);
+            @Override
+            public boolean onResourceReady(GlideDrawable resource, Uri model, Target<GlideDrawable> target, boolean isFromMemoryCache, boolean isFirstResource) {
+                holder.progressBar.setVisibility(View.GONE);
+                return false;
+            }
+        }).into(holder.ig_detail);
 
     }
 
@@ -56,8 +72,10 @@ public class DetailPhotoAdapter extends RecyclerView.Adapter<DetailPhotoAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ig_detail;
+        ProgressBar progressBar;
         public ViewHolder(View itemView) {
             super(itemView);
+            progressBar=(ProgressBar)itemView.findViewById(R.id.pb_photo);
             ig_detail=(ImageView)itemView.findViewById(R.id.ig_detail);
         }
 

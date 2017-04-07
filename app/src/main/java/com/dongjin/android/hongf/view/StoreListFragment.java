@@ -24,6 +24,7 @@ public class StoreListFragment extends Fragment implements View.OnClickListener 
     ImageView list_ig_fastfood;
     ImageView list_ig_cafe;
     //ImageView list_ig_pub;
+    ImageView list_ig_all;
 
     public StoreListFragment() {
         // Required empty public constructor
@@ -45,6 +46,7 @@ public class StoreListFragment extends Fragment implements View.OnClickListener 
         list_ig_koreanSnack=(ImageView)view.findViewById(R.id.list_ig_koreanSnack);
         list_ig_fastfood=(ImageView)view.findViewById(R.id.list_ig_fastfood);
         list_ig_cafe=(ImageView)view.findViewById(R.id.list_ig_cafe);
+        list_ig_all=(ImageView)view.findViewById(R.id.list_ig_all);
         //list_ig_pub=(ImageView)view.findViewById(list_ig_pub);
 
         list_ig_korean.setOnClickListener(this);
@@ -56,6 +58,7 @@ public class StoreListFragment extends Fragment implements View.OnClickListener 
         list_ig_koreanSnack.setOnClickListener(this);
         list_ig_cafe.setOnClickListener(this);
         list_ig_fastfood.setOnClickListener(this);
+        list_ig_all.setOnClickListener(this);
 //        list_ig_pub=(ImageView)view.findViewById(list_ig_pub);
         return view;
 
@@ -84,9 +87,9 @@ public class StoreListFragment extends Fragment implements View.OnClickListener 
             case R.id.list_ig_bar:
                 tag="hope";
                 break;
-//            case list_ig_pub:
-//                tag="hope";
-//                break;
+            case R.id.list_ig_all:
+                tag="all";
+                break;
             case R.id.list_ig_cafe:
                 tag="cafe";
                 break;

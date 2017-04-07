@@ -42,7 +42,7 @@ public class CheckHongik extends AppCompatActivity {
 
 
         container=(RelativeLayout)findViewById(R.id.activity_check_hongik);
-        container.getBackground().setAlpha(51);
+        //container.getBackground().setAlpha(70);
         et=(EditText)findViewById(R.id.check_et_number);
         et.setText("");
         btn=(Button)findViewById(R.id.check_btn_ok);

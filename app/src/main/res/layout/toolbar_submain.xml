@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/toolBar_main"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/splash_backgroind"
     android:minHeight="?attr/actionBarSize"
     android:layout_height="60dp"
     android:elevation="0dp">
@@ -15,8 +15,8 @@
         android:layout_margin="5dp">
         <ImageButton
             android:id="@+id/ib_back_toolbar"
-            android:background="@color/white"
-            android:tint="@color/black"
+            android:background="@color/splash_backgroind"
+            android:tint="@color/white"
             app:srcCompat="@drawable/ic_arrow_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -38,17 +38,18 @@
                 app:srcCompat="@drawable/bottomicon5"
                 android:id="@+id/list_ig_foodfilter"
                 android:layout_width="40dp"
-                android:layout_height="40dp" />
+                android:layout_height="40dp"
+                android:tint="@color/white" />
 
-            <TextView
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="홍식이"
-                android:textColor="@color/black"
-                android:textSize="25sp"
-                android:layout_weight="1"
-                android:id="@+id/list_tv_orderfilter" />
+            <!--<TextView-->
+                <!--android:layout_centerInParent="true"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="홍식이"-->
+                <!--android:textColor="@color/black"-->
+                <!--android:textSize="25sp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:id="@+id/list_tv_orderfilter" />-->
         </LinearLayout>
 
     </RelativeLayout>

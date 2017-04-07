@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="3dp"
-    android:background="@color/cardview_light_background"
+    android:background="@color/splash_backgroind"
     android:orientation="vertical"
     tools:context="com.dongjin.android.hongf.view.MapFragment">
 
@@ -13,19 +13,22 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="50dp">
+        android:background="@color/splash_backgroind"
+        android:layout_height="55dp">
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/splash_backgroind">
 
             <ImageView
                 android:layout_width="77dp"
                 android:layout_height="match_parent"
                 app:srcCompat="@drawable/bottomicon4"
-                android:id="@+id/map_ig_filter" />
+                android:id="@+id/map_ig_filter"
+                android:tint="@color/white" />
 
             <TextView
                 android:text="All"
@@ -34,7 +37,8 @@
                 android:id="@+id/map_tv_filter"
                 android:layout_weight="0.01"
                 android:textAppearance="@style/TextAppearance.AppCompat.Button"
-                android:gravity="center_vertical" />
+                android:gravity="center_vertical"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <ImageView
@@ -42,7 +46,8 @@
             android:layout_height="wrap_content"
             app:srcCompat="@drawable/ic_filter_list_black_36dp"
             android:id="@+id/map_btn_filter"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:tint="@color/white" />
     </LinearLayout>
 
     <RelativeLayout

@@ -1,6 +1,8 @@
 package com.dongjin.android.hongf.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.model.Store;
+import com.dongjin.android.hongf.view.StoreDetailActivity;
 
 import java.util.ArrayList;
 
@@ -67,6 +70,16 @@ public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.ViewHolder
             holder.image.setImageResource(R.drawable.foodicon1);
         }
         holder.tvStoreName.setText(stores.get(position).getStorename());
+        holder.cardView.setTag(position);
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            int posi= (int) holder.cardView.getTag();
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, StoreDetailActivity.class);
+                intent.putExtra("Store",stores.get(posi));
+                context.startActivity(intent);
+            }
+        });
 
     }
 
@@ -80,8 +93,10 @@ public class MyPageAdapter extends RecyclerView.Adapter<MyPageAdapter.ViewHolder
         TextView tvStoreName;
         TextView tvStoreInfo;
         ProgressBar progressBar;
+        CardView cardView;
         public ViewHolder(View itemView) {
             super(itemView);
+            cardView=(CardView)itemView.findViewById(R.id.cardItem);
             progressBar=(ProgressBar)itemView.findViewById(R.id.list_pb);
             image=(ImageView)itemView.findViewById(R.id.image);
             tvStoreName=(TextView)itemView.findViewById(R.id.tvStoreName);

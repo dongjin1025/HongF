@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/toolBar_main"
     android:layout_width="match_parent"
-    android:background="@color/white"
+    android:background="@color/splash_backgroind"
     android:minHeight="?attr/actionBarSize"
     android:layout_height="60dp">
 
@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center_horizontal"
-        android:background="@color/white">
+        android:background="@color/splash_backgroind">
 
 
         <LinearLayout
@@ -25,16 +25,8 @@
                 android:layout_height="wrap_content"
                 app:srcCompat="@drawable/bottomicon4"
                 android:id="@+id/imageView"
-                android:layout_weight="1" />
-
-            <TextView
-                android:text="홍식이"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView2"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textStyle="normal|bold" />
+                android:tint="@color/white" />
 
         </LinearLayout>
 

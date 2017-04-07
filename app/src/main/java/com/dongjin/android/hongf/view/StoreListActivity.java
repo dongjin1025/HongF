@@ -27,7 +27,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 
 /**
@@ -80,10 +79,11 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
         storeListRefer2= database.getReference().child("Store2");
         storeListRefer.keepSynced(true);
         storeListRefer2.keepSynced(false);
-        if(tag!="all"){
+        if(!tag.equals("all")){
             setFilterOnList(tag,"date");
 
-        }else{
+        }else if (tag.equals("all")){
+            Log.e("setFilterOnlist2","setFilterOnlist2");
             setFilterOnList2(tag,"date");
 
         }
@@ -91,7 +91,7 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
         presenter.attachView(this);
         stores=new ArrayList<>();
         subView=findViewById(R.id.tb_comment);
-        list_ig_foodfilter=(ImageView)subView.findViewById(R.id.list_ig_foodfilter);
+        //list_ig_foodfilter=(ImageView)subView.findViewById(R.id.list_ig_foodfilter);
         list_tv_orderfilter=(TextView)subView.findViewById(R.id.list_tv_orderfilter);
         tv_fliter_order=(TextView)subView.findViewById(R.id.tv_fliter_order);
         btnBack=(ImageButton)subView.findViewById(R.id.ib_back_toolbar);
@@ -198,15 +198,14 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
     }
     public void setFilterOnList2(String tag,String orderby){
 
+        Log.e("setFilterOnlist2","setFilterOnlist2");
         stores=new ArrayList<>();
         storeListRefer.orderByChild(orderby).addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Store store=dataSnapshot.getValue(Store.class);
-
-
+                Log.e("setFilterOnlist2 store",store.getStorename());
                 stores.add(store);
-                Collections.reverse(stores);
                 presenter.setSotreListData();
 
             }
@@ -241,48 +240,48 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
     public void setFilterInfo(String tag){
         switch (tag) {
             case "korean":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon1);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon1);
                 list_tv_orderfilter.setText("한식");
                 break;
             case "japanease":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon3);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon3);
                 list_tv_orderfilter.setText("일식");
 
                 break;
             case "chinease":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon4);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon4);
                 list_tv_orderfilter.setText("중식");
                 break;
             case "wastern":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon2);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon2);
                 list_tv_orderfilter.setText("양식");
                 break;
             case "world":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon5);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon5);
                 list_tv_orderfilter.setText("세계음식");
                 break;
             case "cafe":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon8);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon8);
                 list_tv_orderfilter.setText("까페");
                 break;
             case "bar":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon10);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon10);
                 list_tv_orderfilter.setText("Bar");
                 break;
             case "hope":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon9);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon9);
                 list_tv_orderfilter.setText("술집");
                 break;
             case "fastfood":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon7);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon7);
                 list_tv_orderfilter.setText("패스트푸드");
                 break;
             case "koreansnack":
-                list_ig_foodfilter.setImageResource(R.drawable.foodicon6);
+                //list_ig_foodfilter.setImageResource(R.drawable.foodicon6);
                 list_tv_orderfilter.setText("분식");
                 break;
-            case "null":
-                list_ig_foodfilter.setImageResource(R.drawable.places_ic_clear);
+            case "all":
+                //list_ig_foodfilter.setImageResource(R.drawable.bottomicon4);
                 list_tv_orderfilter.setText("All");
         }
 

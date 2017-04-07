@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
 
     tools:context="com.dongjin.android.hongf.view.SplashActivity"
-    android:background="@drawable/splash">
+    android:background="@drawable/splash2">
 
 </RelativeLayout>

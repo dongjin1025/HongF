@@ -300,6 +300,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         tvTell.setText(store.getPhone());
         tvType.setText(store.getStorefood());
         tvPrice.setText(store.getStoreprice());
+        setFoodTagText(store.getStorefood());
         tvStoreName.setText(store.getStorename());
         tvInfo.setText("즐겨찾기: "+store.getBookmarkcount()+
         " 평점: "+store.getAveragerating()+" 리뷰: "+store.getReviewcount());
@@ -308,6 +309,50 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
 
 
 
+    }
+    public void setFoodTagText(String tag){
+        switch (tag){
+            case "korean":
+                tvType.setText("한식");
+                break;
+            case "japanease":
+                tvType.setText("일식");
+
+                break;
+            case "chinease":
+                tvType.setText("중식");
+
+                break;
+            case "wastern":
+                tvType.setText("양식");
+
+                break;
+            case "world":
+                tvType.setText("기타세계음식");
+
+                break;
+            case "cafe":
+                tvType.setText("까페/디저트");
+                break;
+            case "bar":
+                tvType.setText("술집");
+
+                break;
+            case "hope":
+                tvType.setText("술집");
+
+                break;
+            case "fastfood":
+                tvType.setText("패스트푸드");
+
+                break;
+            case "koreansnack":
+                tvType.setText("분식");
+
+                break;
+
+
+        }
     }
 
     @Override

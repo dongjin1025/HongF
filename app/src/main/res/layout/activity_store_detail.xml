@@ -46,12 +46,12 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cardview_light_background">
+                android:background="@color/splash_backgroind">
 
                 <TextView
                     android:text="StoreName"
-                    android:textColor="@color/black"
-                    android:background="@color/white"
+                    android:textColor="@color/white"
+                    android:background="@color/splash_backgroind"
                     android:gravity="center_horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -64,7 +64,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:id="@+id/detail_tv_info" />
+                    android:id="@+id/detail_tv_info"
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -72,7 +73,7 @@
                 android:orientation="horizontal"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/cardview_light_background"
+                android:background="@color/splash_backgroind"
                 android:weightSum="1">
 
 

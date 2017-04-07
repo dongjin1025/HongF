@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:gravity="center"
         android:layout_height="250dp"
-        android:background="@drawable/ratatouiil">
+        android:background="@color/splash_backgroind">
 
         <ImageView
             android:layout_width="100dp"

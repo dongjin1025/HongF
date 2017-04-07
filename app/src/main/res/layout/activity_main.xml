@@ -23,7 +23,7 @@
         android:layout_height="60dp"
         app:ntb_badge_gravity="top"
         app:ntb_badge_position="right"
-        app:ntb_inactive_color="@color/divider_color"
+        app:ntb_inactive_color="@color/white"
         app:ntb_active_color="@color/black"
 
         app:ntb_badged="false"
@@ -31,8 +31,8 @@
         app:ntb_title_mode="all"
         app:ntb_titled="false"
         app:ntb_swiped="true"
-        app:ntb_bg_color="@color/white"
-        android:background="@color/white"
+        app:ntb_bg_color="@color/splash_backgroind"
+        android:background="@color/splash_backgroind"
         android:elevation="24dp" />
 
 </LinearLayout>

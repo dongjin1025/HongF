@@ -107,9 +107,9 @@ public class MainActivity extends AppCompatActivity{
         );
         models.add(
                 new NavigationTabBar.Model.Builder(
-                        getResources().getDrawable(R.drawable.bottomicon2),
+                        getResources().getDrawable(R.drawable.botlist),
                         Color.parseColor(colors[1]))
-                        .selectedIcon(getResources().getDrawable(R.drawable.bottomicon2))
+                        .selectedIcon(getResources().getDrawable(R.drawable.botlist))
                         .title("List")
                         .build()
         );
@@ -148,7 +148,7 @@ public class MainActivity extends AppCompatActivity{
         navigationTabBar.setBehaviorEnabled(true);
         navigationTabBar.setModels(models);
         navigationTabBar.setViewPager(viewPager, 0);
-        navigationTabBar.setBackgroundColor(getResources().getColor(R.color.white));
+        navigationTabBar.setBackgroundColor(getResources().getColor(R.color.splash_backgroind));
         navigationTabBar.setIsBadged(false);
 
 
