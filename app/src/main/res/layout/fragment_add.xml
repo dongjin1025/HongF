@@ -6,37 +6,160 @@
 
     tools:context="com.dongjin.android.hongf.view.AddFragment"
     android:weightSum="1"
-    android:background="@drawable/hongik2">
+    android:background="@drawable/ratatouiil"
+    android:gravity="center_vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:background="@color/white">
+        android:background="@android:color/transparent"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentStart="false"
+        android:id="@+id/moving_lay"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="90dp">\
 
-        <Button
-            android:text="가게등록"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnRegisterStore"
-            android:background="@android:drawable/editbox_background_normal" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp">
 
-        <Button
-            android:text="리뷰등록"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnPostReview"
-            android:background="@android:drawable/editbox_background_normal" />
+            <Button
+                android:text="가게등록"
+                android:id="@+id/btnRegisterStore"
+                android:background="@color/wallet_link_text_light"
+                android:layout_margin="5dp"
+                android:layout_height="120dp"
+                android:layout_width="90dp"
+                android:textStyle="normal|bold"
+                android:textColor="@color/splash_backgroind" />
 
-        <Button
-            android:text="To developer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/btnToDevelop"
-            android:background="@android:drawable/editbox_background_normal" />
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:background="@color/wallet_highlighted_text_holo_dark"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<TextView-->
+                    <!--android:text="가게 등록"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/wallet_highlighted_text_holo_dark"-->
+                    <!--android:id="@+id/textView2"-->
+                    <!--android:textColor="@color/black"-->
+                    <!--android:textStyle="normal|bold" />-->
+
+                <!--<TextView-->
+                    <!--android:text="가게를 등록해야 리뷰등록이 가능합니다."-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:background="@color/wallet_highlighted_text_holo_dark"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:id="@+id/textView6"-->
+                    <!--android:textColor="@color/black" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp">
+
+            <Button
+                android:text="리뷰등록"
+                android:id="@+id/btnPostReview"
+                android:background="@color/cast_expanded_controller_progress_text_color"
+                android:textColor="@color/splash_backgroind"
+                android:layout_margin="5dp"
+                android:layout_height="120dp"
+                android:layout_width="90dp"
+                android:textStyle="normal|bold" />
+
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<TextView-->
+                    <!--android:text="리뷰 등록"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textStyle="normal|bold" />-->
+
+                <!--<TextView-->
+                    <!--android:text="가게가 등록되어 있는지 검색후 리뷰를 등록 합니다."-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:textColor="@color/white" />-->
+            <!--</LinearLayout>-->
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp">
+
+            <Button
+                android:text="To개발자"
+                android:id="@+id/btnToDevelop"
+                android:background="@android:color/holo_red_dark"
+                android:textColor="@color/splash_backgroind"
+                android:layout_margin="5dp"
+                android:layout_height="120dp"
+                android:layout_width="90dp"
+                android:textStyle="normal|bold" />
+
+            <!--<LinearLayout-->
+                <!--android:orientation="vertical"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent">-->
+
+                <!--<TextView-->
+                    <!--android:text="리뷰 등록"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:textColor="@color/white"-->
+                    <!--android:textStyle="normal|bold" />-->
+
+                <!--<TextView-->
+                    <!--android:text="가게가 등록되어 있는지 검색후 리뷰를 등록 합니다."-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+
+                    <!--android:textColor="@color/white" />-->
+            <!--</LinearLayout>-->
+        </LinearLayout>
+
     </LinearLayout>
+
+    <Button
+        android:layout_height="wrap_content"
+        android:id="@+id/button2"
+        android:text="Click here!"
+        android:background="@drawable/speechbubble"
+        android:layout_centerVertical="true"
+        android:layout_alignStart="@+id/moving_lay"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="290dp"
+        android:layout_width="120dp" />
+
+    <Button
+        android:text="1.리뷰 등록을 위해선 가게를 먼저 등록해야 합니다. \n 2.등록된 가게 검색후 리뷰 등록!"
+        android:id="@+id/speech"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/button2"
+        android:layout_alignEnd="@+id/button2"
+        android:layout_marginEnd="29dp"
+        android:background="@drawable/speechbubble"
+        android:visibility="gone" />
+
 </RelativeLayout>

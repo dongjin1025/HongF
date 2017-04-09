@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "256491956902",
+    "firebase_url": "https://hongf-153308.firebaseio.com",
+    "project_id": "hongf-153308",
+    "storage_bucket": "hongf-153308.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256491956902:android:0cd6e0022c69b10f",
+        "android_client_info": {
+          "package_name": "com.dongjin.android.hongf"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256491956902-5s24529pg2copv1nf542p7gn9d8jgspv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.dongjin.android.hongf",
+            "certificate_hash": "8bd3e41bcce450a557d97bc030c9b11b7fdf36de"
+          }
+        },
+        {
+          "client_id": "256491956902-l8s6qgk10shu4mce8rvqs1rbkc2i3bga.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKXCW1d4K5LuugCm7ksYTEUYBMTv-60tA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256491956902-l8s6qgk10shu4mce8rvqs1rbkc2i3bga.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

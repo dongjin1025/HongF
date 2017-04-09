@@ -104,23 +104,24 @@ public class StoryAdapter2 extends RecyclerView.Adapter<StoryAdapter2.ViewHolder
 
         if(keyArray.size()!=0) {
 
-            holder.progressBar.setVisibility(View.VISIBLE);
+            //holder.progressBar.setVisibility(View.VISIBLE);
             StoryPhotoAdapter storyPhotoAdapter = new StoryPhotoAdapter(keyArray.get(position), context);
             holder.photosRecy.setAdapter(storyPhotoAdapter);
+
             holder.photosRecy.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
 
-            holder.photosRecy.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
-                @Override
-                public void onChildViewAttachedToWindow(View view) {
-                    holder.progressBar.setVisibility(View.GONE);
-                }
-
-                @Override
-                public void onChildViewDetachedFromWindow(View view) {
-                    holder.progressBar.setVisibility(View.GONE);
-
-                }
-            });
+//            holder.photosRecy.addOnChildAttachStateChangeListener(new RecyclerView.OnChildAttachStateChangeListener() {
+//                @Override
+//                public void onChildViewAttachedToWindow(View view) {
+//                    holder.progressBar.setVisibility(View.GONE);
+//                }
+//
+//                @Override
+//                public void onChildViewDetachedFromWindow(View view) {
+//                    holder.progressBar.setVisibility(View.GONE);
+//
+//                }
+//            });
 
         }
 
@@ -199,6 +200,86 @@ public class StoryAdapter2 extends RecyclerView.Adapter<StoryAdapter2.ViewHolder
             holder.rate.setColorFilter(ContextCompat.getColor(context, R.color.black));
         }
         holder.date.setText(review.getDate());
+//        holder.rate.setTag(position);
+//        if(!review.getUserId().equals("")){
+//            if(review.getUserId().equals(kaKaoInfo.read_id_kakao())){
+//                holder.rate.setOnClickListener(new View.OnClickListener() {
+//                    int posi= (int) holder.rate.getTag();
+//                    int rCount;
+//
+//                    @Override
+//                    public void onClick(View v) {
+//                        AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+//                        dialog.setTitle("삭제");
+//                        dialog.setMessage("리뷰를 삭제 하시겠습니까?");
+//                        dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//                                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+//                                dialog.setTitle("삭제");
+//                                dialog.setMessage("정말로 리뷰를 삭제 하시겠습니까?");
+//                                dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
+//
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//                                        storyRef.addValueEventListener(new ValueEventListener() {
+//                                            @Override
+//                                            public void onDataChange(DataSnapshot dataSnapshot) {
+//
+//                                                rCount = (int) dataSnapshot.getChildrenCount();
+//
+//
+//                                            }
+//
+//                                            @Override
+//                                            public void onCancelled(DatabaseError databaseError) {
+//
+//                                            }
+//                                        });
+//
+//                                        HashMap<String,Object> hashMap= new HashMap<>();
+//
+//                                        hashMap.put("reviewcount",rCount);
+//
+//                                        storyRef.child("Story").child(keyArray.get(posi)).removeValue();
+//                                        storyRef.child("story2").child(review.getStoreId()).child(keyArray.get(posi)).removeValue();
+//                                        storyRef.child("Store").child(review.getStoreId()).updateChildren(hashMap);
+//                                        storyRef.child("Store2").child(review.getStoreTag()).child(review.getStoreId()).updateChildren(hashMap);
+//
+//                                        reviews.remove(posi);
+//                                        notifyDataSetChanged();
+//
+//
+//                                    }
+//                                });
+//                                dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialogInterface, int i) {
+//
+//
+//                                    }
+//                                });
+//
+//                                dialog.show();
+//
+//                            }
+//
+//                        });
+//                        dialog.setNegativeButton("아니요", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialogInterface, int i) {
+//
+//
+//                            }
+//                        });
+//
+//                        dialog.show();
+//
+//                    }
+//                });
+//            }
+//
+//        }
         holder.likeCount.setText("좋아요 "+review.getLikeCount()+"개");
 
         holder.likeCount.setTag(position);

@@ -33,7 +33,7 @@ public class Detail_ReviwList extends AppCompatActivity {
         reviews=bundle.getParcelableArrayList("reviews");
         adapter.setAdapterData(reviews,keyArray);
         if(reviews.size()!=0){
-            storeName_tb.setText(reviews.get(0).getStoreName());
+//            storeName_tb.setText(reviews.get(0).getStoreName());
         }
 
     }
@@ -54,8 +54,8 @@ public class Detail_ReviwList extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         view = findViewById(R.id.tb_detail);
-        storeName_tb=(TextView)view.findViewById(R.id.list_tv_orderfilter);
-        storeName_tb.setText("리뷰");
+        //      storeName_tb=(TextView)view.findViewById(R.id.list_tv_orderfilter);
+//        storeName_tb.setText("리뷰");
         btnBack = (ImageButton) view.findViewById(R.id.ib_back_toolbar);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

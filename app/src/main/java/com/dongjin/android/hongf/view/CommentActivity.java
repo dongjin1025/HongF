@@ -98,8 +98,8 @@ public class CommentActivity extends AppCompatActivity {
         storyRef2.keepSynced(true);
         commentRef.keepSynced(true);
         view=findViewById(R.id.tb_comment);
-        tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
-        tvCo.setText("댓글");
+//        tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
+//        tvCo.setText("댓글");
         btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

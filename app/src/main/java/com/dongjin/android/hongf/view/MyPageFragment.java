@@ -136,7 +136,7 @@ public class MyPageFragment extends Fragment {
                 mypage_tv_bookmark.setVisibility(View.VISIBLE);
                 mypage_tv_ifound.setVisibility(View.INVISIBLE);
                 mypage_ig_bookmark.setImageResource(R.drawable.btn_common_card_like_pressed);
-                mypage_ig_bookmark.setColorFilter(ContextCompat.getColor(getContext(), R.color.blue));
+                mypage_ig_bookmark.setColorFilter(ContextCompat.getColor(getContext(), R.color.splash_backgroind));
 
                 mypage_ig_ifound.setColorFilter(colorFilter2);
                 adapter=new MyPageAdapter(stores_bookmark,getContext());
@@ -149,7 +149,7 @@ public class MyPageFragment extends Fragment {
             public void onClick(View v) {
                 mypage_tv_bookmark.setVisibility(View.INVISIBLE);
                 mypage_tv_ifound.setVisibility(View.VISIBLE);
-                mypage_ig_ifound.setColorFilter(ContextCompat.getColor(getContext(), R.color.red));
+                mypage_ig_ifound.setColorFilter(ContextCompat.getColor(getContext(), R.color.splash_backgroind));
                 mypage_ig_bookmark.setImageResource(R.drawable.btn_unpress_like);
                 mypage_ig_bookmark.setColorFilter(colorFilter1);
                 //onClickRotate(mypage_ig_ifound);

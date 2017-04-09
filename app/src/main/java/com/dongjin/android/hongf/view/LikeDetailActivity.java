@@ -48,8 +48,8 @@ public class LikeDetailActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         view=findViewById(R.id.tb_like);
-        tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
-        tvCo.setText("좋아요");
+//        tvCo=(TextView)view.findViewById(R.id.list_tv_orderfilter);
+//        tvCo.setText("좋아요");
         btnBack=(ImageButton)view.findViewById(R.id.ib_back_toolbar);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override

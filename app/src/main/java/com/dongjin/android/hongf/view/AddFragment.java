@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 import com.dongjin.android.hongf.R;
 import com.dongjin.android.hongf.presenter.AddPresenter;
@@ -21,11 +22,19 @@ public class AddFragment extends Fragment implements Add_View {
     Button btnPostReview;
     Button btnToDeveloper;
     AddPresenter presenter;
-
+    LinearLayout linearLayout;
+    private Button button2;
+    private Button speeach;
     public AddFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        linearLayout.animate().translationY(-1000);
+        button2.setVisibility(View.VISIBLE);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -35,9 +44,21 @@ public class AddFragment extends Fragment implements Add_View {
         presenter=new AddPresenter();
         presenter.attachView(this);
 
+        linearLayout=(LinearLayout) view.findViewById(R.id.moving_lay);
         btnRegisterStore=(Button)view.findViewById(R.id.btnRegisterStore);
         btnPostReview=(Button)view.findViewById(R.id.btnPostReview);
         btnToDeveloper=(Button)view.findViewById(R.id.btnToDevelop);
+        button2=(Button)view.findViewById(R.id.button2);
+        speeach=(Button)view.findViewById(R.id.speech);
+
+        linearLayout.animate().translationY(-1000);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                linearLayout.animate().translationY(0);
+                button2.setVisibility(View.INVISIBLE);
+            }
+        });
 
         btnRegisterStore.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -109,13 +109,33 @@ public class Review implements Parcelable{
     String userPicture;
     String key;
     String storeId;
+    String storeTag;
+
+    public String getStoreTag() {
+        return storeTag;
+    }
+
+    public void setStoreTag(String storeTag) {
+        this.storeTag = storeTag;
+    }
+
     String date;
     int likeCount;
     int commentCount;
 
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    String userId;
+
 
     public Review(String username, String storeName, String content, String userPicture, String key, String storeId,
-                 int likeCount, float rate, int commentCount ,String date) {
+                 int likeCount, float rate, int commentCount ,String date,String userId,String storeTag) {
         this.username = username;
         this.storeName = storeName;
         this.content = content;
@@ -126,6 +146,8 @@ public class Review implements Parcelable{
         this.rate=rate;
         this.commentCount=commentCount;
         this.date=date;
+        this.userId=userId;
+        this.storeTag=storeTag;
     }
 
     @Override
@@ -145,6 +167,8 @@ public class Review implements Parcelable{
         dest.writeString(date);
         dest.writeFloat(rate);
         dest.writeInt(commentCount);
+        dest.writeString(userId);
+        dest.writeString(storeTag);
 
     }
     private void readFromParcel(Parcel in){
@@ -159,6 +183,8 @@ public class Review implements Parcelable{
         date=in.readString();
         rate=in.readFloat();
         commentCount=in.readInt();
+        userId=in.readString();
+        storeTag=in.readString();
     }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {

@@ -267,7 +267,6 @@
                     <ImageView
                         android:layout_width="match_parent"
                         app:srcCompat="@drawable/foodicon9"
-                        android:id="@+id/register_ig_hope"
                         android:layout_height="70dp" />
 
                     <TextView

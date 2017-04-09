@@ -71,7 +71,9 @@ public class PostReviewActivity extends AppCompatActivity {
     private String username;
     private String storename;
     private String content;
+    private String userId;
     private String foodtag;
+
 
 
     ArrayList<Image> images;
@@ -170,6 +172,7 @@ public class PostReviewActivity extends AppCompatActivity {
             kakoProfile=kaKaoInfo.read_picture_kakao();
         }
         username=kaKaoInfo.read_name_kakao();
+        userId=kaKaoInfo.read_id_kakao();
 
         selectedIg=null;
         images=new ArrayList<>();
@@ -220,7 +223,7 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReviewAndPhotosAsWell(images,username,storename,kakoProfile,id,content,rate,foodtag);
+                                presenter.postReviewAndPhotosAsWell(images,userId,username,storename,kakoProfile,id,content,rate,foodtag);
 
                                 if (reviewcount != 0) {
                                     countHashmap.put("reviewcount", reviewcount + 1);
@@ -267,7 +270,7 @@ public class PostReviewActivity extends AppCompatActivity {
                         dialog.setPositiveButton("네", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
-                                presenter.postReview(username,storename,kakoProfile,id,content,rate,foodtag);
+                                presenter.postReview(username,userId,storename,kakoProfile,id,content,rate,foodtag);
                                 if (reviewcount != 0) {
                                     countHashmap.put("reviewcount", reviewcount + 1);
                                     rateHashmap.put("averagerating", averageRating);

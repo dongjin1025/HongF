@@ -44,7 +44,7 @@
                     android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                     android:paddingTop="5dp"
                     android:paddingLeft="5dp"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     style="@android:style/Widget.DeviceDefault.Light.TextView"
                     android:textStyle="normal|bold" />
 

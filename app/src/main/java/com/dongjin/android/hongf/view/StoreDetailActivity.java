@@ -355,6 +355,7 @@ public class StoreDetailActivity extends AppCompatActivity implements StoreDetai
         }
     }
 
+
     @Override
     public Context getContext() {
         return this;

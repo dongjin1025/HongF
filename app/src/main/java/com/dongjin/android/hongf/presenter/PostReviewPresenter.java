@@ -97,10 +97,10 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         postReviewActivity.startActivityForResult(intent, Constants.REQUEST_CODE);
     }
 
-    public void postReview(String username,String storename,String photo,String id,String content,float rate,String foodtag){
+    public void postReview(String username,String userId,String storename,String photo,String id,String content,float rate,String foodtag){
         Review review=new Review();
 
-
+        review.setUserId(userId);
         review.setContent(content);
         review.setRate(rate);
         review.setUserPicture(photo);
@@ -110,6 +110,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setStoreName(storename);
         review.setDate(stringdate);
         review.setStoreId(id);
+        review.setStoreTag(foodtag);
 
         pushKey=myRef.child("Story").push().getKey();
         storeRef=myRef.child("Store").child(id);
@@ -121,10 +122,11 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
     }
 
     String pushKey;
-    public void postReviewAndPhotosAsWell(ArrayList<Image> images,String username,String storename,String photo, final String id,
+    public void postReviewAndPhotosAsWell(ArrayList<Image> images,String userId,String username,String storename,String photo, final String id,
                                           String content, float rate,String foodtag){
         final Review review=new Review();
         review.setContent(content);
+        review.setUserId(userId);
         review.setRate(rate);
         review.setUserPicture(photo);
         review.setCommentCount(0);
@@ -133,6 +135,7 @@ public class PostReviewPresenter implements Presenter<PostReview_View> {
         review.setStoreName(storename);
         review.setDate(stringdate);
         review.setStoreId(id);
+        review.setStoreTag(foodtag);
 
 
 

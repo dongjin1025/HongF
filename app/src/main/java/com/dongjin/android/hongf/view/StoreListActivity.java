@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
@@ -119,7 +120,7 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
         recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
         resetAdapter();
 
-        RecyclerView.LayoutManager manager = new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL);
+        RecyclerView.LayoutManager manager = new LinearLayoutManager(this, StaggeredGridLayoutManager.VERTICAL,true);
         recyclerView.setLayoutManager(manager);
 
     }
@@ -139,6 +140,9 @@ public class StoreListActivity extends AppCompatActivity implements StoreList_Vi
                     break;
                 case "reviewcount":
                     tv_fliter_order.setText("리뷰순");
+                    break;
+                case "null":
+                    tv_fliter_order.setText("최신순");
                     break;
             }
             setFilterOnList(tag,orderTag);

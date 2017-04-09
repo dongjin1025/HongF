@@ -5,7 +5,6 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context="com.dongjin.android.hongf.view.StoreListFragment"
-    android:gravity="center"
     android:background="@drawable/listbackground">
 
     <!-- TODO: Update blank fragment layout -->
@@ -16,13 +15,21 @@
         <!--layout="@layout/toolbar_main"-->
         <!--android:visibility="visible"-->
         <!--android:layout_alignParentEnd="true" />-->
+    <include
+        android:id="@+id/tb_maps"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        layout="@layout/toolbar_main"
+        android:visibility="visible"
+        android:layout_alignParentEnd="true" />
 
 
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-        android:gravity="center_horizontal">
+        android:gravity="center_horizontal"
+        android:layout_marginTop="25dp">
 
             <LinearLayout
                 android:orientation="vertical"
@@ -203,8 +210,8 @@
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_marginLeft="10dp"
-        android:layout_height="125dp">
+        android:layout_height="125dp"
+        android:layout_marginLeft="16dp">
 
         <LinearLayout
             android:orientation="vertical"
@@ -233,8 +240,8 @@
             app:srcCompat="@drawable/logoooo"
             android:id="@+id/imageView8"
             android:layout_weight="0.15"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="28dp"
             android:layout_height="90dp"
             android:layout_width="90dp" />
 

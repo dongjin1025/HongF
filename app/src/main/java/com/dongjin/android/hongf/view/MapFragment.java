@@ -171,32 +171,33 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
     public void setFilterInfo(String tag){
         switch (tag) {
             case "korean":
-                map_ig_filter.setImageResource(R.drawable.foodicon1);
+                //map_ig_filter.setImageResource(R.drawable.foodicon1);
+                map_ig_filter.setColorFilter(null);
                 map_tv_filter.setText("한식");
                 break;
             case "japanease":
-                map_ig_filter.setImageResource(R.drawable.foodicon3);
+                //map_ig_filter.setImageResource(R.drawable.foodicon3);
                 map_tv_filter.setText("일식");
 
                 break;
             case "chinease":
-                map_ig_filter.setImageResource(R.drawable.foodicon4);
+                //map_ig_filter.setImageResource(R.drawable.foodicon4);
                 map_tv_filter.setText("중식");
                 break;
             case "wastern":
-                map_ig_filter.setImageResource(R.drawable.foodicon2);
+                //map_ig_filter.setImageResource(R.drawable.foodicon2);
                 map_tv_filter.setText("양식");
                 break;
             case "world":
-                map_ig_filter.setImageResource(R.drawable.foodicon5);
+               //map_ig_filter.setImageResource(R.drawable.foodicon5);
                 map_tv_filter.setText("세계음식");
                 break;
             case "cafe":
-                map_ig_filter.setImageResource(R.drawable.foodicon8);
+                //map_ig_filter.setImageResource(R.drawable.foodicon8);
                 map_tv_filter.setText("까페");
                 break;
             case "hope":
-                map_ig_filter.setImageResource(R.drawable.foodicon10);
+                //map_ig_filter.setImageResource(R.drawable.foodicon10);
                 map_tv_filter.setText("술집");
                 break;
 //            case "hope":
@@ -204,15 +205,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback,Map_View
 //                map_tv_filter.setText("술집");
 //                break;
             case "fastfood":
-                map_ig_filter.setImageResource(R.drawable.foodicon7);
+                //map_ig_filter.setImageResource(R.drawable.foodicon7);
                 map_tv_filter.setText("패스트푸드");
                 break;
             case "koreansnack":
-                map_ig_filter.setImageResource(R.drawable.foodicon6);
+                //map_ig_filter.setImageResource(R.drawable.foodicon6);
                 map_tv_filter.setText("분식");
                 break;
             case "null":
-                map_ig_filter.setImageResource(R.drawable.bottomicon4);
+                //map_ig_filter.setImageResource(R.drawable.bottomicon4);
                 map_tv_filter.setText("All");
         }
 
